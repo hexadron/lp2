@@ -16,7 +16,9 @@ public class LoginServlet extends ApplicationController {
 		String[] arreglo = {"HAML", "SASS", "Compass", "Rails"};
 		for (String s : arreglo)
 			System.out.println(s);
-		render(request, response);
+//		render(request, response);
+//		render(request, response, "index");
+		render(request, response, "login/index");
 	}
 
 }
