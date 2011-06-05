@@ -12,7 +12,7 @@ public class ApplicationController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			runMethod(request, response);
+			doAction(request, response);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -26,12 +26,13 @@ public class ApplicationController extends HttpServlet {
 		render(request, response);
 	}
 	
-	protected Method runMethod(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ServletException, IOException {
+	protected Method doAction(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ServletException, IOException {
 		Method[] methods = this.getClass().getDeclaredMethods();
-		if (request.getPathInfo() != null && !request.getPathInfo().equals("/")) {
+		String path = request.getPathInfo();
+		if (path != null && !path.equals("/")) {
 			for (Method m : methods) {
-				if (("/" + m.getName()).equals(request.getPathInfo()) ||
-					("/" + m.getName() + "/").equals(request.getPathInfo())) {
+				if (("/" + m.getName()).equals(path) ||
+					("/" + m.getName() + "/").equals(path)) {
 					m.invoke(this, request, response);
 					return m;
 				}
@@ -46,12 +47,13 @@ public class ApplicationController extends HttpServlet {
 		render(request, response, "index");
 	}
 	
-	// template = algo => sitio.com/servlet/algo
+	// template: algo => sitio.com/servlet/algo.jsp
 	protected void render(HttpServletRequest request, HttpServletResponse response, String template) throws ServletException, IOException {
 		String url = "/WEB-INF/" + getUrlPath() + "/" + template + ".jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
+	// LalalaServlet => lalala
 	protected String getUrlPath() {
 		StringBuilder url = new StringBuilder();
 		url.append(getClass().getName().toLowerCase());
