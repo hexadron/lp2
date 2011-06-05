@@ -47,7 +47,10 @@ public class ApplicationController extends HttpServlet {
 		render(request, response, "index");
 	}
 	
-	// template: algo => sitio.com/servlet/algo.jsp
+	// template             resultado
+	// accion               sitio.com/controlador/accion.jsp
+	// controlador/accion   sitio.com/controlador/accion.jsp
+	// cobb/goes/to/limbo   sitio.com/cobb/goes/to/limbo.jsp
 	protected void render(HttpServletRequest request, HttpServletResponse response, String template) throws ServletException, IOException {
 		String url = "/WEB-INF/";
 		// si es que es una accion del mismo controlador
