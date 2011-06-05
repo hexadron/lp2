@@ -43,8 +43,10 @@ public class ApplicationController extends HttpServlet {
 		return null;
 	}
 
+	// stack: [0] getStackTrace [1] render [2] metodo que llamo a render
 	protected void render(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		render(request, response, "index");
+		String accion = Thread.currentThread().getStackTrace()[2].getMethodName();
+		render(request, response, accion);
 	}
 	
 	// template             resultado
@@ -55,14 +57,14 @@ public class ApplicationController extends HttpServlet {
 		String url = "/WEB-INF/";
 		// si es que es una accion del mismo controlador
 		if (template.indexOf("/") == -1)
-			url += getUrlPath() + "/" + template + ".jsp";
+			url += getControllerPath() + "/" + template + ".jsp";
 		else // accion de otro controlador
 			url += template + ".jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	// LalalaServlet => lalala
-	protected String getUrlPath() {
+	protected String getControllerPath() {
 		StringBuilder url = new StringBuilder();
 		url.append(getClass().getName().toLowerCase());
 		url.replace(0, url.lastIndexOf(".") + 1, "");
