@@ -10,7 +10,7 @@ import java.lang.reflect.*;
 public class ApplicationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			doAction(request, response);
 		} catch (IllegalArgumentException e) {
@@ -26,21 +26,21 @@ public class ApplicationController extends HttpServlet {
 		render(request, response);
 	}
 	
-	protected Method doAction(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ServletException, IOException {
-		Method[] methods = this.getClass().getDeclaredMethods();
+	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ServletException, IOException {
 		String path = request.getPathInfo();
-		if (path != null && !path.equals("/")) {
-			for (Method m : methods) {
-				if (("/" + m.getName()).equals(path) ||
-					("/" + m.getName() + "/").equals(path)) {
+		if (path != null && !path.equals("")) {
+			StringBuilder url = new StringBuilder(path);
+			url.replace(0, 1, ""); // /accion => accion
+			if (url.indexOf("/") != -1) // accion/* => accion
+				url.replace(url.indexOf("/"), url.length(), "");
+			path = url.toString();
+			Method[] methods = this.getClass().getDeclaredMethods();
+			for (Method m : methods)
+				if (m.getName().equals(path))
 					m.invoke(this, request, response);
-					return m;
-				}
-			}
 		} else {
 			index(request, response);
 		}
-		return null;
 	}
 
 	// stack: [0] getStackTrace [1] render [2] metodo que llamo a render

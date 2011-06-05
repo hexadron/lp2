@@ -8,12 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends ApplicationController {
 	private static final long serialVersionUID = 1L;
        
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
 	public void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] arreglo = {"HAML", "SASS", "Compass", "Rails"};
+		String[] arreglo = {"Sprockets", "Coffee", "Compass"};
 		for (String s : arreglo)
 			System.out.println(s);
 		render(request, response, "index");
