@@ -1,0 +1,142 @@
+@import base
+
+@mixin button_color($color)
+  background: $color
+  @include background(linear-gradient($color, darken($color, 10)))
+  @include box-shadow(lighten($color, 10) 0 1px 0 inset, darken($color, 25) 0 -3px 0 inset, lighten($color, 10) 0 -4px 0 inset)
+
+html
+  background: hsl(0, 0, 96)
+
+.container
+  @include container
+
+.column
+  @include column-base
+
+#header
+  font-family: sans-serif
+  margin-top: 1em
+  @extend .column
+  @include span(24)
+
+  h1
+    color: hsl(0, 0, 40)
+    @include text-shadow(white, 0, 2px, 0)
+
+.content
+  background: white
+  padding: 1.5em 1.25em
+  border: 0.1em solid hsl(0, 0, 80)
+  margin: 0 auto
+  margin-bottom: 2.5em
+  border-top: 0.5em solid hsl(0, 0, 40)
+  @include border-bottom-radius(0.35em)
+  @extend .column
+  @include span(22.9)
+
+  h2
+    color: hsl(0, 0, 40)
+    font-weight: light
+    margin-top: 1em
+    margin-bottom: 0.5em 
+
+.dark
+  color: white
+  background: hsl(0, 0, 20)
+  padding: 0.5em 1.25em
+  @include border-radius(0.5em)
+  @include box-shadow(rgba(255, 255, 255, 0.1) 0 1px 0, rgba(0, 0, 0, 0.8) 0 1px 7px 0px inset)
+  @extend .column
+  @include span(22)
+
+.textcontainer
+  border: 1px solid hsl(0, 0, 70)
+  padding: 0.25em
+  @include box-shadow(rgba(0, 0, 0, 0.30) 0 1px 3px 0px inset)
+
+form
+  color: hsl(0, 0, 20)
+  font: normal normal 1.2em/1.5em sans-serif
+  margin-top: -1em
+
+  fieldset
+    padding: 0
+    border: none
+
+    ul
+      margin: 0
+
+  li
+    margin-bottom: 0.3em
+
+  h3
+    color: hsl(0, 0, 40)
+    font-weight: bold
+    margin-top: 1em
+    margin-bottom: 0.5em
+
+  label
+    text-align: right
+    vertical-align: middle
+    @extend .column
+    @include span(5)
+    
+    &.nowrap
+      text-align: left
+      margin-bottom: 1.5em
+      @include span(21)
+
+  input
+
+    &[type=text], &[type=password]
+      @extend .textcontainer
+      @include span(8)
+
+    $color : hsl(210, 50, 50)
+
+    &[type=submit]
+      border: 0.1em solid white
+      color: hsl(0, 0, 35)
+      float: right
+      margin-left: 1.25em
+      margin-right: -0.5em
+      padding: 0.62em 0.5em 
+      @include border-radius(0.2em)
+      @include span(4)
+
+      &:hover
+        border-color: $color
+        color: darken($color, 10)
+
+      &:active
+        position: relative
+        top: 1px
+
+      &.default
+        color: white
+        border: 0.1em solid darken($color, 10)
+        border-bottom-color: darken($color, 25) 
+        padding: 0.5em
+        padding-bottom: 0.75em
+        @include button_color($color)
+        @include text-shadow(darken($color, 20), 0, 2px, 0)
+          
+      &.default:hover
+        color: white
+        border-bottom-color: darken($color, 15) 
+        @include button_color(lighten($color, 10))
+
+      &.default:active
+        padding: 0.62em 0.5em
+
+  textarea
+    font-family: sans-serif
+    @extend .textcontainer
+    @include span(21)
+
+  .actions
+    height: 3em
+    margin-top: 0.5em
+    @extend .column
+    @include span(21)
