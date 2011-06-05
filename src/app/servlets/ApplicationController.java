@@ -30,7 +30,8 @@ public class ApplicationController extends HttpServlet {
 		Method[] methods = this.getClass().getDeclaredMethods();
 		if (request.getPathInfo() != null && !request.getPathInfo().equals("/")) {
 			for (Method m : methods) {
-				if (("/" + m.getName()).equals(request.getPathInfo())) {
+				if (("/" + m.getName()).equals(request.getPathInfo()) ||
+					("/" + m.getName() + "/").equals(request.getPathInfo())) {
 					m.invoke(this, request, response);
 					return m;
 				}
