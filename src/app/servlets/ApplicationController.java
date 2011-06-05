@@ -26,7 +26,7 @@ public class ApplicationController extends HttpServlet {
 		render(request, response);
 	}
 	
-	protected Method runMethod(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+	protected Method runMethod(HttpServletRequest request, HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, ServletException, IOException {
 		Method[] methods = this.getClass().getDeclaredMethods();
 		if (request.getPathInfo() != null && !request.getPathInfo().equals("/")) {
 			for (Method m : methods) {
@@ -36,13 +36,7 @@ public class ApplicationController extends HttpServlet {
 				}
 			}
 		} else {
-			try {
-				index(request, response);
-			} catch (ServletException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			index(request, response);
 		}
 		return null;
 	}
