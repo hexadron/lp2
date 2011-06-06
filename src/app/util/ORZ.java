@@ -24,8 +24,10 @@ public abstract class ORZ {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
 			ps.setLong(1, id);
+			
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			
 			if (rs.next()) {
 				String name;
 				T o = (T) getClass().newInstance();
@@ -71,18 +73,23 @@ public abstract class ORZ {
 	public <T> List<T> where(String query, Object... values) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
-		String sql;
+		String sql = "SELECT * FROM " + getTable() + " WHERE ";
+		
 		if (query.split(" ").length > 1) // si contiene una condicion
-			sql = "SELECT * FROM " + getTable() + " WHERE " + query;
+			sql += query;
 		else
-			sql = "SELECT * FROM " + getTable() + " WHERE " + query + " = ?";
+			sql += query + " = ?";
+		
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
+			
 			for (int i = 0; i < values.length; i++)
 				ps.setObject(i + 1, values[i]);
+			
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			
 			while (rs.next()) {
 				String name;
 				T o = (T) getClass().newInstance();
@@ -165,26 +172,34 @@ public abstract class ORZ {
 	
 	public <T> T create() {
 		Connection db = null;
-		StringBuilder sql = new StringBuilder("INSERT INTO " + getTable() + " (");
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO " + getTable() + " (");
 		String[] fields = getTableFields().split(", ");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(", ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(") VALUES (");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append("?, ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(")");
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString(), 
 						Statement.RETURN_GENERATED_KEYS);
+			
 			for (int i = 0; i <= fields.length - 1; i++) {
 				Field f = getClass().getDeclaredField(fields[i]);
 				ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
 			}
+			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
+			
 			if (rs.next())
 				getSetter("id").invoke(this, rs.getLong(1));
 			return (T) this;
@@ -208,24 +223,32 @@ public abstract class ORZ {
 	
 	public <T> T create(Object... params) {
 		Connection db = null;
-		StringBuilder sql = new StringBuilder("INSERT INTO " + getTable() + " (");
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO " + getTable() + " (");
 		String[] fields = getTableFields().split(", ");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(", ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(") VALUES (");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append("?, ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(")");
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString(), 
 						Statement.RETURN_GENERATED_KEYS);
+			
 			for (int i = 1; i <= params.length; i++)
 				ps.setObject(i, params[i - 1]);
+			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
+			
 			if (rs.next())
 				updateAttributes(rs.getLong(1));
 			return (T) this;
@@ -241,20 +264,26 @@ public abstract class ORZ {
 	
 	public <T> T update() {
 		Connection db = null;
-		StringBuilder sql = new StringBuilder("UPDATE " + getTable() + " SET ");
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE " + getTable() + " SET ");
 		String[] fields = getTableFields().split(", ");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(" = ?, ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(" WHERE id = ?");
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString());
+			
 			int i = 1;
 			for (; i <= fields.length; i++) {
 				Field f = getClass().getDeclaredField(fields[i - 1]);
 				ps.setObject(i, getGetter(f.getName()).invoke(this));
 			}
+			
 			ps.setLong(i, (Long) getGetter("id").invoke(this));
 			ps.executeUpdate();
 			return (T) this;
@@ -278,18 +307,25 @@ public abstract class ORZ {
 	
 	public <T> T update(Object... params) {
 		Connection db = null;
-		StringBuilder sql = new StringBuilder("UPDATE " + getTable() + " SET ");
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE " + getTable() + " SET ");
 		String[] fields = getTableFields().split(", ");
+		
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(" = ?, ");
+		
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(" WHERE id = ?");
+		
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString());
+			
 			int i = 1;
 			for (; i <= params.length; i++)
 				ps.setObject(i, params[i - 1]);
+			
 			ps.setLong(i, (Long) getGetter("id").invoke(this));
 			ps.executeUpdate();
 			updateAttributes((Long) getGetter("id").invoke(this));
@@ -365,15 +401,13 @@ public abstract class ORZ {
 			DatabaseMetaData databaseMetaData = cn.getMetaData();
 			ResultSet rs = databaseMetaData.getColumns(null, null, getTable(), "%");
 			StringBuilder fields = new StringBuilder();
-			while (rs.next()) {
-				if (!(rs.getString("COLUMN_NAME").equals("id"))) {
-					for (Field f : getClass().getDeclaredFields()) {
-						if (f.getName().equals(rs.getString("COLUMN_NAME"))) {
+			
+			while (rs.next())
+				if (!(rs.getString("COLUMN_NAME").equals("id")))
+					for (Field f : getClass().getDeclaredFields())
+						if (f.getName().equals(rs.getString("COLUMN_NAME")))
 							fields.append(f.getName()).append(", ");
-						}
-					}
-				}
-			}
+
 			fields.delete(fields.length() - 2, fields.length());
 			return fields.toString();
 		} catch (SQLException e) {
@@ -387,14 +421,13 @@ public abstract class ORZ {
 			Connection cn = Database.getConnection();
 			DatabaseMetaData databaseMetaData = cn.getMetaData();
 			ResultSet rs = databaseMetaData.getColumns(null, null, getTable(c.getName()), "%");
+			
 			StringBuilder fields = new StringBuilder();
-			while (rs.next()) {
-				for (Field f : c.getDeclaredFields()) {
-					if (f.getName().equals(rs.getString("COLUMN_NAME"))) {
+			while (rs.next())
+				for (Field f : c.getDeclaredFields())
+					if (f.getName().equals(rs.getString("COLUMN_NAME")))
 						fields.append(prefix).append(f.getName()).append(", ");
-					}
-				}
-			}
+
 			fields.delete(fields.lastIndexOf(","), fields.length());
 			return fields.toString();
 		} catch (SQLException e) {
@@ -473,16 +506,19 @@ public abstract class ORZ {
 	public <T> List<T> parent(Class<T> c) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
+		
 		String sql = "SELECT " + getAllTableFields(c, "parent.") +
 		" FROM " + getTable(c.getName()) + " AS parent INNER JOIN " + 
 		getTable(getClass().getName()) + " AS child ON child." +
 		getTable(c.getName()) + "_id = parent.id WHERE child.id = ?";
+		
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
 			ps.setLong(1, (Long) getGetter("id").invoke(this));
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			
 			while (rs.next()) {
 				String name;
 				T o = c.newInstance();
@@ -517,16 +553,19 @@ public abstract class ORZ {
 	public <T> List<T> children(Class<T> c) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
+		
 		String sql = "SELECT " + getAllTableFields(c, "child.") +
 		" FROM " + getTable(c.getName()) + " AS child INNER JOIN " + 
 		getTable(getClass().getName()) + " AS parent ON child." +
 		getTable(getClass().getName()) + "_id = parent.id WHERE parent.id = ?";
+		
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
 			ps.setLong(1, (Long) getGetter("id").invoke(this));
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
+			
 			while (rs.next()) {
 				String name;
 				T o = c.newInstance();

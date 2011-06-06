@@ -14,11 +14,13 @@ public class ApplicationController extends HttpServlet {
 		try {
 			String path = request.getPathInfo();
 			if (path != null && !path.equals("/")) {
+				
 				StringBuilder url = new StringBuilder(path);
 				url.replace(0, 1, ""); // /accion => accion
 				if (url.indexOf("/") != -1) // accion/* => accion
 					url.replace(url.indexOf("/"), url.length(), "");
 				path = url.toString();
+				
 				Method[] methods = this.getClass().getDeclaredMethods();
 				for (Method m : methods)
 					if (m.getName().equals(path))
@@ -45,7 +47,7 @@ public class ApplicationController extends HttpServlet {
 		render(request, response, accion);
 	}
 	
-	// template             resultado
+	// parametro            resultado
 	// accion               sitio.com/controlador/accion.jsp
 	// controlador/accion   sitio.com/controlador/accion.jsp
 	// cobb/goes/to/limbo   sitio.com/cobb/goes/to/limbo.jsp
@@ -57,6 +59,19 @@ public class ApplicationController extends HttpServlet {
 		else // accion de otro controlador
 			url += template + ".jsp";
 		request.getRequestDispatcher(url).forward(request, response);
+	}
+	
+	protected void redirectTo(HttpServletRequest request, HttpServletResponse response, String location) throws IOException {
+		String url = request.getContextPath() + "/";
+		if (location.indexOf("/") == -1) {
+			url += getControllerPath();
+			if (location.equals("index"))
+				response.sendRedirect(url);
+			else
+				response.sendRedirect(url + "/" + location);
+		}
+		else
+			response.sendRedirect(url + location);
 	}
 	
 	// LalalaServlet => lalala

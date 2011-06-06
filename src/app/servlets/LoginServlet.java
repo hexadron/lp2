@@ -13,6 +13,7 @@ public class LoginServlet extends ApplicationController {
 		for (String s : arreglo)
 			System.out.println(s);
 		render(request, response, "index");
+//		redirectTo(request, response, "index");
 	}
 
 }
