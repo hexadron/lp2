@@ -1,4 +1,4 @@
-/* line 1, ../sass/reset.sass */
+/* line 1, ../sass/_reset.sass */
 html, body, div, span, h1, h2, h3, p, a, em, img, strong, form, input, ol, ul, li, textarea, table, th, td, tr {
   margin: 0;
   padding: 0;
@@ -11,118 +11,118 @@ html, body, div, span, h1, h2, h3, p, a, em, img, strong, form, input, ol, ul, l
   background: transparent;
 }
 
-/* line 12, ../sass/reset.sass */
+/* line 12, ../sass/_reset.sass */
 ol, ul {
   list-style: none;
 }
 
-/* line 15, ../sass/reset.sass */
+/* line 15, ../sass/_reset.sass */
 p {
   margin: 0 0 1.5em 0;
 }
 
-/* line 18, ../sass/reset.sass */
+/* line 18, ../sass/_reset.sass */
 ol, ul {
   margin: 0 0 1.5em 2em;
 }
 
-/* line 21, ../sass/reset.sass */
+/* line 21, ../sass/_reset.sass */
 th, td, caption {
   text-align: left;
   vertical-align: middle;
 }
 
-/* line 25, ../sass/reset.sass */
+/* line 25, ../sass/_reset.sass */
 h1 {
   font-size: 3em;
   line-height: 1;
   margin-bottom: 0.5em;
 }
 
-/* line 30, ../sass/reset.sass */
+/* line 30, ../sass/_reset.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 0.75em;
 }
 
-/* line 34, ../sass/reset.sass */
+/* line 34, ../sass/_reset.sass */
 h3 {
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1em;
 }
 
-/* line 39, ../sass/reset.sass */
+/* line 39, ../sass/_reset.sass */
 h4 {
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
 
-/* line 44, ../sass/reset.sass */
+/* line 44, ../sass/_reset.sass */
 h5 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.5em;
 }
 
-/* line 49, ../sass/reset.sass */
+/* line 49, ../sass/_reset.sass */
 h6 {
   font-size: 1em;
   font-weight: bold;
 }
 
-/* line 53, ../sass/reset.sass */
+/* line 53, ../sass/_reset.sass */
 blockquote {
   margin: 1.5em;
   color: #666666;
   font-style: italic;
 }
 
-/* line 58, ../sass/reset.sass */
+/* line 58, ../sass/_reset.sass */
 strong, dfn {
   font-weight: bold;
 }
 
-/* line 61, ../sass/reset.sass */
+/* line 61, ../sass/_reset.sass */
 em, dfn {
   font-style: italic;
 }
 
-/* line 64, ../sass/reset.sass */
+/* line 64, ../sass/_reset.sass */
 sup, sub {
   line-height: 0;
 }
 
-/* line 67, ../sass/reset.sass */
+/* line 67, ../sass/_reset.sass */
 abbr, acronym {
   border-bottom: 1px dotted #666666;
 }
 
-/* line 70, ../sass/reset.sass */
+/* line 70, ../sass/_reset.sass */
 address {
   margin: 0 0 1.5em;
   font-style: italic;
 }
 
-/* line 74, ../sass/reset.sass */
+/* line 74, ../sass/_reset.sass */
 del {
   color: #666666;
 }
 
-/* line 77, ../sass/reset.sass */
+/* line 77, ../sass/_reset.sass */
 pre {
   margin: 1.5em 0;
   white-space: pre;
 }
 
-/* line 81, ../sass/reset.sass */
+/* line 81, ../sass/_reset.sass */
 pre, code, tt {
   font: 1em "menlo", "monaco", "consolas", "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
 
-/* line 85, ../sass/reset.sass */
+/* line 85, ../sass/_reset.sass */
 th {
   font-weight: bold;
 }
