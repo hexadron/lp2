@@ -13,7 +13,12 @@ public class LoginServlet extends ApplicationController {
 		for (String s : arreglo)
 			System.out.println(s);
 		render(request, response, "index");
-//		redirectTo(request, response, "index");
+	}
+	
+	public void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (!request.getMethod().equals("POST"))
+			return;
+		redirectTo(request, response, "home/");
 	}
 
 }

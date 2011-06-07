@@ -3,3 +3,5 @@
 .project
 /build
 /WebContent/assets/.sass-cache
+id
+id.pub
