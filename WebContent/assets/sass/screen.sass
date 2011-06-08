@@ -6,7 +6,6 @@
   @include box-shadow(lighten($color, 10) 0 1px 0 inset, darken($color, 25) 0 -3px 0 inset, lighten($color, 10) 0 -4px 0 inset)
 
 html
-  background: hsl(0, 0, 96)
 
 .container
   @include container
@@ -21,25 +20,23 @@ html
   @include span(24)
 
   h1
-    color: hsl(0, 0, 40)
-    @include text-shadow(white, 0, 2px, 0)
+    margin: auto 0
 
 .content
   background: white
-  padding: 1.5em 1.25em
-  border: 0.1em solid hsl(0, 0, 80)
-  margin: 0 auto
-  margin-bottom: 2.5em
-  border-top: 0.5em solid hsl(0, 0, 40)
-  @include border-bottom-radius(0.35em)
+  margin: 0 0 2.5em 0
   @extend .column
-  @include span(22.9)
+  @include span(17.25)
+  @include prepend(3.25)
 
   h2
     color: hsl(0, 0, 40)
     font-weight: light
     margin-top: 1em
-    margin-bottom: 0.5em 
+    margin-bottom: 0.5em
+    color: white
+    background: hsl(0, 90, 50)
+    padding: 0.5em
 
 .dark
   color: white
@@ -58,21 +55,19 @@ html
 form
   color: hsl(0, 0, 20)
   font: normal normal 1.2em/1.5em sans-serif
-  margin-top: -1em
+
+  ul
+    margin-left: 0
 
   fieldset
     padding: 0
     border: none
 
-    ul
-      margin: 0
-
   li
     margin-bottom: 0.3em
 
   h3
-    color: hsl(0, 0, 40)
-    font-weight: bold
+    color: black
     margin-top: 1em
     margin-bottom: 0.5em
 
@@ -85,7 +80,7 @@ form
     &.nowrap
       text-align: left
       margin-bottom: 1.5em
-      @include span(21)
+      width: inherit
 
   input
 
@@ -96,17 +91,15 @@ form
     $color : hsl(210, 50, 50)
 
     &[type=submit]
-      border: 0.1em solid white
-      color: hsl(0, 0, 35)
+      color: hsl(0, 0, 30)
+      border: 0.1em dashed hsl(0, 0, 40)
       float: right
-      margin-left: 1.25em
-      margin-right: -0.5em
       padding: 0.62em 0.5em 
       @include border-radius(0.2em)
       @include span(4)
 
       &:hover
-        border-color: $color
+        border: 0.1em solid $color
         color: darken($color, 10)
 
       &:active
@@ -133,10 +126,13 @@ form
   textarea
     font-family: sans-serif
     @extend .textcontainer
-    @include span(21)
+    @include span(15.75)
 
   .actions
     height: 3em
     margin-top: 0.5em
     @extend .column
-    @include span(21)
+    @include span(16)
+
+    input[type=submit]
+      margin-left: 1em

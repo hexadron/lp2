@@ -74,7 +74,7 @@ public class ApplicationController extends HttpServlet {
 			response.sendRedirect(url + location);
 	}
 	
-	// LalalaServlet => lalala
+	// app.servlets.LalalaServlet => lalala
 	protected String getControllerPath() {
 		StringBuilder url = new StringBuilder();
 		url.append(getClass().getName().toLowerCase());
