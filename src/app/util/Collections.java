@@ -5,7 +5,10 @@ import java.util.*;
 public abstract class Collections {
 
 	public static <T> List<T> List(T... params) {
-		return Arrays.asList(params);
+		List<T> list = new ArrayList<T>();
+		for (T e : params) 
+			list.add(e);
+		return list;
 	}
 	
 	public static int[] Range(int a, int b) {
