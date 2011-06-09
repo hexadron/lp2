@@ -214,24 +214,25 @@ form h3 {
   border-bottom: 1px solid #cccccc;
   margin-top: 1em;
   margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
 }
-/* line 66, ../sass/screen.sass */
+/* line 67, ../sass/screen.sass */
 form label {
   text-align: right;
   vertical-align: middle;
   width: 190px;
 }
-/* line 72, ../sass/screen.sass */
+/* line 73, ../sass/screen.sass */
 form label.nowrap {
   text-align: left;
   margin-bottom: 1.5em;
   width: inherit;
 }
-/* line 79, ../sass/screen.sass */
+/* line 80, ../sass/screen.sass */
 form input[type=text], form input[type=password] {
   width: 310px;
 }
-/* line 84, ../sass/screen.sass */
+/* line 85, ../sass/screen.sass */
 form input[type=submit] {
   color: #4d4d4d;
   border: 0.1em dashed #666666;
@@ -239,45 +240,45 @@ form input[type=submit] {
   padding: 0.62em 0.5em;
   width: 150px;
 }
-/* line 91, ../sass/screen.sass */
+/* line 92, ../sass/screen.sass */
 form input[type=submit]:hover {
   border: 0.1em solid #f20d0d;
   color: #c20a0a;
 }
-/* line 95, ../sass/screen.sass */
+/* line 96, ../sass/screen.sass */
 form input[type=submit]:active {
   position: relative;
   top: 1px;
 }
-/* line 99, ../sass/screen.sass */
+/* line 100, ../sass/screen.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 104, ../sass/screen.sass */
+/* line 105, ../sass/screen.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 108, ../sass/screen.sass */
+/* line 109, ../sass/screen.sass */
 form input[type=submit].default:active {
   background: #da0b0b;
   padding: 0.62em 0.5em;
 }
-/* line 112, ../sass/screen.sass */
+/* line 113, ../sass/screen.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 118, ../sass/screen.sass */
+/* line 119, ../sass/screen.sass */
 form .actions {
   height: 3em;
   margin-top: 2em;
   width: 680px;
 }
-/* line 124, ../sass/screen.sass */
+/* line 125, ../sass/screen.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }

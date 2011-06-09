@@ -488,14 +488,12 @@ public abstract class ORZ {
 	}
 
 	public String getTable() {
-		return getTable(getClass().getName());
+		return getTable(getClass().getSimpleName());
 	}
 	
 	private String getTable(String name) {
 		StringBuilder table = new StringBuilder();
 		table.append(name.toLowerCase());
-		int dot = table.lastIndexOf(".") + 1;
-		table.replace(0, dot, "");
 //		int ex = table.lastIndexOf("dto");
 //		table.replace(ex, table.length(), "");
 		return table.toString();

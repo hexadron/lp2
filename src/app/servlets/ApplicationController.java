@@ -9,6 +9,7 @@ import java.lang.reflect.*;
 
 public class ApplicationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	protected boolean rendered = false;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -23,8 +24,12 @@ public class ApplicationController extends HttpServlet {
 				
 				Method[] methods = this.getClass().getDeclaredMethods();
 				for (Method m : methods)
-					if (m.getName().equals(path))
+					if (m.getName().equals(path)) {
+						rendered = false;
 						m.invoke(this, request, response);
+						if (!rendered)
+							render(request, response, m.getName());
+					}
 			} else {
 				index(request, response);
 			}
@@ -58,11 +63,14 @@ public class ApplicationController extends HttpServlet {
 			url += getControllerPath() + "/" + template + ".jsp";
 		else // accion de otro controlador
 			url += template + ".jsp";
+		rendered = true;
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 	
 	protected void redirectTo(HttpServletRequest request, HttpServletResponse response, String location) throws IOException {
 		String url = request.getContextPath() + "/";
+		// evita que renderice automaticamente la vista
+		rendered = true;
 		if (location.indexOf("/") == -1) {
 			url += getControllerPath();
 			if (location.equals("index"))
@@ -77,8 +85,7 @@ public class ApplicationController extends HttpServlet {
 	// app.servlets.LalalaServlet => lalala
 	protected String getControllerPath() {
 		StringBuilder url = new StringBuilder();
-		url.append(getClass().getName().toLowerCase());
-		url.replace(0, url.lastIndexOf(".") + 1, "");
+		url.append(getClass().getSimpleName().toLowerCase());
 		url.replace(url.lastIndexOf("servlet"), url.length(), "");
 		return url.toString();
 	}
