@@ -16,6 +16,8 @@ public class LoginServlet extends ApplicationController {
 		List<String> arreglo = List("Sprockets", "Coffee", "Compass");
 		for (String s : arreglo)
 			System.out.println(s);
+		for (int i : Range(1, 10))
+			System.out.println(i);
 	}
 	
 	public void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

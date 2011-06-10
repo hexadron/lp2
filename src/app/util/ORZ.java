@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.*;
 
 public abstract class ORZ {
-	
+
 	public static <T> T find(Class<? extends ORZ> c, long id) {
 		try {
 			return c.newInstance().find(id);
@@ -16,7 +16,7 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public <T> T find(long id) {
 		Connection db = null;
 		String sql = "SELECT * FROM " + getTable() + " WHERE id = ?";
@@ -24,18 +24,17 @@ public abstract class ORZ {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
 			ps.setLong(1, id);
-			
+
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			
+
 			if (rs.next()) {
 				String name;
 				T o = (T) getClass().newInstance();
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 					name = rsmd.getColumnName(i);
-					Field f = getClass().getDeclaredField(name);
-					Object val = rs.getObject(name);
-					getSetter(f.getName()).invoke(o, val);
+					Field f = getField(name);
+					f.set(this, rs.getObject(name));
 				}
 				return o;
 			}
@@ -47,18 +46,14 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} finally {
 			Database.close(db);
 		}
 		return null;
 	}
-	
+
 	public static <T> List<T> where(Class<? extends ORZ> c, String query, Object... values) {
 		try {
 			return c.newInstance().where(query, values);
@@ -69,35 +64,35 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public <T> List<T> where(String query, Object... values) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
 		String sql = "SELECT * FROM " + getTable() + " WHERE ";
-		
+
 		if (query.split(" ").length > 1) // si contiene una condicion
 			sql += query;
 		else
 			sql += query + " = ?";
-		
+
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
-			
+
 			for (int i = 0; i < values.length; i++)
 				ps.setObject(i + 1, values[i]);
-			
+
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			
+
 			while (rs.next()) {
 				String name;
 				T o = (T) getClass().newInstance();
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 					name = rsmd.getColumnName(i);
-					Field f = getClass().getDeclaredField(name);
+					Field f = getField(name);
 					Object val = rs.getObject(name);
-					getSetter(f.getName()).invoke(o, val);
+					f.set(this, val);
 				}
 				all.add(o);
 			}
@@ -109,37 +104,31 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} finally {
 			Database.close(db);
 		}
 		return all;
 	}
-	
+
 	public <T> T save() {
-		if (getGetter("id") != null) {
-			try {
-				Object id = getGetter("id").invoke(this);
+		Field id = getField("id");
+		try {
+			if (id.get(this) != null) {
 				if (id.toString().equals("0"))
 					create();
 				else
 					update();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
 			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 		return (T) this;
 	}
-	
+
 	public static <T> T save(Class<? extends ORZ> c, Object... params) {
 		try {
 			return c.newInstance().save(params);
@@ -150,58 +139,58 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public <T> T save(Object... params) {
-		if (getGetter("id") != null) {
-			try {
-				Object id = getGetter("id").invoke(this);
+		Field id = getField("id");
+		try {
+			if (id.get(this) != null) {
 				if (id.toString().equals("0"))
 					create(params);
 				else
 					update(params);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
 			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
 		return (T) this;
 	}
-	
+
 	public <T> T create() {
 		Connection db = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO " + getTable() + " (");
 		String[] fields = getTableFields().split(", ");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(", ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(") VALUES (");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append("?, ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(")");
 		try {
 			db = Database.getConnection();
-			PreparedStatement ps = db.prepareStatement(sql.toString(), 
-						Statement.RETURN_GENERATED_KEYS);
-			
+			PreparedStatement ps = db.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
 			for (int i = 0; i <= fields.length - 1; i++) {
 				Field f = getClass().getDeclaredField(fields[i]);
-				ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
+				ps.setObject(i + 1, f.get(this));
 			}
-			
+
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
-			
-			if (rs.next())
-				getSetter("id").invoke(this, rs.getLong(1));
+
+			if (rs.next()) {
+				Field f = getClass().getDeclaredField("id");
+				f.set(this, rs.getLong(1));
+			}
 			return (T) this;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -213,42 +202,40 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} finally {
 			Database.close(db);
 		}
 		return null;
 	}
-	
+
 	public <T> T create(Object... params) {
 		Connection db = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO " + getTable() + " (");
 		String[] fields = getTableFields().split(", ");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(", ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(") VALUES (");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append("?, ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(")");
 		try {
 			db = Database.getConnection();
-			PreparedStatement ps = db.prepareStatement(sql.toString(), 
-						Statement.RETURN_GENERATED_KEYS);
-			
+			PreparedStatement ps = db.prepareStatement(sql.toString(),
+					Statement.RETURN_GENERATED_KEYS);
+
 			for (int i = 1; i <= params.length; i++)
 				ps.setObject(i, params[i - 1]);
-			
+
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
-			
+
 			if (rs.next())
 				updateAttributes(rs.getLong(1));
 			return (T) this;
@@ -261,30 +248,31 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public <T> T update() {
 		Connection db = null;
-		
+
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE " + getTable() + " SET ");
 		String[] fields = getTableFields().split(", ");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(" = ?, ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(" WHERE id = ?");
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString());
-			
+
 			int i = 1;
 			for (; i <= fields.length; i++) {
 				Field f = getClass().getDeclaredField(fields[i - 1]);
-				ps.setObject(i, getGetter(f.getName()).invoke(this));
+				ps.setObject(i, f.get(this));
 			}
-			
-			ps.setLong(i, (Long) getGetter("id").invoke(this));
+
+			Object id = getClass().getDeclaredField("id").get(this);
+			ps.setLong(i, (Long) id);
 			ps.executeUpdate();
 			return (T) this;
 		} catch (SQLException e) {
@@ -292,8 +280,6 @@ public abstract class ORZ {
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -304,31 +290,33 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public <T> T update(Object... params) {
 		Connection db = null;
-		
+
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE " + getTable() + " SET ");
 		String[] fields = getTableFields().split(", ");
-		
+
 		for (int i = 0; i < fields.length; i++)
 			sql.append(fields[i]).append(" = ?, ");
-		
+
 		sql.delete(sql.length() - 2, sql.length());
 		sql.append(" WHERE id = ?");
-		
+
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString());
-			
+
 			int i = 1;
 			for (; i <= params.length; i++)
 				ps.setObject(i, params[i - 1]);
+
+			Object id = getClass().getDeclaredField("id").get(this);
 			
-			ps.setLong(i, (Long) getGetter("id").invoke(this));
+			ps.setLong(i, (Long) id);
 			ps.executeUpdate();
-			updateAttributes((Long) getGetter("id").invoke(this));
+			updateAttributes((Long) id);
 			return (T) this;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -336,7 +324,9 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} finally {
 			Database.close(db);
@@ -350,7 +340,8 @@ public abstract class ORZ {
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
-			ps.setLong(1, (Long) getGetter("id").invoke(this));
+			Object id = getClass().getDeclaredField("id").get(this);
+			ps.setLong(1, (Long) id);
 			ps.executeUpdate();
 			return (T) this;
 		} catch (SQLException e) {
@@ -359,20 +350,22 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} finally {
 			Database.close(db);
 		}
 		return null;
 	}
-	
+
 	public static <T> T delete(Class<? extends ORZ> c, long id) {
 		Connection db = null;
 		try {
-			String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE id = ?";
+			String sql = "DELETE FROM " + c.newInstance().getTable()
+					+ " WHERE id = ?";
 			T o = c.newInstance().find(id);
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
@@ -394,14 +387,15 @@ public abstract class ORZ {
 		}
 		return null;
 	}
-	
+
 	public String getTableFields() {
 		try {
 			Connection cn = Database.getConnection();
 			DatabaseMetaData databaseMetaData = cn.getMetaData();
-			ResultSet rs = databaseMetaData.getColumns(null, null, getTable(), "%");
+			ResultSet rs = databaseMetaData.getColumns(null, null, getTable(),
+					"%");
 			StringBuilder fields = new StringBuilder();
-			
+
 			while (rs.next())
 				if (!(rs.getString("COLUMN_NAME").equals("id")))
 					for (Field f : getClass().getDeclaredFields())
@@ -412,16 +406,17 @@ public abstract class ORZ {
 			return fields.toString();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
-	
+
 	private String getAllTableFields(Class<?> c, String prefix) {
 		try {
 			Connection cn = Database.getConnection();
 			DatabaseMetaData databaseMetaData = cn.getMetaData();
-			ResultSet rs = databaseMetaData.getColumns(null, null, getTable(c.getName()), "%");
-			
+			ResultSet rs = databaseMetaData.getColumns(null, null,
+					getTable(c.getName()), "%");
+
 			StringBuilder fields = new StringBuilder();
 			while (rs.next())
 				for (Field f : c.getDeclaredFields())
@@ -432,24 +427,28 @@ public abstract class ORZ {
 			return fields.toString();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
-	
+
 	private <T> T updateAttributes(long id) {
 		T o = find(id);
 		for (Method m : o.getClass().getDeclaredMethods()) {
 			if (m.getName().startsWith("set")) {
 				StringBuilder setter = new StringBuilder(m.getName());
-				String field = setter.delete(0, 3).toString().toLowerCase();
+				String name = setter.delete(0, 3).toString().toLowerCase();
 				try {
-					Object val = getGetter(field).invoke(o);
-					getSetter(field).invoke(this, val);
+					Field f = getField(name);
+					Field other = o.getClass().getDeclaredField(name);
+					f.set(this, other);
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					e.printStackTrace();
+				} catch (NoSuchFieldException e) {
 					e.printStackTrace();
 				}
 			}
@@ -457,32 +456,15 @@ public abstract class ORZ {
 		return (T) this;
 	}
 	
-	private Method getGetter(String field) {
-		return getGetter(field, getClass());
-	}
-	
-	private Method getGetter(String field, Class<?> c) {
-		for (Method m : c.getDeclaredMethods()) {
-			if (m.getName().startsWith("get")) {
-				if (m.getName().toLowerCase().endsWith(field)) {
-					return m;
-				}
-			}
-		}
-		return null;
-	}
-	
-	private Method getSetter(String field) {
-		return getSetter(field, getClass());
-	}
-	
-	private Method getSetter(String field, Class<?> c) {
-		for (Method m : c.getDeclaredMethods()) {
-			if (m.getName().startsWith("set")) {
-				if (m.getName().toLowerCase().endsWith(field)) {
-					return m;
-				}
-			}
+	public Field getField(String name) {
+		try {
+			Field f = getClass().getDeclaredField(name);
+			f.setAccessible(true);
+			return f;
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -490,41 +472,41 @@ public abstract class ORZ {
 	public String getTable() {
 		return getTable(getClass().getSimpleName());
 	}
-	
+
 	private String getTable(String name) {
 		StringBuilder table = new StringBuilder();
 		table.append(name.toLowerCase());
-//		int ex = table.lastIndexOf("dto");
-//		table.replace(ex, table.length(), "");
+		// int ex = table.lastIndexOf("dto");
+		// table.replace(ex, table.length(), "");
 		return table.toString();
 	}
-	
+
 	/* ActiveRelation? No U_U */
-	
+
 	public <T> List<T> parent(Class<T> c) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
-		
-		String sql = "SELECT " + getAllTableFields(c, "parent.") +
-		" FROM " + getTable(c.getName()) + " AS parent INNER JOIN " + 
-		getTable(getClass().getName()) + " AS child ON child." +
-		getTable(c.getName()) + "_id = parent.id WHERE child.id = ?";
-		
+
+		String sql = "SELECT " + getAllTableFields(c, "parent.") + " FROM "
+				+ getTable(c.getName()) + " AS parent INNER JOIN "
+				+ getTable(getClass().getName()) + " AS child ON child."
+				+ getTable(c.getName()) + "_id = parent.id WHERE child.id = ?";
+
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
-			ps.setLong(1, (Long) getGetter("id").invoke(this));
+			ps.setLong(1, (Long) getField("id").get(this));
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			
+
 			while (rs.next()) {
 				String name;
 				T o = c.newInstance();
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 					name = rsmd.getColumnName(i);
 					Field f = c.getDeclaredField(name);
-					Object val = rs.getObject(name);
-					getSetter(f.getName(), c).invoke(o, val);
+					f.setAccessible(true);
+					f.set(o, rs.getObject(name));
 				}
 				all.add(o);
 			}
@@ -536,8 +518,6 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
@@ -547,31 +527,32 @@ public abstract class ORZ {
 		}
 		return all;
 	}
-	
+
 	public <T> List<T> children(Class<T> c) {
 		List<T> all = new ArrayList<T>();
 		Connection db = null;
-		
-		String sql = "SELECT " + getAllTableFields(c, "child.") +
-		" FROM " + getTable(c.getName()) + " AS child INNER JOIN " + 
-		getTable(getClass().getName()) + " AS parent ON child." +
-		getTable(getClass().getName()) + "_id = parent.id WHERE parent.id = ?";
-		
+
+		String sql = "SELECT " + getAllTableFields(c, "child.") + " FROM "
+				+ getTable(c.getName()) + " AS child INNER JOIN "
+				+ getTable(getClass().getName()) + " AS parent ON child."
+				+ getTable(getClass().getName())
+				+ "_id = parent.id WHERE parent.id = ?";
+
 		try {
 			db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql);
-			ps.setLong(1, (Long) getGetter("id").invoke(this));
+			ps.setLong(1, (Long) getField("id").get(this));
 			ResultSet rs = ps.executeQuery();
 			ResultSetMetaData rsmd = rs.getMetaData();
-			
+
 			while (rs.next()) {
 				String name;
 				T o = c.newInstance();
 				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 					name = rsmd.getColumnName(i);
 					Field f = c.getDeclaredField(name);
-					Object val = rs.getObject(name);
-					getSetter(f.getName(), c).invoke(o, val);
+					f.setAccessible(true);
+					f.set(o, rs.getObject(name));
 				}
 				all.add(o);
 			}
@@ -583,8 +564,6 @@ public abstract class ORZ {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
@@ -593,24 +572,6 @@ public abstract class ORZ {
 			Database.close(db);
 		}
 		return all;
-	}
-	
-	public boolean equals(Object o) {
-		try {
-			for (Field f : this.getClass().getDeclaredFields()) {
-				if (o.getClass().getDeclaredField(f.getName()) != null)
-					if (getGetter(f.getName()).invoke(o) != getGetter(f.getName()).invoke(this))
-					return false;
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-	
-	public int hashCode() {
-		//por terminar
-		return 1;
 	}
 
 }
