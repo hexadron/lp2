@@ -13,8 +13,28 @@ html
 #header
   font-family: sans-serif
   margin-top: 1em
+  text-align: center
   @extend .column
   @include span(24)
+
+  .menu
+    border-bottom: 0.3em solid $color
+    @extend .column
+    @include span(24)
+    
+    & > li
+      padding: 1em 0
+      @extend .column
+      @include span(6.15)
+      @include last
+      position: relative
+      float: left
+
+    & > li:hover
+      background: $color
+      color: white
+      line-height: 0.6em
+      font-size: 1.25em
 
   h1
     margin: auto 0
@@ -28,11 +48,10 @@ html
 
   h2
     color: hsl(0, 0, 40)
+    border-left: 0.1em solid $color
     font-weight: light
     margin-top: 1em
     margin-bottom: 0.5em
-    color: white
-    background: $color
     padding: 0.5em
 
 .textcontainer
@@ -48,7 +67,7 @@ form
   font: normal normal 1.2em/1.5em sans-serif
 
   ul
-    margin-left: 0
+    margin: 0
 
   fieldset
     padding: 0
@@ -88,6 +107,7 @@ form
       float: right
       padding: 0.62em 0.5em 
       @include span(4)
+      @include border_radius(0.2em)
 
       &:hover
         border: 0.1em solid $color
@@ -124,3 +144,44 @@ form
 
     input[type=submit]
       margin-left: 1em
+
+
+.switch
+  background: lighten($color, 5)
+  border: 0.1em solid hsl(0, 0, 50)
+  color: white
+  cursor: pointer
+  display: inline-block
+  font-size: 0.85em
+  font-weight: bold
+  line-height: 1.3em
+  padding: 0 0.25em
+  text-align: center
+  width: 5em
+  @include box-shadow(rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, $color 0 1em 0.1em inset)
+  @include border_radius(2em)
+
+  .switch_text
+    position: relative
+
+  .switch_button
+    background: white
+    border: 0.1em solid hsl(0, 0, 50)
+    display: inline-block
+    padding: 0.275em 0.75em
+    position: relative
+    right: -22px
+    @include background_image(linear-gradient(darken(white, 15), white))
+    @include box-shadow(darken(white, 5) 0 0.15em 0 inset)
+    @include border_radius(2em)
+  
+  &.off
+    background: white
+    color: hsl(0, 0, 20)
+    @include box-shadow(rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, darken(white, 4) 0 1em 0.1em inset)
+
+    .switch_text
+      right: -35px
+
+    .switch_button
+      right: 46px

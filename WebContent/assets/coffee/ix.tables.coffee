@@ -1,4 +1,4 @@
-TableView = Backbone.View.extend
+window.TableView = Backbone.View.extend
   events: 'click th': 'sort'
   sort: (e) ->
     target = e.srcElement ? e.target

@@ -1,4 +1,4 @@
-ToolbarView = Backbone.View.extend
+window.ToolbarView = Backbone.View.extend
   intialize: (options) ->
     @table = options.table
   table: ->

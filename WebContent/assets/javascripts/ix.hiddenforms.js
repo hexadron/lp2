@@ -1,6 +1,5 @@
 (function() {
-  var HiddenFormView;
-  HiddenFormView = Backbone.View.extend({
+  window.HiddenFormView = Backbone.View.extend({
     events: {
       'click .show-form': 'show',
       'click .hide-form': 'hide'
