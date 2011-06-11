@@ -9,6 +9,20 @@
   <body>
     <div class='container'>
       <div id='header'>
+        <ul class='menu'>
+          <li>
+            Men&uacute; principal
+          </li>
+          <li>
+            Cuenta
+          </li>
+          <li>
+            Administrar
+          </li>
+          <li>
+            Salir
+          </li>
+        </ul>
         <h1>Mantenimiento de Equipos</h1>
       </div>
       <ul class='content'>
@@ -55,8 +69,11 @@
                 <h3>Metadatos</h3>
               </li>
               <li>
-                <label for='check'>Checkbox</label>
-                <input id='check' type='checkbox' />
+                <label for='check'>Switch</label>
+                <div id="aleph" class="switch off">
+        			<span class="switch_text">No</span>
+        			<span class="switch_button">&nbsp;</span>
+		      	</div>
               </li>
               <li>
                 <h3>Supertextos</h3>
@@ -78,5 +95,12 @@
         </li>
       </ul>
     </div>
+    <script type="text/javascript" src="assets/javascripts/lib/jquery.js"></script>
+    <script type="text/javascript" src="assets/javascripts/lib/jquery.scrollto.js"></script>
+    <script type="text/javascript" src="assets/javascripts/lib/underscore.js"></script>
+    <script type="text/javascript" src="assets/javascripts/lib/underscore.string.js"></script>
+    <script type="text/javascript" src="assets/javascripts/lib/backbone.js"></script>
+    <script type="text/javascript" src="assets/javascripts/ix.switch.js"></script>
+    <script type="text/javascript" src="assets/javascripts/ix.initialize.js"></script>
   </body>
 </html>

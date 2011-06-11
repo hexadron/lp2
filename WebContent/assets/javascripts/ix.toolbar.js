@@ -1,6 +1,5 @@
 (function() {
-  var ToolbarView;
-  ToolbarView = Backbone.View.extend({
+  window.ToolbarView = Backbone.View.extend({
     intialize: function(options) {
       return this.table = options.table;
     },

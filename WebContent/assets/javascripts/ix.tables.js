@@ -1,6 +1,5 @@
 (function() {
-  var TableView;
-  TableView = Backbone.View.extend({
+  window.TableView = Backbone.View.extend({
     events: {
       'click th': 'sort',
       sort: function(e) {
