@@ -35,4 +35,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EjemplosServlet</display-name>
+    <servlet-name>EjemplosServlet</servlet-name>
+    <servlet-class>app.servlets.EjemplosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EjemplosServlet</servlet-name>
+    <url-pattern>/ejemplos/*</url-pattern>
+  </servlet-mapping>
 </web-app>

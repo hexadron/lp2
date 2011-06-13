@@ -1,10 +1,15 @@
 package app.beans;
 
+import java.util.List;
+
 import app.util.ORZ;
 
 public class Usuario extends ORZ {
 	private long id;
+	private String usuario;
 	private String nombre;
+	private String password;
+	private Rol rol;
 
 	public long getId() {
 		return id;
@@ -12,6 +17,14 @@ public class Usuario extends ORZ {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNombre() {
@@ -22,10 +35,29 @@ public class Usuario extends ORZ {
 		this.nombre = nombre;
 	}
 
-	public static boolean isAdmin(String user, String password) {
-//		Usuario usuario = (Usuario) Usuario.where(Usuario.class, "nombre = ? and password = ?", user, password).get(0);
-//		return usuario.getTipo().equals("admin") ? true : false;
-		return true;
+	public String getPassword() {
+		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public static String validate(String user, String password) {
+		List<Usuario> u = Usuario.where(Usuario.class, "usuario", user);
+		if (u.size() == 0)
+			return null;
+		Usuario x = u.get(0);
+		if (x == null || !x.getPassword().equals(password))
+			return null;
+		return x.getRol().getNombre();
+	}
 }
