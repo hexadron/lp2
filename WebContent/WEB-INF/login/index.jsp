@@ -37,12 +37,8 @@
         </li>
       </ul>
     </div>
-    <script type="text/javascript" src="assets/javascripts/lib/jquery.js"></script>
-    <script type="text/javascript" src="assets/javascripts/lib/jquery.scrollto.js"></script>
-    <script type="text/javascript" src="assets/javascripts/lib/underscore.js"></script>
-    <script type="text/javascript" src="assets/javascripts/lib/underscore.string.js"></script>
-    <script type="text/javascript" src="assets/javascripts/lib/backbone.js"></script>
-    <script type="text/javascript" src="assets/javascripts/ix.switch.js"></script>
-    <script type="text/javascript" src="assets/javascripts/ix.initialize.js"></script>
+    <jsp:include page="../templates/scripts.jsp">
+    	<jsp:param value="defaults" name="scripts"/>
+    </jsp:include>
   </body>
 </html>
