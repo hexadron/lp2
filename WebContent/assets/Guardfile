@@ -1,1 +1,1 @@
-guard 'coffeescript', :input => 'coffee', :output => 'javascripts'
+guard 'coffeescript', :input => 'coffeescripts', :output => 'javascripts'
