@@ -31,7 +31,10 @@ public class ApplicationController extends HttpServlet {
 							render(request, response, m.getName());
 					}
 			} else {
+				rendered = false;
 				index(request, response);
+				if (!rendered)
+					render(request, response, "index");
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
