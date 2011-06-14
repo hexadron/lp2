@@ -7,6 +7,7 @@
   		<script type="text/javascript" src="assets/javascripts/lib/<%= d %>.js"></script>
   		<% } %>
   	<% } else { %>
-	<script type="text/javascript" src="assets/javascripts/<%= s.trim() %>.js"></script>
+	<script type="text/coffeescript" src="assets/coffee/<%= s.trim() %>.coffee"></script>
   	<% } %>
   <% } %>
+  <script type="text/javascript" src="assets/javascripts/coffee-script.js"></script>
