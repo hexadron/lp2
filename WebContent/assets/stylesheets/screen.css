@@ -122,7 +122,54 @@ th {
   font-weight: bold;
 }
 
-/* line 7, ../sass/screen.sass */
+/* line 5, ../sass/screen.sass */
+html {
+  font-family: sans-serif;
+}
+
+/* line 8, ../sass/screen.sass */
+#menu {
+  background: #333333;
+  border-bottom: 0.3em solid #f20d0d;
+  font-weight: bold;
+  height: 2.75em;
+  margin-bottom: 1.5em;
+  width: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #111111));
+  background-image: -webkit-linear-gradient(#333333, #111111);
+  background-image: -moz-linear-gradient(#333333, #111111);
+  background-image: -o-linear-gradient(#333333, #111111);
+  background-image: linear-gradient(#333333, #111111);
+}
+
+/* line 17, ../sass/screen.sass */
+.menu_items {
+  width: 950px;
+  margin: 0 auto;
+}
+/* line 21, ../sass/screen.sass */
+.menu_items > li {
+  color: #d9d9d9;
+  cursor: pointer;
+  display: inline;
+  float: left;
+  padding: 0.35em 1em;
+  margin: 0.5em;
+  text-align: center;
+}
+/* line 30, ../sass/screen.sass */
+.menu_items > li:hover {
+  color: white;
+  background: black;
+  -moz-border-radius: 5em;
+  -webkit-border-radius: 5em;
+  -o-border-radius: 5em;
+  -ms-border-radius: 5em;
+  -khtml-border-radius: 5em;
+  border-radius: 5em;
+}
+
+/* line 35, ../sass/screen.sass */
 .container {
   width: 950px;
   margin: 0 auto;
@@ -130,67 +177,45 @@ th {
   *zoom: 1;
 }
 
-/* line 10, ../sass/screen.sass */
-.column, #header, #header .menu, #header .menu > li, .content, form label, form .actions {
+/* line 38, ../sass/screen.sass */
+.column, #header, .content, form label, form .actions {
   display: inline;
   float: left;
   margin-right: 10px;
 }
 /* line 147, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .column, * html #header, * html #header .menu, #header * html .menu, * html #header .menu > li, #header * html .menu > li, * html .content, * html form label, form * html label, * html form .actions, form * html .actions {
+* html .column, * html #header, * html .content, * html form label, form * html label, * html form .actions, form * html .actions {
   overflow-x: hidden;
 }
 
-/* line 13, ../sass/screen.sass */
+/* line 41, ../sass/screen.sass */
 #header {
-  font-family: sans-serif;
-  margin-top: 1em;
   text-align: center;
   width: 950px;
 }
-/* line 20, ../sass/screen.sass */
-#header .menu {
-  border-bottom: 0.3em solid #f20d0d;
-  width: 950px;
-}
-/* line 25, ../sass/screen.sass */
-#header .menu > li {
-  padding: 1em 0;
-  width: 236px;
-  margin-right: 0;
-  position: relative;
-  float: left;
-}
-/* line 33, ../sass/screen.sass */
-#header .menu > li:hover {
-  background: #f20d0d;
-  color: white;
-  line-height: 0.6em;
-  font-size: 1.25em;
-}
-/* line 39, ../sass/screen.sass */
+/* line 46, ../sass/screen.sass */
 #header h1 {
-  margin: auto 0;
+  padding-bottom: 0.5em;
+  border-bottom: 0.025em solid #999999;
 }
 
-/* line 42, ../sass/screen.sass */
+/* line 50, ../sass/screen.sass */
 .content {
   background: white;
   margin: 0 0 2.5em 0;
   width: 680px;
   padding-left: 130px;
 }
-/* line 49, ../sass/screen.sass */
+/* line 57, ../sass/screen.sass */
 .content h2 {
-  color: #666666;
-  border-left: 0.1em solid #f20d0d;
+  color: black;
+  border-bottom: 0.1em solid #f20d0d;
   font-weight: light;
-  margin-top: 1em;
   margin-bottom: 0.5em;
-  padding: 0.5em;
+  padding: 0.5em 0;
 }
 
-/* line 57, ../sass/screen.sass */
+/* line 64, ../sass/screen.sass */
 .textcontainer, form input[type=text], form input[type=password], form textarea {
   border: 1px solid #b3b3b3;
   padding: 0.25em;
@@ -200,36 +225,30 @@ th {
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px 0px inset;
 }
 
-/* line 62, ../sass/screen.sass */
+/* line 69, ../sass/screen.sass */
 .textcontainer:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
   border-color: #f20d0d;
 }
 
-/* line 65, ../sass/screen.sass */
+/* line 72, ../sass/screen.sass */
 form {
   color: #333333;
   font: normal normal 1.2em/1.5em sans-serif;
 }
-/* line 69, ../sass/screen.sass */
+/* line 76, ../sass/screen.sass */
 form ul {
   margin: 0;
 }
-/* line 72, ../sass/screen.sass */
+/* line 79, ../sass/screen.sass */
 form fieldset {
   padding: 0;
   border: none;
 }
-/* line 57, ../sass/screen.sass */
+/* line 83, ../sass/screen.sass */
 form li {
   margin-bottom: 0.3em;
 }
-/* line 60, ../sass/screen.sass */
-=======
-/* line 76, ../sass/screen.sass */
-form li {
-  margin-bottom: 0.3em;
-}
-/* line 79, ../sass/screen.sass */
+/* line 86, ../sass/screen.sass */
 form h3 {
   color: black;
   border-bottom: 1px solid #cccccc;
@@ -237,25 +256,26 @@ form h3 {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
 }
-/* line 86, ../sass/screen.sass */
+/* line 93, ../sass/screen.sass */
 form label {
   text-align: right;
   vertical-align: middle;
   width: 190px;
 }
-/* line 92, ../sass/screen.sass */
+/* line 99, ../sass/screen.sass */
 form label.nowrap {
   text-align: left;
   margin-bottom: 1.5em;
   width: inherit;
 }
-/* line 99, ../sass/screen.sass */
+/* line 106, ../sass/screen.sass */
 form input[type=text], form input[type=password] {
   width: 310px;
 }
-/* line 104, ../sass/screen.sass */
+/* line 111, ../sass/screen.sass */
 form input[type=submit] {
   color: #4d4d4d;
+  cursor: pointer;
   border: 0.1em dashed #666666;
   float: right;
   padding: 0.62em 0.5em;
@@ -267,50 +287,50 @@ form input[type=submit] {
   -khtml-border-radius: 0.2em;
   border-radius: 0.2em;
 }
-/* line 112, ../sass/screen.sass */
+/* line 120, ../sass/screen.sass */
 form input[type=submit]:hover {
   border: 0.1em solid #f20d0d;
   color: #c20a0a;
 }
-/* line 116, ../sass/screen.sass */
+/* line 124, ../sass/screen.sass */
 form input[type=submit]:active {
   position: relative;
   top: 1px;
 }
-/* line 120, ../sass/screen.sass */
+/* line 128, ../sass/screen.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 125, ../sass/screen.sass */
+/* line 133, ../sass/screen.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 129, ../sass/screen.sass */
+/* line 137, ../sass/screen.sass */
 form input[type=submit].default:active {
   background: #da0b0b;
   padding: 0.62em 0.5em;
 }
-/* line 133, ../sass/screen.sass */
+/* line 141, ../sass/screen.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 139, ../sass/screen.sass */
+/* line 147, ../sass/screen.sass */
 form .actions {
   height: 3em;
   margin-top: 2em;
   width: 680px;
 }
-/* line 145, ../sass/screen.sass */
+/* line 153, ../sass/screen.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }
 
-/* line 149, ../sass/screen.sass */
+/* line 157, ../sass/screen.sass */
 .switch {
   background: #f42525;
   border: 0.1em solid gray;
@@ -334,11 +354,11 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 164, ../sass/screen.sass */
+/* line 172, ../sass/screen.sass */
 .switch .switch_text {
   position: relative;
 }
-/* line 167, ../sass/screen.sass */
+/* line 175, ../sass/screen.sass */
 .switch .switch_button {
   background: white;
   border: 0.1em solid gray;
@@ -362,7 +382,7 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 178, ../sass/screen.sass */
+/* line 186, ../sass/screen.sass */
 .switch.off {
   background: white;
   color: #333333;
@@ -371,11 +391,11 @@ form .actions input[type=submit] {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
 }
-/* line 183, ../sass/screen.sass */
+/* line 191, ../sass/screen.sass */
 .switch.off .switch_text {
   right: -35px;
 }
-/* line 186, ../sass/screen.sass */
+/* line 194, ../sass/screen.sass */
 .switch.off .switch_button {
   right: 46px;
 }

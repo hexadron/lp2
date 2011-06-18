@@ -6,9 +6,8 @@ window.Switch = Backbone.View.extend
   initialize: (options) ->
     @el.unselectable()
 
-  events: {
+  events:
     'click': 'slide'
-  }
 
   slide: (evt) ->
     evt.preventDefault()

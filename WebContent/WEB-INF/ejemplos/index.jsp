@@ -7,22 +7,24 @@
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
+  	<div id='menu'>
+	  	<ul class='menu_items'>
+	    	<li>
+	            Men&uacute; principal
+	        </li>
+	        <li>
+	            Cuenta
+	        </li>
+	        <li>
+	            Administrar
+	        </li>
+	        <li>
+	            Salir
+	        </li>
+	    </ul>
+    </div>
     <div class='container'>
       <div id='header'>
-        <ul class='menu'>
-          <li>
-            Men&uacute; principal
-          </li>
-          <li>
-            Cuenta
-          </li>
-          <li>
-            Administrar
-          </li>
-          <li>
-            Salir
-          </li>
-        </ul>
         <h1>Mantenimiento de Equipos</h1>
       </div>
       <ul class='content'>
