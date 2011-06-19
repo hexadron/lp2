@@ -1,18 +1,18 @@
 @import base
 
-$color : hsl(0, 90, 50)
+$menu_color: hsl(0, 50, 50)
+$color : saturate($menu_color, 40)
 
 html
   font-family: sans-serif
+  background: hsl(0, 0, 90)
 
 #menu
-  background: #333
-  border-bottom: 0.3em solid $color
-  font-weight: bold
+  background: darken($menu_color, 7)
   height: 2.75em
-  margin-bottom: 1.5em
   width: 100%
-  @include background_image(linear_gradient(#333, #111))
+  @include background_image(linear_gradient($menu_color, darken($menu_color, 15)))
+  @include box_shadow(rgba(0, 0, 0, 0.5) 0 0.15em 0.2em)
 
 .menu_items
   width: 950px
@@ -22,18 +22,22 @@ html
     color: hsl(0, 0, 85)
     cursor: pointer
     display: inline
-    float: left
+    float: right
     padding: 0.35em 1em
     margin: 0.5em
     text-align: center
 
   & > li:hover
     color: white
-    background: black
+    background: darken($menu_color, 12)
     @include border-radius(5em)
+    @include box_shadow(lighten($menu_color, 5) 0 -1px 0 inset)
 
 .container
+  background: white
   @include container
+  @include border_top_radius(0.5em)
+  margin-top: 1.5em
 
 .column
   @include column-base
@@ -44,8 +48,9 @@ html
   @include span(24)
 
   h1
-    padding-bottom: 0.5em
-    border-bottom: 0.025em solid hsl(0, 0, 60)
+    color: hsl(0, 0, 70)
+    padding: 0.5em 0
+    border-bottom: 0.025em solid hsl(0, 0, 90)
 
 .content
   background: white
@@ -61,12 +66,15 @@ html
     margin-bottom: 0.5em
     padding: 0.5em 0
 
-.textcontainer
+.text_container
   border: 1px solid hsl(0, 0, 70)
   padding: 0.25em
   @include box-shadow(rgba(0, 0, 0, 0.30) 0 1px 3px 0px inset)
 
-.textcontainer:focus
+.text_container:hover
+  border-color: hsl(0, 0, 50)
+
+.text_container:focus
   border-color: $color
 
 form
@@ -104,7 +112,7 @@ form
   input
 
     &[type=text], &[type=password]
-      @extend .textcontainer
+      @extend .text_container
       @include span(8)
 
 
@@ -141,7 +149,7 @@ form
   textarea
     height: 4em
     font-family: sans-serif
-    @extend .textcontainer
+    @extend .text_container
     @include span(13)
 
   .actions

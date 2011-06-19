@@ -10,16 +10,16 @@
   	<div id='menu'>
 	  	<ul class='menu_items'>
 	    	<li>
-	            Men&uacute; principal
+	    		Salir
 	        </li>
 	        <li>
-	            Cuenta
+	            An&oacute;nimo
 	        </li>
 	        <li>
 	            Administrar
 	        </li>
 	        <li>
-	            Salir
+	            Men&uacute; principal
 	        </li>
 	    </ul>
     </div>

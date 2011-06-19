@@ -122,24 +122,26 @@ th {
   font-weight: bold;
 }
 
-/* line 5, ../sass/screen.sass */
+/* line 6, ../sass/screen.sass */
 html {
   font-family: sans-serif;
+  background: #e6e6e6;
 }
 
-/* line 8, ../sass/screen.sass */
+/* line 10, ../sass/screen.sass */
 #menu {
-  background: #333333;
-  border-bottom: 0.3em solid #f20d0d;
-  font-weight: bold;
+  background: #a43737;
   height: 2.75em;
-  margin-bottom: 1.5em;
   width: 100%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #111111));
-  background-image: -webkit-linear-gradient(#333333, #111111);
-  background-image: -moz-linear-gradient(#333333, #111111);
-  background-image: -o-linear-gradient(#333333, #111111);
-  background-image: linear-gradient(#333333, #111111);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #bf4040), color-stop(100%, #862d2d));
+  background-image: -webkit-linear-gradient(#bf4040, #862d2d);
+  background-image: -moz-linear-gradient(#bf4040, #862d2d);
+  background-image: -o-linear-gradient(#bf4040, #862d2d);
+  background-image: linear-gradient(#bf4040, #862d2d);
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
+  -o-box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
 }
 
 /* line 17, ../sass/screen.sass */
@@ -152,7 +154,7 @@ html {
   color: #d9d9d9;
   cursor: pointer;
   display: inline;
-  float: left;
+  float: right;
   padding: 0.35em 1em;
   margin: 0.5em;
   text-align: center;
@@ -160,24 +162,42 @@ html {
 /* line 30, ../sass/screen.sass */
 .menu_items > li:hover {
   color: white;
-  background: black;
+  background: #913030;
   -moz-border-radius: 5em;
   -webkit-border-radius: 5em;
   -o-border-radius: 5em;
   -ms-border-radius: 5em;
   -khtml-border-radius: 5em;
   border-radius: 5em;
+  -moz-box-shadow: #c65353 0 -1px 0 inset;
+  -webkit-box-shadow: #c65353 0 -1px 0 inset;
+  -o-box-shadow: #c65353 0 -1px 0 inset;
+  box-shadow: #c65353 0 -1px 0 inset;
 }
 
-/* line 35, ../sass/screen.sass */
+/* line 36, ../sass/screen.sass */
 .container {
+  background: white;
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
+  -moz-border-radius-topleft: 0.5em;
+  -webkit-border-top-left-radius: 0.5em;
+  -o-border-top-left-radius: 0.5em;
+  -ms-border-top-left-radius: 0.5em;
+  -khtml-border-top-left-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+  -moz-border-radius-topright: 0.5em;
+  -webkit-border-top-right-radius: 0.5em;
+  -o-border-top-right-radius: 0.5em;
+  -ms-border-top-right-radius: 0.5em;
+  -khtml-border-top-right-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  margin-top: 1.5em;
 }
 
-/* line 38, ../sass/screen.sass */
+/* line 42, ../sass/screen.sass */
 .column, #header, .content, form label, form .actions {
   display: inline;
   float: left;
@@ -188,25 +208,26 @@ html {
   overflow-x: hidden;
 }
 
-/* line 41, ../sass/screen.sass */
+/* line 45, ../sass/screen.sass */
 #header {
   text-align: center;
   width: 950px;
 }
-/* line 46, ../sass/screen.sass */
+/* line 50, ../sass/screen.sass */
 #header h1 {
-  padding-bottom: 0.5em;
-  border-bottom: 0.025em solid #999999;
+  color: #b3b3b3;
+  padding: 0.5em 0;
+  border-bottom: 0.025em solid #e6e6e6;
 }
 
-/* line 50, ../sass/screen.sass */
+/* line 55, ../sass/screen.sass */
 .content {
   background: white;
   margin: 0 0 2.5em 0;
   width: 680px;
   padding-left: 130px;
 }
-/* line 57, ../sass/screen.sass */
+/* line 62, ../sass/screen.sass */
 .content h2 {
   color: black;
   border-bottom: 0.1em solid #f20d0d;
@@ -215,8 +236,8 @@ html {
   padding: 0.5em 0;
 }
 
-/* line 64, ../sass/screen.sass */
-.textcontainer, form input[type=text], form input[type=password], form textarea {
+/* line 69, ../sass/screen.sass */
+.text_container, form input[type=text], form input[type=password], form textarea {
   border: 1px solid #b3b3b3;
   padding: 0.25em;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px 0px inset;
@@ -225,30 +246,35 @@ html {
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px 0px inset;
 }
 
-/* line 69, ../sass/screen.sass */
-.textcontainer:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
+/* line 74, ../sass/screen.sass */
+.text_container:hover, form input[type=text]:hover, form input[type=password]:hover, form textarea:hover {
+  border-color: gray;
+}
+
+/* line 77, ../sass/screen.sass */
+.text_container:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
   border-color: #f20d0d;
 }
 
-/* line 72, ../sass/screen.sass */
+/* line 80, ../sass/screen.sass */
 form {
   color: #333333;
   font: normal normal 1.2em/1.5em sans-serif;
 }
-/* line 76, ../sass/screen.sass */
+/* line 84, ../sass/screen.sass */
 form ul {
   margin: 0;
 }
-/* line 79, ../sass/screen.sass */
+/* line 87, ../sass/screen.sass */
 form fieldset {
   padding: 0;
   border: none;
 }
-/* line 83, ../sass/screen.sass */
+/* line 91, ../sass/screen.sass */
 form li {
   margin-bottom: 0.3em;
 }
-/* line 86, ../sass/screen.sass */
+/* line 94, ../sass/screen.sass */
 form h3 {
   color: black;
   border-bottom: 1px solid #cccccc;
@@ -256,23 +282,23 @@ form h3 {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
 }
-/* line 93, ../sass/screen.sass */
+/* line 101, ../sass/screen.sass */
 form label {
   text-align: right;
   vertical-align: middle;
   width: 190px;
 }
-/* line 99, ../sass/screen.sass */
+/* line 107, ../sass/screen.sass */
 form label.nowrap {
   text-align: left;
   margin-bottom: 1.5em;
   width: inherit;
 }
-/* line 106, ../sass/screen.sass */
+/* line 114, ../sass/screen.sass */
 form input[type=text], form input[type=password] {
   width: 310px;
 }
-/* line 111, ../sass/screen.sass */
+/* line 119, ../sass/screen.sass */
 form input[type=submit] {
   color: #4d4d4d;
   cursor: pointer;
@@ -287,50 +313,50 @@ form input[type=submit] {
   -khtml-border-radius: 0.2em;
   border-radius: 0.2em;
 }
-/* line 120, ../sass/screen.sass */
+/* line 128, ../sass/screen.sass */
 form input[type=submit]:hover {
   border: 0.1em solid #f20d0d;
   color: #c20a0a;
 }
-/* line 124, ../sass/screen.sass */
+/* line 132, ../sass/screen.sass */
 form input[type=submit]:active {
   position: relative;
   top: 1px;
 }
-/* line 128, ../sass/screen.sass */
+/* line 136, ../sass/screen.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 133, ../sass/screen.sass */
+/* line 141, ../sass/screen.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 137, ../sass/screen.sass */
+/* line 145, ../sass/screen.sass */
 form input[type=submit].default:active {
   background: #da0b0b;
   padding: 0.62em 0.5em;
 }
-/* line 141, ../sass/screen.sass */
+/* line 149, ../sass/screen.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 147, ../sass/screen.sass */
+/* line 155, ../sass/screen.sass */
 form .actions {
   height: 3em;
   margin-top: 2em;
   width: 680px;
 }
-/* line 153, ../sass/screen.sass */
+/* line 161, ../sass/screen.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }
 
-/* line 157, ../sass/screen.sass */
+/* line 165, ../sass/screen.sass */
 .switch {
   background: #f42525;
   border: 0.1em solid gray;
@@ -354,11 +380,11 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 172, ../sass/screen.sass */
+/* line 180, ../sass/screen.sass */
 .switch .switch_text {
   position: relative;
 }
-/* line 175, ../sass/screen.sass */
+/* line 183, ../sass/screen.sass */
 .switch .switch_button {
   background: white;
   border: 0.1em solid gray;
@@ -382,7 +408,7 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 186, ../sass/screen.sass */
+/* line 194, ../sass/screen.sass */
 .switch.off {
   background: white;
   color: #333333;
@@ -391,11 +417,11 @@ form .actions input[type=submit] {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
 }
-/* line 191, ../sass/screen.sass */
+/* line 199, ../sass/screen.sass */
 .switch.off .switch_text {
   right: -35px;
 }
-/* line 194, ../sass/screen.sass */
+/* line 202, ../sass/screen.sass */
 .switch.off .switch_button {
   right: 46px;
 }
