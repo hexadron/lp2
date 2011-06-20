@@ -17,7 +17,8 @@ public abstract class ORZ {
         return null;
     }
     
-    public <T> T find(long id) {
+    @SuppressWarnings("unchecked")
+	public <T> T find(long id) {
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE id = ?";
         try {
@@ -39,19 +40,7 @@ public abstract class ORZ {
                 }
                 return o;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -62,15 +51,14 @@ public abstract class ORZ {
     public static <T> List<T> where(Class<? extends ORZ> c, String query, Object... values) {
         try {
             return c.newInstance().where(query, values);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
     
-    public <T> List<T> where(String query, Object... values) {
+    @SuppressWarnings("unchecked")
+	public <T> List<T> where(String query, Object... values) {
         List<T> all = new ArrayList<T>();
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE ";
@@ -101,19 +89,7 @@ public abstract class ORZ {
                 }
                 all.add(o);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -121,6 +97,7 @@ public abstract class ORZ {
         return all;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T save() {
         if (getGetter("id") != null) {
             try {
@@ -129,11 +106,7 @@ public abstract class ORZ {
                     create();
                 else
                     update();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -143,14 +116,13 @@ public abstract class ORZ {
     public static <T> T save(Class<? extends ORZ> c, Object... params) {
         try {
             return c.newInstance().save(params);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T save(Object... params) {
         if (getGetter("id") != null) {
             try {
@@ -159,17 +131,14 @@ public abstract class ORZ {
                     create(params);
                 else
                     update(params);
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return (T) this;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T create() {
         Connection db = null;
         StringBuilder sql = new StringBuilder();
@@ -203,17 +172,7 @@ public abstract class ORZ {
             if (rs.next())
                 getSetter("id").invoke(this, rs.getLong(1));
             return (T) this;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -221,6 +180,7 @@ public abstract class ORZ {
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T create(Object... params) {
         Connection db = null;
         StringBuilder sql = new StringBuilder();
@@ -252,9 +212,7 @@ public abstract class ORZ {
             if (rs.next())
                 updateAttributes(rs.getLong(1));
             return (T) this;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -262,6 +220,7 @@ public abstract class ORZ {
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T update() {
         Connection db = null;
         
@@ -287,17 +246,7 @@ public abstract class ORZ {
             ps.setLong(i, (Long) getGetter("id").invoke(this));
             ps.executeUpdate();
             return (T) this;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -305,6 +254,7 @@ public abstract class ORZ {
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     public <T> T update(Object... params) {
         Connection db = null;
         
@@ -330,13 +280,7 @@ public abstract class ORZ {
             ps.executeUpdate();
             updateAttributes((Long) getGetter("id").invoke(this));
             return (T) this;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -344,6 +288,7 @@ public abstract class ORZ {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public <T> T delete() {
         Connection db = null;
         String sql = "DELETE FROM " + getTable() + " WHERE id = ?";
@@ -353,15 +298,7 @@ public abstract class ORZ {
             ps.setLong(1, (Long) getGetter("id").invoke(this));
             ps.executeUpdate();
             return (T) this;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -379,15 +316,7 @@ public abstract class ORZ {
             ps.setLong(1, id);
             ps.executeUpdate();
             return o;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -436,6 +365,7 @@ public abstract class ORZ {
         return null;
     }
     
+    @SuppressWarnings("unchecked")
     private <T> T updateAttributes(long id) {
         T o = find(id);
         for (Method m : o.getClass().getDeclaredMethods()) {
@@ -445,11 +375,7 @@ public abstract class ORZ {
                 try {
                     Object val = getGetter(field).invoke(o);
                     getSetter(field).invoke(this, val);
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -492,11 +418,7 @@ public abstract class ORZ {
     }
     
     private String getTable(String name) {
-        StringBuilder table = new StringBuilder();
-        table.append(name.toLowerCase());
-//		int ex = table.lastIndexOf("dto");
-//		table.replace(ex, table.length(), "");
-        return table.toString();
+        return name.toLowerCase().toString();
     }
     
     /* ActiveRelation? No U_U */
@@ -528,19 +450,7 @@ public abstract class ORZ {
                 }
                 all.add(o);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
@@ -575,19 +485,7 @@ public abstract class ORZ {
                 }
                 all.add(o);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             Database.close(db);
