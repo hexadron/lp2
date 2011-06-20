@@ -1,7 +1,7 @@
 package app.beans;
 
-import app.util.ORZ;
+import app.util.ObjectRelationalZapper;
 
-public class Tecnico extends ORZ {
+public class Tecnico extends ObjectRelationalZapper {
 
 }

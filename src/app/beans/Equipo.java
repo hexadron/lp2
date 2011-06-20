@@ -1,7 +1,7 @@
 package app.beans;
 
-import app.util.ORZ;
+import app.util.ObjectRelationalZapper;
 
-public class Equipo extends ORZ {
+public class Equipo extends ObjectRelationalZapper {
 
 }

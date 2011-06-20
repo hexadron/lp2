@@ -4,9 +4,9 @@ import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 
-public abstract class ORZ {
+public abstract class ObjectRelationalZapper {
     
-    public static <T> T find(Class<? extends ORZ> c, long id) {
+    public static <T> T find(Class<? extends ObjectRelationalZapper> c, long id) {
         try {
             return c.newInstance().find(id);
         } catch (InstantiationException e) {
@@ -48,7 +48,7 @@ public abstract class ORZ {
         return null;
     }
     
-    public static <T> List<T> where(Class<? extends ORZ> c, String query, Object... values) {
+    public static <T> List<T> where(Class<? extends ObjectRelationalZapper> c, String query, Object... values) {
         try {
             return c.newInstance().where(query, values);
         } catch (Exception e) {
@@ -113,7 +113,7 @@ public abstract class ORZ {
         return (T) this;
     }
     
-    public static <T> T save(Class<? extends ORZ> c, Object... params) {
+    public static <T> T save(Class<? extends ObjectRelationalZapper> c, Object... params) {
         try {
             return c.newInstance().save(params);
         } catch (Exception e) {
@@ -306,7 +306,7 @@ public abstract class ORZ {
         return null;
     }
     
-    public static <T> T delete(Class<? extends ORZ> c, long id) {
+    public static <T> T delete(Class<? extends ObjectRelationalZapper> c, long id) {
         Connection db = null;
         try {
             String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE id = ?";
@@ -329,23 +329,23 @@ public abstract class ORZ {
             Connection cn = Database.getConnection();
             DatabaseMetaData databaseMetaData = cn.getMetaData();
             ResultSet rs = databaseMetaData.getColumns(null, null, getTable(), "%");
-            StringBuilder fields = new StringBuilder();
             
+            StringBuilder fields = new StringBuilder();
             while (rs.next())
                 if (!(rs.getString("COLUMN_NAME").equals("id")))
                     for (Field f : getClass().getDeclaredFields())
                         if (f.getName().equals(rs.getString("COLUMN_NAME")))
                             fields.append(f.getName()).append(", ");
 
-            fields.delete(fields.length() - 2, fields.length());
+            fields.delete(fields.lastIndexOf(","), fields.length());
             return fields.toString();
         } catch (SQLException e) {
             e.printStackTrace();
-        } 
+        }
         return null;
     }
     
-    private String getAllTableFields(Class<?> c, String prefix) {
+    private String getTableFields(Class<?> c, String prefix) {
         try {
             Connection cn = Database.getConnection();
             DatabaseMetaData databaseMetaData = cn.getMetaData();
@@ -388,13 +388,10 @@ public abstract class ORZ {
     }
     
     private Method getGetter(String field, Class<?> c) {
-        for (Method m : c.getDeclaredMethods()) {
-            if (m.getName().startsWith("get")) {
-                if (m.getName().toLowerCase().endsWith(field)) {
+        for (Method m : c.getDeclaredMethods())
+            if (m.getName().startsWith("get"))
+                if (m.getName().toLowerCase().endsWith(field))
                     return m;
-                }
-            }
-        }
         return null;
     }
     
@@ -403,13 +400,10 @@ public abstract class ORZ {
     }
     
     private Method getSetter(String field, Class<?> c) {
-        for (Method m : c.getDeclaredMethods()) {
-            if (m.getName().startsWith("set")) {
-                if (m.getName().toLowerCase().endsWith(field)) {
+        for (Method m : c.getDeclaredMethods())
+            if (m.getName().startsWith("set"))
+                if (m.getName().toLowerCase().endsWith(field))
                     return m;
-                }
-            }
-        }
         return null;
     }
 
@@ -427,7 +421,7 @@ public abstract class ORZ {
         List<T> all = new ArrayList<T>();
         Connection db = null;
         
-        String sql = "SELECT " + getAllTableFields(c, "parent.") +
+        String sql = "SELECT " + getTableFields(c, "parent.") +
         " FROM " + getTable(c.getName()) + " AS parent INNER JOIN " + 
         getTable(getClass().getName()) + " AS child ON child." +
         getTable(c.getName()) + "_id = parent.id WHERE child.id = ?";
@@ -462,7 +456,7 @@ public abstract class ORZ {
         List<T> all = new ArrayList<T>();
         Connection db = null;
         
-        String sql = "SELECT " + getAllTableFields(c, "child.") +
+        String sql = "SELECT " + getTableFields(c, "child.") +
         " FROM " + getTable(c.getName()) + " AS child INNER JOIN " + 
         getTable(getClass().getName()) + " AS parent ON child." +
         getTable(getClass().getName()) + "_id = parent.id WHERE parent.id = ?";
@@ -495,11 +489,10 @@ public abstract class ORZ {
     
     public boolean equals(Object o) {
         try {
-            for (Field f : this.getClass().getDeclaredFields()) {
+            for (Field f : this.getClass().getDeclaredFields())
                 if (o.getClass().getDeclaredField(f.getName()) != null)
                     if (getGetter(f.getName()).invoke(o) != getGetter(f.getName()).invoke(this))
-                    return false;
-            }
+                    	return false;
         } catch (Exception e) {
             return false;
         }

@@ -2,9 +2,9 @@ package app.beans;
 
 import java.util.List;
 
-import app.util.ORZ;
+import app.util.ObjectRelationalZapper;
 
-public class Usuario extends ORZ {
+public class Usuario extends ObjectRelationalZapper {
 	private long id;
 	private String usuario;
 	private String nombre;
