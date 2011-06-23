@@ -13,7 +13,7 @@
       </div>
       <ul class='content'>
         <li>
-          <form>
+          <form action="login/procesar">
             <ul>
               <li>
                 <h2>Ingresa tus datos</h2>
@@ -38,7 +38,7 @@
       </ul>
     </div>
     <jsp:include page="../templates/scripts.jsp">
-    	<jsp:param value="defaults" name="scripts"/>
+    	<jsp:param value="defaults, dorotea" name="scripts"/>
     </jsp:include>
   </body>
 </html>

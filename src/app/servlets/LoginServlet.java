@@ -3,6 +3,7 @@ package app.servlets;
 import static app.util.Collections.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,15 +24,19 @@ public class LoginServlet extends ApplicationController {
 	}
 	
 	public void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!request.getMethod().equals("POST")) {
+		if (!request.getMethod().equalsIgnoreCase("POST")) {
+			System.out.println("8-)");
 			redirectTo(request, response, "index");
 			return;
 		}
-		String user = request.getParameter("user");
-		String password = request.getParameter("nombre");
-		if (Usuario.validate(user, password) != null) {
-			redirectTo(request, response, "home/");
-		}
+		System.out.println("ES POOOOOST");
+		PrintWriter pw = response.getWriter();
+		pw.write("Hola inmundo");
+//		String user = request.getParameter("user");
+//		String password = request.getParameter("nombre");
+//		if (Usuario.validate(user, password) != null) {
+//			redirectTo(request, response, "home/");
+//		}
 	}
 	
 }
