@@ -13,7 +13,7 @@
       </div>
       <ul class='content'>
         <li>
-          <form action="login/procesar">
+          <form action="login/procesar" method="post">
             <ul>
               <li>
                 <h2>Ingresa tus datos</h2>

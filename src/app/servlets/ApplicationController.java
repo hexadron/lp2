@@ -8,12 +8,17 @@ import java.lang.reflect.*;
 public class ApplicationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected boolean rendered = false;
+	protected boolean ajax = false;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String path = request.getPathInfo();
+			
+			if (request.getParameter("ajax") != null &&
+					request.getParameter("ajax").equals("true"))
+				ajax = true;
+			
 			if (path != null && !path.equals("/")) {
-				
 				StringBuilder url = new StringBuilder(path);
 				url.replace(0, 1, ""); // /accion => accion
 				if (url.indexOf("/") != -1) // accion/* => accion
@@ -25,7 +30,7 @@ public class ApplicationController extends HttpServlet {
 					if (m.getName().equals(path)) {
 						rendered = false;
 						m.invoke(this, request, response);
-						if (!rendered)
+						if (!rendered && !ajax)
 							render(request, response, m.getName());
 					}
 			} else {
