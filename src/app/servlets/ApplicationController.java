@@ -3,6 +3,9 @@ package app.servlets;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+import com.google.gson.Gson;
+
 import java.lang.reflect.*;
 
 public class ApplicationController extends HttpServlet {
@@ -94,6 +97,11 @@ public class ApplicationController extends HttpServlet {
 		url.append(getClass().getSimpleName().toLowerCase());
 		url.replace(url.lastIndexOf("servlet"), url.length(), "");
 		return url.toString();
+	}
+	
+	protected void renderJSON(HttpServletResponse res, Object o) throws IOException {
+		Gson gs = new Gson();
+		res.getOutputStream().println(gs.toJson(o));
 	}
 	
 }

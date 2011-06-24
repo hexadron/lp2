@@ -6833,7 +6833,7 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 		if ( jQuery.isFunction( data ) ) {
 			type = type || callback;
 			callback = data;
-			data = {ajax: true}; // >(*&*)<
+			data = {}; // >(*&*)<
 		}
 		
 		data.ajax = true;

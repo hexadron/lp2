@@ -26,17 +26,19 @@ public class LoginServlet extends ApplicationController {
 			System.out.println(i);
 	}
 	
-	public void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void procesar(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Gson gs = new Gson();
 		
-		PrintWriter out = response.getWriter();
-		String jString = request.getParameter("vaca");
+		//PrintWriter out = res.getWriter();
+		
+		String jString = req.getParameter("vaca");
 		System.out.println(jString);
+		
 		Vaca v2 = gs.fromJson(jString, Vaca.class);
 		System.out.println(v2.getNombre());
 		
 		// simple ajax works...
-		out.println("Hola inmundo");
+		//out.println("Hola inmundo");
 		// and now... json
 		Vaca v = new Vaca();
 		v.setNombre("Cowww");
@@ -50,7 +52,7 @@ public class LoginServlet extends ApplicationController {
 		hijos.add(t2);
 		v.setHijos(hijos);
 		
-		out.println(gs.toJson(v));
+		renderJSON(res, v);
 		// {"number":1234,"nombre":"Cowww","hijos":[{"nombre":"Hijo 1"},{"nombre":"Hijo 2"}]}
 		// and well... json works...
 	}

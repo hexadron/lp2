@@ -5,10 +5,10 @@ $ ->
     
     v2 = 
       number: 4321
-      nombre: "Dorotea"
+      nombre: 'Dorotea'
      
     console.log v2
     
-    $.post "login/procesar",
+    $.post 'login/procesar',
       vaca: JSON.stringify(v2),
       (r) -> console.log r
