@@ -27,26 +27,32 @@ public class LoginServlet extends ApplicationController {
 	}
 	
 	public void procesar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ES POOOOOST");
+		Gson gs = new Gson();
+		
 		PrintWriter out = response.getWriter();
-		//ajax works...
-		//out.println("Hola inmundo");
-		//and now... json
+		String jString = request.getParameter("vaca");
+		System.out.println(jString);
+		Vaca v2 = gs.fromJson(jString, Vaca.class);
+		System.out.println(v2.getNombre());
+		
+		// simple ajax works...
+		out.println("Hola inmundo");
+		// and now... json
 		Vaca v = new Vaca();
 		v.setNombre("Cowww");
 		v.setNumber(1234);
 		Ternero t1 = new Ternero();
 		t1.setNombre("Hijo 1");
 		Ternero t2 = new Ternero();
-		t2.setNombre("Hijo 1");
+		t2.setNombre("Hijo 2");
 		ArrayList<Ternero> hijos = new ArrayList<Ternero>();
 		hijos.add(t1);
 		hijos.add(t2);
 		v.setHijos(hijos);
 		
-		Gson gs = new Gson();
 		out.println(gs.toJson(v));
-//		and well... json works...
+		// {"number":1234,"nombre":"Cowww","hijos":[{"nombre":"Hijo 1"},{"nombre":"Hijo 2"}]}
+		// and well... json works...
 	}
 	
 }
