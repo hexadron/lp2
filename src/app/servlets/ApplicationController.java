@@ -20,7 +20,9 @@ public class ApplicationController extends HttpServlet {
 			String path = request.getPathInfo();
 			this.req = request;
 			this.res = response;
-			
+//			System.out.println(req);
+//			System.out.println(res);
+//			System.out.println(this.toString());
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
 				ajax = true;

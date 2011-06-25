@@ -4,6 +4,7 @@
 <html lang='es'>
   <head>
     <title>Login</title>
+    <meta charset="utf-8">
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
@@ -14,18 +15,18 @@
       </div>
       <ul class='content'>
         <li>
-          <form action="login/procesar" method="post">
+          <form action="procesar" method="post">
             <ul>
               <li>
                 <h2>Ingresa tus datos</h2>
               </li>
               <li>
                 <label for='nombre'>Usuario</label>
-                <input id='nombre' type='text' />
+                <input name="nombre" id='nombre' type='text' />
               </li>
               <li>
                 <label for='pwd'>Password</label>
-                <input id='pwd' type='password' />
+                <input name="password" id='pwd' type='password' />
               </li>
               <li>
                 <div class='actions'>

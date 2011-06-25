@@ -9,4 +9,9 @@ public class MySQLDaoFactory extends DaoFactory {
 		return new MySQLAdministradorDao();
 	}
 
+	@Override
+	public LoginDao getLoginDao() {
+		return new MySQLLoginDao();
+	}
+
 }
