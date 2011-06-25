@@ -68,7 +68,15 @@ public class ApplicationController extends HttpServlet {
 	
 	// agrega un atributo al request, solo para terminar de aislar los requests y responses
 	protected void add(String name, Object o) {
-		req.setAttribute(name, o);
+		this.req.setAttribute(name, o);
+	}
+	
+	protected String param(String name) {
+		return this.req.getParameter(name);
+	}
+	
+	protected Object attr(String name) {
+		return this.req.getAttribute(name);
 	}
 		
 	// parametro            resultado
@@ -123,6 +131,14 @@ public class ApplicationController extends HttpServlet {
 		Gson gs = new Gson();
 		try {
 			res.getOutputStream().println(gs.toJson(o));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected void renderText(String text) {
+		try {
+			this.res.getOutputStream().println(text);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
