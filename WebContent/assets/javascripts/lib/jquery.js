@@ -6833,13 +6833,10 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 		if ( jQuery.isFunction( data ) ) {
 			type = type || callback;
 			callback = data;
-<<<<<<< HEAD
-			data = {}; // an empty data, not undefined
-=======
->>>>>>> 3c5138d5e393a51bebc661f632af16baffec2e74
+			data = {}; // empty data, not undefined
 		}
 		
-		data = {ajax = true}; // lalala
+		data.ajax = true; // lalala
 		
 		return jQuery.ajax({
 			type: method,
