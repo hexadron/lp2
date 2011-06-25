@@ -18,11 +18,11 @@ public class ApplicationController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String path = request.getPathInfo();
-			this.req = request;
-			this.res = response;
+			req = request;
+			res = response;
 //			System.out.println(req);
 //			System.out.println(res);
-//			System.out.println(this.toString());
+//			System.out.println(toString());
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
 				ajax = true;
@@ -34,7 +34,7 @@ public class ApplicationController extends HttpServlet {
 					url.replace(url.indexOf("/"), url.length(), "");
 				path = url.toString();
 				
-				Method[] methods = this.getClass().getDeclaredMethods();
+				Method[] methods = getClass().getDeclaredMethods();
 				for (Method m : methods)
 					if (m.getName().equals(path)) {
 						rendered = false;
@@ -70,15 +70,15 @@ public class ApplicationController extends HttpServlet {
 	
 	// agrega un atributo al request, solo para terminar de aislar los requests y responses
 	protected void add(String name, Object o) {
-		this.req.setAttribute(name, o);
+		req.setAttribute(name, o);
 	}
 	
 	protected String param(String name) {
-		return this.req.getParameter(name);
+		return req.getParameter(name);
 	}
 	
 	protected Object attr(String name) {
-		return this.req.getAttribute(name);
+		return req.getAttribute(name);
 	}
 		
 	// parametro            resultado
@@ -94,7 +94,7 @@ public class ApplicationController extends HttpServlet {
 			url += template + ".jsp";
 		rendered = true;
 		try {
-			this.req.getRequestDispatcher(url).forward(this.req, this.res);
+			req.getRequestDispatcher(url).forward(req, res);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -140,7 +140,7 @@ public class ApplicationController extends HttpServlet {
 	
 	protected void renderText(String text) {
 		try {
-			this.res.getOutputStream().println(text);
+			res.getOutputStream().println(text);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

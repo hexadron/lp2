@@ -97,6 +97,8 @@ public abstract class ObjectRelationalZapper {
         return all;
     }
     
+    // Usuario u = new Usuario();
+    // u.save();
     @SuppressWarnings("unchecked")
     public <T> T save() {
         if (getGetter("id") != null) {
