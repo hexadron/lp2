@@ -104,4 +104,8 @@ public class ApplicationController extends HttpServlet {
 		res.getOutputStream().println(gs.toJson(o));
 	}
 	
+	protected void renderText(HttpServletResponse res, String text) throws IOException {
+		res.getOutputStream().println(text);
+	}
+	
 }

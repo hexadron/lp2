@@ -3,7 +3,6 @@ package app.servlets;
 import static app.util.Collections.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-
-import app.beans.Usuario;
 
 public class LoginServlet extends ApplicationController {
 	private static final long serialVersionUID = 1L;
