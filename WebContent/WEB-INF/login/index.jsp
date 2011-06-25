@@ -4,7 +4,7 @@
 <html lang='es'>
   <head>
     <title>Login</title>
-    <link href='assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
+    <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
     <div class='container'>

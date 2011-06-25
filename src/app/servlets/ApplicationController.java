@@ -12,10 +12,14 @@ public class ApplicationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected boolean rendered = false;
 	protected boolean ajax = false;
+	protected HttpServletRequest req;
+	protected HttpServletResponse res;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String path = request.getPathInfo();
+			this.req = request;
+			this.res = response;
 			
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
@@ -32,15 +36,16 @@ public class ApplicationController extends HttpServlet {
 				for (Method m : methods)
 					if (m.getName().equals(path)) {
 						rendered = false;
-						m.invoke(this, request, response);
+						m.invoke(this);
+						//m.invoke(this, request, response);
 						if (!rendered && !ajax)
-							render(request, response, m.getName());
+							render(m.getName());
 					}
 			} else {
 				rendered = false;
-				index(request, response);
+				index();
 				if (!rendered)
-					render(request, response, "index");
+					render("index");
 			}
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -51,21 +56,26 @@ public class ApplicationController extends HttpServlet {
 		}
 	}
 	
-	public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		render(request, response);
+	public void index(){
+		render("index");
 	}
 
 	// stack: [0] getStackTrace [1] render [2] metodo que llamo a render
-	protected void render(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void render() {
 		String accion = Thread.currentThread().getStackTrace()[2].getMethodName();
-		render(request, response, accion);
+		render(accion);
 	}
 	
+	// agrega un atributo al request, solo para terminar de aislar los requests y responses
+	protected void add(String name, Object o) {
+		req.setAttribute(name, o);
+	}
+		
 	// parametro            resultado
 	// accion               sitio.com/controlador/accion.jsp
 	// controlador/accion   sitio.com/controlador/accion.jsp
-	// cobb/goes/to/limbo   sitio.com/cobb/goes/to/limbo.jsp
-	protected void render(HttpServletRequest request, HttpServletResponse response, String template) throws ServletException, IOException {
+	// cobb/goes/to/limbo   sitio.com/cobb/goes/to/limbo.jsp	
+	protected void render(String template) {
 		String url = "/WEB-INF/";
 		// si es que es una accion del mismo controlador
 		if (template.indexOf("/") == -1)
@@ -73,22 +83,32 @@ public class ApplicationController extends HttpServlet {
 		else // accion de otro controlador
 			url += template + ".jsp";
 		rendered = true;
-		request.getRequestDispatcher(url).forward(request, response);
+		try {
+			this.req.getRequestDispatcher(url).forward(this.req, this.res);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	protected void redirectTo(HttpServletRequest request, HttpServletResponse response, String location) throws IOException {
-		String url = request.getContextPath() + "/";
+	protected void redirectTo(String location)  {
+		String url = req.getContextPath() + "/";
 		// evita que renderice automaticamente la vista
 		rendered = true;
-		if (location.indexOf("/") == -1) {
-			url += getControllerPath();
-			if (location.equals("index"))
-				response.sendRedirect(url);
+		try {
+			if (location.indexOf("/") == -1) {
+				url += getControllerPath();
+				if (location.equals("index"))
+					res.sendRedirect(url);
+				else
+					res.sendRedirect(url + "/" + location);
+			}
 			else
-				response.sendRedirect(url + "/" + location);
+				res.sendRedirect(url + location);
+		} catch(IOException ex) {
+			ex.printStackTrace();
 		}
-		else
-			response.sendRedirect(url + location);
 	}
 	
 	// app.servlets.LalalaServlet => lalala
@@ -99,9 +119,13 @@ public class ApplicationController extends HttpServlet {
 		return url.toString();
 	}
 	
-	protected void renderJSON(HttpServletResponse res, Object o) throws IOException {
+	protected void renderJSON(Object o) {
 		Gson gs = new Gson();
-		res.getOutputStream().println(gs.toJson(o));
+		try {
+			res.getOutputStream().println(gs.toJson(o));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
