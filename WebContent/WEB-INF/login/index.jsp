@@ -4,27 +4,29 @@
 <html lang='es'>
   <head>
     <title>Login</title>
-    <link href='assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
+    <meta charset="utf-8">
+    <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
+    <h1>${rol}</h1>
     <div class='container'>
       <div id='header'>
         <h1>Inicia Sesi&oacute;n</h1>
       </div>
       <ul class='content'>
         <li>
-          <form action="login/procesar" method="post">
+          <form action="procesar" method="post">
             <ul>
               <li>
                 <h2>Ingresa tus datos</h2>
               </li>
               <li>
                 <label for='nombre'>Usuario</label>
-                <input id='nombre' type='text' />
+                <input name="nombre" id='nombre' type='text' />
               </li>
               <li>
                 <label for='pwd'>Password</label>
-                <input id='pwd' type='password' />
+                <input name="password" id='pwd' type='password' />
               </li>
               <li>
                 <div class='actions'>
