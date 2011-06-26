@@ -8,7 +8,6 @@
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
-  	<h1>${sessionScope.user.usuario}</h1>
     <div class='container'>
       <div id='header'>
         <h1>Inicia Sesi&oacute;n</h1>

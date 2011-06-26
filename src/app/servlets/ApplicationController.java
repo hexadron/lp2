@@ -14,12 +14,15 @@ public class ApplicationController extends HttpServlet {
 	protected boolean ajax = false;
 	protected HttpServletRequest req;
 	protected HttpServletResponse res;
+	protected HttpSession ses;
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String path = request.getPathInfo();
 			req = request;
 			res = response;
+			System.out.println("CAMBIAN REQ AND RES");
+			
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
 				ajax = true;
@@ -73,6 +76,10 @@ public class ApplicationController extends HttpServlet {
 		req.getSession().setAttribute(name, o);	
 	}
 	
+	protected Object fromSession(String name) {
+		return req.getSession().getAttribute(name);
+	}
+	
 	protected String param(String name) {
 		return req.getParameter(name);
 	}
@@ -94,6 +101,9 @@ public class ApplicationController extends HttpServlet {
 			url += template + ".jsp";
 		rendered = true;
 		try {
+			System.out.println("IN SUPERCLASS");
+			System.out.println(req);
+			System.out.println(req.getSession().getAttribute("user"));
 			req.getRequestDispatcher(url).forward(req, res);
 		} catch (ServletException e) {
 			e.printStackTrace();

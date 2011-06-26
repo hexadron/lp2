@@ -4,12 +4,12 @@ import static app.util.Collections.*;
 import java.util.*;
 
 import app.beans.*;
-import app.services.LoginService;
+import app.services.SecurityService;
 
 public class LoginServlet extends ApplicationController {
 	private static final long serialVersionUID = 1L;
 	
-	private LoginService service = new LoginService();
+	private SecurityService service = new SecurityService();
 
 	public void listar() {
 		List<String> arreglo = List("Sprockets", "Coffee", "Compass");
@@ -24,7 +24,7 @@ public class LoginServlet extends ApplicationController {
 		
 		if (u != null) {
 			toSession("user", u);
-			redirectTo("index");
+			redirectTo("main/index");
 		} else {
 			add("error", "Ingreso Fallido");
 			render("index");

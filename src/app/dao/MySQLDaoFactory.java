@@ -10,8 +10,8 @@ public class MySQLDaoFactory extends DaoFactory {
 	}
 
 	@Override
-	public LoginDao getLoginDao() {
-		return new MySQLLoginDao();
+	public SecurityDao getSecurityDao() {
+		return new MySqlSecurityDao();
 	}
 
 }
