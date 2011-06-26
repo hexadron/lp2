@@ -24,7 +24,7 @@ public class LoginServlet extends ApplicationController {
 		
 		if (u != null) {
 			toSession("user", u);
-			redirectTo("main/index");
+			redirectTo("/");
 		} else {
 			add("error", "Ingreso Fallido");
 			render("index");

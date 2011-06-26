@@ -9,7 +9,8 @@ create table perfil (
 
 create table modulo (
   id int not null auto_increment primary key,
-  descripcion varchar(100) not null
+  descripcion varchar(100) not null,
+  uri varchar(120) not null
 );
 
 create table moduloPorPerfil (
@@ -42,11 +43,11 @@ insert into perfil (descripcion) values ('jefe del area');
 insert into perfil (descripcion) values ('tecnico interno');
 insert into perfil (descripcion) values ('usuario');
 #modulo
-insert into modulo (descripcion) values ('diagnostico y reparacion');
-insert into modulo (descripcion) values ('reparacion externa');
-insert into modulo (descripcion) values ('asignacion de tecnicos');
-insert into modulo (descripcion) values ('terceros');
-insert into modulo (descripcion) values ('solicitud de mantenimiento');
+insert into modulo (descripcion, uri) values ('diagnostico y reparacion', 'reparacion');
+insert into modulo (descripcion, uri) values ('reparacion externa', 'reparacion_externa');
+insert into modulo (descripcion, uri) values ('asignacion de tecnicos', 'asignacion');
+insert into modulo (descripcion, uri) values ('terceros', 'terceros');
+insert into modulo (descripcion, uri) values ('solicitud de mantenimiento', 'solicitud');
 #moduloporperfil
 insert into moduloPorPerfil values (1, 1);
 insert into moduloPorPerfil values (1, 2);

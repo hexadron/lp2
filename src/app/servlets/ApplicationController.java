@@ -21,7 +21,6 @@ public class ApplicationController extends HttpServlet {
 			String path = request.getPathInfo();
 			req = request;
 			res = response;
-			System.out.println("CAMBIAN REQ AND RES");
 			
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
@@ -101,9 +100,6 @@ public class ApplicationController extends HttpServlet {
 			url += template + ".jsp";
 		rendered = true;
 		try {
-			System.out.println("IN SUPERCLASS");
-			System.out.println(req);
-			System.out.println(req.getSession().getAttribute("user"));
 			req.getRequestDispatcher(url).forward(req, res);
 		} catch (ServletException e) {
 			e.printStackTrace();
@@ -114,6 +110,7 @@ public class ApplicationController extends HttpServlet {
 	
 	protected void redirectTo(String location)  {
 		String url = req.getContextPath() + "/";
+		System.out.println("url: " + url);
 		// evita que renderice automaticamente la vista
 		rendered = true;
 		try {
@@ -124,7 +121,9 @@ public class ApplicationController extends HttpServlet {
 				else
 					res.sendRedirect(url + "/" + location);
 			}
-			else
+			else if (location.equals("/"))
+				res.sendRedirect(url);
+			else	
 				res.sendRedirect(url + location);
 		} catch(IOException ex) {
 			ex.printStackTrace();

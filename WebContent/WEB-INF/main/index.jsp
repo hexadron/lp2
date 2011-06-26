@@ -10,7 +10,7 @@
 <body>
 <h1>${sessionScope.user.usuario}</h1>
 <c:forEach var="m" items="${ modulos }">
-	<h3>${ m.descripcion }</h3>
+	<h3><a href="${ m.uri }">${ m.descripcion }</a></h3>
 </c:forEach>
 </body>
 </html>
