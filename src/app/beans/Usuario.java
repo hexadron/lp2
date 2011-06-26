@@ -1,15 +1,14 @@
 package app.beans;
 
-import java.util.List;
-
 import app.util.ObjectRelationalZapper;
 
 public class Usuario extends ObjectRelationalZapper {
+
 	private long id;
 	private String usuario;
-	private String nombre;
 	private String password;
-	private Rol rol;
+	private Perfil perfil;
+	private Area area;
 
 	public long getId() {
 		return id;
@@ -27,14 +26,6 @@ public class Usuario extends ObjectRelationalZapper {
 		this.usuario = usuario;
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -43,22 +34,20 @@ public class Usuario extends ObjectRelationalZapper {
 		this.password = password;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public Perfil getPerfil() {
+		return perfil;
 	}
 
-	public Rol getRol() {
-		return rol;
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
-	public static String validate(String user, String password) {
-		return "SuperUsuario";
-//		List<Usuario> u = Usuario.where(Usuario.class, "usuario", user);
-//		if (u.size() == 0)
-//			return null;
-//		Usuario x = u.get(0);
-//		if (x == null || !x.getPassword().equals(password))
-//			return null;
-//		return x.getRol().getNombre();
+	public Area getArea() {
+		return area;
 	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
 }

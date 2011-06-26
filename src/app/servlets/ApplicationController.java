@@ -20,9 +20,6 @@ public class ApplicationController extends HttpServlet {
 			String path = request.getPathInfo();
 			req = request;
 			res = response;
-//			System.out.println(req);
-//			System.out.println(res);
-//			System.out.println(toString());
 			if (request.getParameter("ajax") != null &&
 					request.getParameter("ajax").equals("true"))
 				ajax = true;
@@ -68,9 +65,12 @@ public class ApplicationController extends HttpServlet {
 		render(accion);
 	}
 	
-	// agrega un atributo al request, solo para terminar de aislar los requests y responses
 	protected void add(String name, Object o) {
 		req.setAttribute(name, o);
+	}
+	
+	protected void toSession(String name, Object o) {
+		req.getSession().setAttribute(name, o);	
 	}
 	
 	protected String param(String name) {

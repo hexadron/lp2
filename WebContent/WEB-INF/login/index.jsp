@@ -8,14 +8,14 @@
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
-    <h1>${rol}</h1>
+  	<h1>${sessionScope.user.usuario}</h1>
     <div class='container'>
       <div id='header'>
         <h1>Inicia Sesi&oacute;n</h1>
       </div>
       <ul class='content'>
         <li>
-          <form action="procesar" method="post">
+          <form action="${pageContext.request.contextPath}/login/procesar" method="post">
             <ul>
               <li>
                 <h2>Ingresa tus datos</h2>
@@ -30,6 +30,7 @@
               </li>
               <li>
                 <div class='actions'>
+                	  <span>${ error }</span>
                   <input class='default' type='submit' value='Enviar' />
                   <input type='submit' value='Cancelar' />
                 </div>

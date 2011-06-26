@@ -29,14 +29,14 @@ public abstract class ObjectRelationalZapper {
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             
+            // huh... debo reescribir lo de where aqu’ ??!
             if (rs.next()) {
                 String name;
                 T o = (T) getClass().newInstance();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                     name = rsmd.getColumnName(i);
-                    Field f = getClass().getDeclaredField(name);
                     Object val = rs.getObject(name);
-                    getSetter(f.getName()).invoke(o, val);
+                    getSetter(name).invoke(o, val);
                 }
                 return o;
             }
@@ -79,13 +79,21 @@ public abstract class ObjectRelationalZapper {
             ResultSetMetaData rsmd = rs.getMetaData();
             
             while (rs.next()) {
-                String name;
+                String name, colname;
                 T o = (T) getClass().newInstance();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    name = rsmd.getColumnName(i);
-                    Field f = getClass().getDeclaredField(name);
-                    Object val = rs.getObject(name);
-                    getSetter(f.getName()).invoke(o, val);
+                		colname = rsmd.getColumnName(i); 
+                    name = colname.endsWith("_id") ? colname.replace("_id", "") : colname;
+                    Object val = rs.getObject(colname);
+                    if (val != null) {
+                    		Method m = getSetter(name);
+                    		Class<?> type = m.getParameterTypes()[0];
+                    		if (type.getSuperclass() != null &&
+	                    		type.getSuperclass().equals(this.getClass().getSuperclass()))
+	                    			m.invoke(o, find((Class<? extends ObjectRelationalZapper>) type, (Integer)val));
+                    		else
+	                    		m.invoke(o, val);
+                    }
                 }
                 all.add(o);
             }

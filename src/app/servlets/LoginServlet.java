@@ -3,6 +3,7 @@ package app.servlets;
 import static app.util.Collections.*;
 import java.util.*;
 
+import app.beans.*;
 import app.services.LoginService;
 
 public class LoginServlet extends ApplicationController {
@@ -19,15 +20,15 @@ public class LoginServlet extends ApplicationController {
 		String name = param("nombre");
 		String pwd = param("password");
 		
-		// modo: Framework de Pila Completa
-		// String userRol = Usuario.validate(name, pwd);
-		// modo: Java Evil Edition... Marea de DAOS!!!!
-		String userRol = service.validate(name, pwd);
-		if (userRol != null)
-			add("rol", userRol);
-		else
+		Usuario u = service.validate(name, pwd);
+		
+		if (u != null) {
+			toSession("user", u);
+			redirectTo("index");
+		} else {
 			add("error", "Ingreso Fallido");
-		render("index");
+			render("index");
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package app.interfaces;
 
+import app.beans.Usuario;
+
 public interface LoginDao {
 	
-	public String validate(String username, String password);
+	public Usuario validate(String username, String password);
 }
