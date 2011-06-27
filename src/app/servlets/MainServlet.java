@@ -12,7 +12,7 @@ public class MainServlet extends ApplicationController {
 	public void index() {
 		Usuario u = (Usuario) fromSession("user");
 		if (u == null)
-			render("login/index");
+			render("security/login");
 		else {
 			add("perfil", u.getPerfil());
 			add("modulos", service.getModules(u.getPerfil()));

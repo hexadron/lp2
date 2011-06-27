@@ -1,9 +1,16 @@
 $ ->
 ###
-  ($ 'input[type=submit]').click (e) ->
+  ($ '#login').click (e) ->
     e.preventDefault()
     
     $.post 'login/procesar',
-      nombre: "luna"
-      password: "lunera",
-      (r) -> console.log r
+      nombre: ($ '#nombre').val()
+      password: ($ '#pwd').val()
+      (r) -> 
+        console.log r
+        if r != "error" and r != ""
+          alert "continuar"
+          ($ '#login').submit()
+        else
+          ($ '#error').html r
+          alert "error"

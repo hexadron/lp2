@@ -98,7 +98,7 @@ public class ApplicationController extends HttpServlet {
 			url += getControllerPath() + "/" + template + ".jsp";
 		else // accion de otro controlador
 			url += template + ".jsp";
-		rendered = true;
+		skipRender();
 		try {
 			req.getRequestDispatcher(url).forward(req, res);
 		} catch (ServletException e) {
@@ -108,9 +108,8 @@ public class ApplicationController extends HttpServlet {
 		}
 	}
 	
-	protected void redirectTo(String location)  {
+	protected void redirect(String location)  {
 		String url = req.getContextPath() + "/";
-		System.out.println("url: " + url);
 		// evita que renderice automaticamente la vista
 		rendered = true;
 		try {
@@ -125,7 +124,7 @@ public class ApplicationController extends HttpServlet {
 				res.sendRedirect(url);
 			else	
 				res.sendRedirect(url + location);
-		} catch(IOException ex) {
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -153,6 +152,10 @@ public class ApplicationController extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected void skipRender() {
+		 rendered = true;
 	}
 	
 }
