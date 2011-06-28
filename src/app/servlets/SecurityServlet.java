@@ -1,8 +1,5 @@
 package app.servlets;
 
-import static app.util.Collections.*;
-import java.util.*;
-
 import app.beans.*;
 import app.services.SecurityService;
 
@@ -10,10 +7,14 @@ public class SecurityServlet extends ApplicationController {
 	private static final long serialVersionUID = 1L;
 	
 	private SecurityService service = new SecurityService();
-
-	public void listar() {
-		List<String> arreglo = List("Sprockets", "Coffee", "Compass");
-		add("arreglo", arreglo);
+	
+	public void login() {
+		
+	}
+	
+	public void logout() {
+		destroySessionWithNuclearBombsAndTurtles();
+		andThenWeGoBackToHome();
 	}
 
 	public void authenticate() {

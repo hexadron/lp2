@@ -71,6 +71,14 @@ public class ApplicationController extends HttpServlet {
 		req.setAttribute(name, o);
 	}
 	
+	protected void destroySessionWithNuclearBombsAndTurtles() {
+		req.getSession().invalidate();
+	}
+	
+	protected void andThenWeGoBackToHome() {
+		redirect("/");
+	}
+	
 	protected void toSession(String name, Object o) {
 		req.getSession().setAttribute(name, o);	
 	}

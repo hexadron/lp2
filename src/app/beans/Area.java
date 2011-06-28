@@ -5,7 +5,7 @@ import app.util.ObjectRelationalZapper;
 public class Area extends ObjectRelationalZapper {
 
 	private int id;
-	private int descripcion;
+	private String descripcion;
 
 	public int getId() {
 		return id;
@@ -15,11 +15,12 @@ public class Area extends ObjectRelationalZapper {
 		this.id = id;
 	}
 
-	public int getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(int descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
 }

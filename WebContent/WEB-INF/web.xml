@@ -46,6 +46,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>SolicitudServlet</display-name>
+    <servlet-name>SolicitudServlet</servlet-name>
+    <servlet-class>app.servlets.SolicitudServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SolicitudServlet</servlet-name>
+    <url-pattern>/solicitud/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>EjemplosServlet</display-name>
     <servlet-name>EjemplosServlet</servlet-name>
     <servlet-class>app.servlets.EjemplosServlet</servlet-class>
@@ -54,4 +64,7 @@
     <servlet-name>EjemplosServlet</servlet-name>
     <url-pattern>/ejemplos/*</url-pattern>
   </servlet-mapping>
+  <session-config>
+  	<session-timeout>45</session-timeout> 
+  </session-config>
 </web-app>

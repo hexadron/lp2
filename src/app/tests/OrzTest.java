@@ -13,10 +13,18 @@ public class OrzTest extends TestCase {
 	
 	@Test
 	public void testObjects() throws Exception {
-		String username = "root", password = "sudo";
+		String username = "scott", password = "tiger";
 		List<Usuario> users = Usuario.where
-		(Usuario.class, "usuario = ? and password = ?", username, password);
-		String n = (users.size() > 0) ? users.get(0).getPerfil().getDescripcion() : null;
+			(Usuario.class, "usuario = ? and password = ?", username, password);
+		Usuario u =  (users.size() > 0) ? users.get(0) : null;
+		System.out.println(u.getUsuario());
+		assertNotNull(u);
+	}
+	
+	@Test
+	public void testFindId() {
+		Usuario u = Usuario.find(Usuario.class, 1);
+		String n = (u != null) ? u.getPerfil().getDescripcion() : null;
 		System.out.println(n);
 		assertNotNull(n);
 	}
