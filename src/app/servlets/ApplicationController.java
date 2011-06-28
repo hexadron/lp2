@@ -75,7 +75,7 @@ public class ApplicationController extends HttpServlet {
 		req.getSession().invalidate();
 	}
 	
-	protected void andThenWeGoBackToHome() {
+	protected void andThenWeGoBackHome() {
 		redirect("/");
 	}
 	

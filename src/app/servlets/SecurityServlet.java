@@ -14,7 +14,7 @@ public class SecurityServlet extends ApplicationController {
 	
 	public void logout() {
 		destroySessionWithNuclearBombsAndTurtles();
-		andThenWeGoBackToHome();
+		andThenWeGoBackHome();
 	}
 
 	public void authenticate() {
