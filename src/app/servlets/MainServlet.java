@@ -16,7 +16,6 @@ public class MainServlet extends ApplicationController {
 		else {
 			add("perfil", u.getPerfil());
 			add("modulos", service.getModules(u.getPerfil()));
-			render();
 		}
 	}
 

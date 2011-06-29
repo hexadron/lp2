@@ -25,7 +25,7 @@ public class SecurityServlet extends ApplicationController {
 		
 		if (u != null) {
 			toSession("user", u);
-			redirect("/");
+			andThenWeGoBackHome();
 		} else {
 			add("error", "Ingreso Fallido");
 			render("index");

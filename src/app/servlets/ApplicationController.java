@@ -119,7 +119,7 @@ public class ApplicationController extends HttpServlet {
 	protected void redirect(String location)  {
 		String url = req.getContextPath() + "/";
 		// evita que renderice automaticamente la vista
-		rendered = true;
+		skipRender();
 		try {
 			if (location.indexOf("/") == -1) {
 				url += getControllerPath();
