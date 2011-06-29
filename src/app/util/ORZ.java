@@ -4,9 +4,9 @@ import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 
-public abstract class ObjectRelationalZapper {
+public abstract class ORZ {
     
-    public static <T> T find(Class<? extends ObjectRelationalZapper> c, long id) {
+    public static <T> T find(Class<? extends ORZ> c, long id) {
         try {
             return c.newInstance().find(id);
         } catch (InstantiationException e) {
@@ -41,7 +41,7 @@ public abstract class ObjectRelationalZapper {
                     		Class<?> type = m.getParameterTypes()[0];
                     		if (type.getSuperclass() != null &&
                     				type.getSuperclass().equals(this.getClass().getSuperclass()))
-                    			m.invoke(o, find((Class<? extends ObjectRelationalZapper>) type, (Integer)val));
+                    			m.invoke(o, find((Class<? extends ORZ>) type, (Integer)val));
                     		else
                     			m.invoke(o, val);
                     }
@@ -56,7 +56,7 @@ public abstract class ObjectRelationalZapper {
         return null;
     }
     
-    public static <T> List<T> where(Class<? extends ObjectRelationalZapper> c, String query, Object... values) {
+    public static <T> List<T> where(Class<? extends ORZ> c, String query, Object... values) {
         try {
             return c.newInstance().where(query, values);
         } catch (Exception e) {
@@ -98,7 +98,7 @@ public abstract class ObjectRelationalZapper {
                     		Class<?> type = m.getParameterTypes()[0];
                     		if (type.getSuperclass() != null &&
 	                    		type.getSuperclass().equals(this.getClass().getSuperclass()))
-	                    			m.invoke(o, find((Class<? extends ObjectRelationalZapper>) type, (Integer)val));
+	                    			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
                     		else
 	                    		m.invoke(o, val);
                     }
@@ -113,8 +113,6 @@ public abstract class ObjectRelationalZapper {
         return all;
     }
     
-    // Usuario u = new Usuario();
-    // u.save();
     @SuppressWarnings("unchecked")
     public <T> T save() {
         if (getGetter("id") != null) {
@@ -131,7 +129,7 @@ public abstract class ObjectRelationalZapper {
         return (T) this;
     }
     
-    public static <T> T save(Class<? extends ObjectRelationalZapper> c, Object... params) {
+    public static <T> T save(Class<? extends ORZ> c, Object... params) {
         try {
             return c.newInstance().save(params);
         } catch (Exception e) {
@@ -324,7 +322,7 @@ public abstract class ObjectRelationalZapper {
         return null;
     }
     
-    public static <T> T delete(Class<? extends ObjectRelationalZapper> c, long id) {
+    public static <T> T delete(Class<? extends ORZ> c, long id) {
         Connection db = null;
         try {
             String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE id = ?";

@@ -1,8 +1,8 @@
 package app.beans;
 
-import app.util.ObjectRelationalZapper;
+import app.util.ORZ;
 
-public class ModuloPorPerfil extends ObjectRelationalZapper {
+public class ModuloPorPerfil extends ORZ {
 	private Modulo modulo;
 	private Perfil perfil;
 

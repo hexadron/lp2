@@ -1,8 +1,8 @@
 package app.beans;
 
-import app.util.ObjectRelationalZapper;
+import app.util.ORZ;
 
-public class Usuario extends ObjectRelationalZapper {
+public class Usuario extends ORZ {
 
 	private long id;
 	private String usuario;
