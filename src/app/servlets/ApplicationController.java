@@ -60,12 +60,6 @@ public class ApplicationController extends HttpServlet {
 	public void index(){
 		render("index");
 	}
-
-	// stack: [0] getStackTrace [1] render [2] metodo que llamo a render
-	protected void render() {
-		String accion = Thread.currentThread().getStackTrace()[2].getMethodName();
-		render(accion);
-	}
 	
 	protected void add(String name, Object o) {
 		req.setAttribute(name, o);
@@ -93,6 +87,12 @@ public class ApplicationController extends HttpServlet {
 	
 	protected Object attr(String name) {
 		return req.getAttribute(name);
+	}
+	
+	// stack: [0] getStackTrace [1] render [2] metodo que llamo a render
+	protected void render() {
+		String accion = Thread.currentThread().getStackTrace()[2].getMethodName();
+		render(accion);
 	}
 		
 	// parametro            resultado
@@ -146,9 +146,8 @@ public class ApplicationController extends HttpServlet {
 	}
 	
 	protected void renderJSON(Object o) {
-		Gson gs = new Gson();
 		try {
-			res.getOutputStream().println(gs.toJson(o));
+			res.getOutputStream().println(new Gson().toJson(o));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
