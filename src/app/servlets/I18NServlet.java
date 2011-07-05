@@ -23,7 +23,7 @@ public class I18NServlet extends ApplicationController implements Servlet {
 		
 		HttpSession session = req.getSession(false);
 		Config.set(session, Config.FMT_LOCALE, locale);
-		renderPlain("ejemplo");
+		renderJSP("ejemplo");
 	}
 
 }

@@ -116,7 +116,7 @@ public class ApplicationController extends HttpServlet {
 		}
 	}
 	
-	protected void renderPlain(String file) {
+	protected void renderJSP(String file) {
 		String url = "/" + file + ".jsp";
 		skipRender();
 		try {
