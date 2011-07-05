@@ -117,10 +117,9 @@ public class ApplicationController extends HttpServlet {
 	}
 	
 	protected void renderJSP(String file) {
-		String url = "/" + file + ".jsp";
-		skipRender();
 		try {
-			req.getRequestDispatcher(url).forward(req, res);
+			skipRender();
+			req.getRequestDispatcher("/" + file + ".jsp").forward(req, res);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
