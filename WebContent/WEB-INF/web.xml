@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>proyecto</display-name>
   <welcome-file-list>
-  	<welcome-file>main</welcome-file>
+    <welcome-file>main</welcome-file>
   </welcome-file-list>
   <servlet>
     <description>main</description>
@@ -65,6 +65,53 @@
     <url-pattern>/ejemplos/*</url-pattern>
   </servlet-mapping>
   <session-config>
-  	<session-timeout>45</session-timeout> 
+    <session-timeout>45</session-timeout>
   </session-config>
+  <context-param>
+    <description>
+   	Recursos
+  	</description>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>app.resources.app</param-value>
+  </context-param>
+  <servlet>
+    <description></description>
+    <display-name>I18NServlet</display-name>
+    <servlet-name>I18NServlet</servlet-name>
+    <servlet-class>app.servlets.I18NServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>I18NServlet</servlet-name>
+    <url-pattern>/i18n/*</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>ValidateSessionFilter</display-name>
+    <filter-name>ValidateSessionFilter</filter-name>
+    <filter-class>app.filters.ValidateSessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ValidateSessionFilter</filter-name>
+    <url-pattern>/ValidateSessionFilter</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>nanana</servlet-name>
+    <jsp-file>/nanana.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>nanana</servlet-name>
+    <url-pattern>/nanana</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>filtro</filter-name>
+    <filter-class>
+  		app.filters.ValidateSessionFilter
+  	</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filtro</filter-name>
+    <servlet-name>nanana</servlet-name>
+  </filter-mapping>
+  
 </web-app>

@@ -116,6 +116,18 @@ public class ApplicationController extends HttpServlet {
 		}
 	}
 	
+	protected void renderPlain(String file) {
+		String url = "/" + file + ".jsp";
+		skipRender();
+		try {
+			req.getRequestDispatcher(url).forward(req, res);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	protected void redirect(String location)  {
 		String url = req.getContextPath() + "/";
 		// evita que renderice automaticamente la vista
