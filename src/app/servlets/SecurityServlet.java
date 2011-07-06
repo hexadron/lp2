@@ -16,6 +16,14 @@ public class SecurityServlet extends ApplicationController {
 		destroySessionWithNuclearBombsAndTurtles();
 		andThenWeGoBackHome();
 	}
+	
+	public void perfiles() {
+		
+	}
+	
+	public void usuarios() {
+		
+	}
 
 	public void authenticate() {
 		String name = param("nombre");

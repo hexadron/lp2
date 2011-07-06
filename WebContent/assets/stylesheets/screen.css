@@ -425,3 +425,23 @@ form .actions input[type=submit] {
 .switch.off .switch_button {
   right: 46px;
 }
+
+/* line 205, ../sass/screen.sass */
+table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+  width: 100%;
+}
+/* line 210, ../sass/screen.sass */
+table th, table td {
+  padding: 0.5em 0;
+  cursor: pointer;
+}
+/* line 214, ../sass/screen.sass */
+table tbody tr {
+  border-top: 0.1em solid #d9d9d9;
+}
+/* line 217, ../sass/screen.sass */
+table tbody tr:hover {
+  background: #ffff99;
+}
