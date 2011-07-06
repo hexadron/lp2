@@ -129,6 +129,28 @@ public class ApplicationController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
+	protected void renderJSON(Object o) {
+		try {
+			skipRender();
+			res.getOutputStream().println(new Gson().toJson(o));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected void renderText(String text) {
+		try {
+			skipRender();
+			res.getOutputStream().println(text);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected void skipRender() {
+		 rendered = true;
+	}
 	
 	protected void redirect(String location)  {
 		String url = req.getContextPath() + "/";
@@ -157,26 +179,6 @@ public class ApplicationController extends HttpServlet {
 		url.append(getClass().getSimpleName().toLowerCase());
 		url.replace(url.lastIndexOf("servlet"), url.length(), "");
 		return url.toString();
-	}
-	
-	protected void renderJSON(Object o) {
-		try {
-			res.getOutputStream().println(new Gson().toJson(o));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	protected void renderText(String text) {
-		try {
-			res.getOutputStream().println(text);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	protected void skipRender() {
-		 rendered = true;
 	}
 	
 }
