@@ -29,9 +29,8 @@
               </li>
               <li>
                 <div class='actions'>
-                	  <span id='error'>${ error }</span>
-                  <input class='default' type='submit' value='Enviar' id="login" />
-                  <input type='submit' value='Cancelar' />
+                  <span id='error'>${ error }</span>
+                  <input class='default' type='submit' value='Ingresar' id="login" />
                 </div>
               </li>
             </ul>

@@ -26,9 +26,13 @@ public class SecurityServlet extends ApplicationController {
 	}
 
 	public void authenticate() {
+		if (!req.getMethod().equals("POST")) {
+			redirect("login");
+			return;
+		}
+
 		String name = param("nombre");
 		String pwd = param("password");
-		
 		Usuario u = service.validate(name, pwd);
 		
 		if (u != null) {

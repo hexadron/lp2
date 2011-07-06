@@ -20,7 +20,7 @@
 
 		<!-- las prioridades basicas son: debug, info, warn, error y fatal -->
 
-		<priority value="error" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
 

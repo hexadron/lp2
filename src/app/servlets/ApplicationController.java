@@ -42,7 +42,6 @@ public class ApplicationController extends HttpServlet {
 					if (m.getName().equals(path)) {
 						rendered = false;
 						m.invoke(this);
-						//m.invoke(this, request, response);
 						if (!rendered && !ajax)
 							render(m.getName());
 					}
