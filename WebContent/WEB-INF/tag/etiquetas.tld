@@ -14,5 +14,15 @@
 		<tag-class>
 			app.tags.PrimeraEtiqueta
   		</tag-class>
+  		<attribute>
+  			<name>nombre</name>
+  			<required>true</required>
+  		</attribute>
+  		<attribute>
+  			<name>list</name>
+  			<required>true</required>
+  			<rtexprvalue>true</rtexprvalue>
+  		</attribute>
 	</tag>
+	
 </taglib>

@@ -93,7 +93,6 @@
     <filter-name>ValidateSessionFilter</filter-name>
     <url-pattern>/ValidateSessionFilter</url-pattern>
   </filter-mapping>
-
   <servlet>
     <servlet-name>nanana</servlet-name>
     <jsp-file>/nanana.jsp</jsp-file>
@@ -102,7 +101,6 @@
     <servlet-name>nanana</servlet-name>
     <url-pattern>/nanana</url-pattern>
   </servlet-mapping>
-  
   <filter>
     <filter-name>filtro</filter-name>
     <filter-class>
@@ -113,5 +111,7 @@
     <filter-name>filtro</filter-name>
     <servlet-name>nanana</servlet-name>
   </filter-mapping>
-  
+  <listener>
+    <listener-class>app.listeners.DeafListener</listener-class>
+  </listener>
 </web-app>

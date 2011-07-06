@@ -4,12 +4,16 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 
 import java.lang.reflect.*;
 
 public class ApplicationController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	public static Logger log = Logger.getLogger(ApplicationController.class);
 	protected boolean rendered = false;
 	protected boolean ajax = false;
 	protected HttpServletRequest req;

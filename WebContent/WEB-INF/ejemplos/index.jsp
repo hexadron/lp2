@@ -1,5 +1,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang='es'>
   <head>
@@ -9,18 +10,10 @@
   <body>
     <div id='menu'>
       <ul class='menu_items'>
-        <li>
-        Salir
-        </li>
-        <li>
-        An&oacute;nimo
-        </li>
-        <li>
-        Administrar
-        </li>
-        <li>
-        Men&uacute; principal
-        </li>
+        <li>Salir</li>
+        <li>An&oacute;nimo</li>
+        <li>Administrar</li>
+        <li>Men&uacute; principal</li>
       </ul>
     </div>
     <div class='container'>
@@ -81,11 +74,12 @@
             <table>
               <thead>
                 <tr>
-                  <th class="numeric">Codigo</th>
-                  <th class="date">Fec. Registro</th>
-                  <th>Denominacion Equipo</th>
-                  <th># Serie</th>
-                  <th>Estado</th>
+                  <fmt:message key='table.tooltip' var="tooltip" />
+                  <th class="numeric" title="${ tooltip }">Codigo</th>
+                  <th class="date" title="${ tooltip }">Fec. Registro</th>
+                  <th title="${ tooltip }">Denominacion Equipo</th>
+                  <th title="${ tooltip }"># Serie</th>
+                  <th title="${ tooltip }">Estado</th>
                 </tr>
               </thead>
               <tbody>
@@ -155,20 +149,20 @@
       </ul>
     </div>
     <jsp:include page="../templates/scripts.jsp">
-    <jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
+    	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
     </jsp:include>
     <script type="text/javascript">
-      $("document").ready(function() {
-          $("input[value='Enviar']").click(function(e) {
-            e.preventDefault();
-            $.post("ejemplos/imprimir", // direccion
-              {usuario: "Saul"}, // parametros del request
-              function(data) { // que hace con los datos
-              var v = JSON.parse(data);
-              $("textarea").val(v.usuario);
-              });
-            });
-          });
-</script>
+		$("document").ready(function() {
+			$("input[value='Enviar']").click(function(e) {
+				e.preventDefault();
+				$.post("ejemplos/imprimir", // direccion
+				{usuario: "Saul"}, // parametros del request
+				function(data) { // que hace con los datos
+					var v = JSON.parse(data);
+					$("textarea").val(v.usuario);
+				});
+			});
+		});
+	</script>
   </body>
 </html>

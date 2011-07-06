@@ -14,7 +14,7 @@
 	<a href="/proyecto/i18n/idioma?idioma=it">Italiano</a>
 	<a href="/proyecto/i18n/idioma?idioma=es">Espanol</a>
 	<!-- Estan en /web-inf/tag/etiquetas.tld -->
-	<at:etiquetapersonalizada>
-	</at:etiquetapersonalizada>
+	<at:etiquetapersonalizada 
+		nombre="lala" list="${ applicationScope.list }" />
 </body>
 </html>
