@@ -122,13 +122,14 @@ th {
   font-weight: bold;
 }
 
-/* line 7, ../sass/screen.sass */
+/* line 7, ../sass/ads.sass */
 html {
+  font-size: 0.8em;
   font-family: sans-serif;
   background: #e6e6e6;
 }
 
-/* line 11, ../sass/screen.sass */
+/* line 12, ../sass/ads.sass */
 #menu {
   background: #a43737;
   height: 2.75em;
@@ -144,12 +145,12 @@ html {
   box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
 }
 
-/* line 18, ../sass/screen.sass */
+/* line 19, ../sass/ads.sass */
 .menu_items {
   width: 950px;
   margin: 0 auto;
 }
-/* line 22, ../sass/screen.sass */
+/* line 23, ../sass/ads.sass */
 .menu_items > li {
   color: #d9d9d9;
   cursor: pointer;
@@ -159,12 +160,12 @@ html {
   margin: 0.5em;
   text-align: center;
 }
-/* line 31, ../sass/screen.sass */
+/* line 32, ../sass/ads.sass */
 .menu_items > li a {
   color: #d9d9d9;
   text-decoration: none;
 }
-/* line 35, ../sass/screen.sass */
+/* line 36, ../sass/ads.sass */
 .menu_items > li:hover {
   color: white;
   background: #913030;
@@ -179,12 +180,12 @@ html {
   -o-box-shadow: #c65353 0 -1px 0 inset;
   box-shadow: #c65353 0 -1px 0 inset;
 }
-/* line 41, ../sass/screen.sass */
+/* line 42, ../sass/ads.sass */
 .menu_items > li:hover a {
   color: white;
 }
 
-/* line 44, ../sass/screen.sass */
+/* line 45, ../sass/ads.sass */
 .container {
   background: white;
   width: 950px;
@@ -206,37 +207,37 @@ html {
   margin-top: 1.5em;
 }
 
-/* line 50, ../sass/screen.sass */
-.column, #header, .content, form label, form .actions {
+/* line 51, ../sass/ads.sass */
+.column, #header, .content, .halflife .actions, form label {
   display: inline;
   float: left;
   margin-right: 10px;
 }
 /* line 147, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html .column, * html #header, * html .content, * html form label, form * html label, * html form .actions, form * html .actions {
+* html .column, * html #header, * html .content, * html .halflife .actions, .halflife * html .actions, * html form label, form * html label {
   overflow-x: hidden;
 }
 
-/* line 53, ../sass/screen.sass */
+/* line 54, ../sass/ads.sass */
 #header {
   text-align: center;
   width: 950px;
 }
-/* line 58, ../sass/screen.sass */
+/* line 59, ../sass/ads.sass */
 #header h1 {
   color: #b3b3b3;
   padding: 0.5em 0;
   border-bottom: 0.025em solid #e6e6e6;
 }
 
-/* line 63, ../sass/screen.sass */
+/* line 64, ../sass/ads.sass */
 .content {
   background: white;
   margin: 0 0 2.5em 0;
-  width: 680px;
-  padding-left: 130px;
+  width: 870px;
+  padding-left: 40px;
 }
-/* line 70, ../sass/screen.sass */
+/* line 71, ../sass/ads.sass */
 .content h2 {
   color: black;
   border-bottom: 0.1em solid #f20d0d;
@@ -245,7 +246,7 @@ html {
   padding: 0.5em 0;
 }
 
-/* line 77, ../sass/screen.sass */
+/* line 78, ../sass/ads.sass */
 .text_container, form input[type=text], form input[type=password], form textarea {
   border: 1px solid #b3b3b3;
   padding: 0.25em;
@@ -255,36 +256,84 @@ html {
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px 0px inset;
 }
 
-/* line 82, ../sass/screen.sass */
+/* line 83, ../sass/ads.sass */
 .text_container:hover, form input[type=text]:hover, form input[type=password]:hover, form textarea:hover {
   border-color: gray;
 }
 
-/* line 85, ../sass/screen.sass */
+/* line 86, ../sass/ads.sass */
 .text_container:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
   border-color: #f20d0d;
 }
 
-/* line 88, ../sass/screen.sass */
+/* line 89, ../sass/ads.sass */
+.secondpane {
+  float: right;
+}
+
+/* line 92, ../sass/ads.sass */
+#omg1 {
+  margin-top: -14em;
+}
+/* line 95, ../sass/ads.sass */
+#omg1 .error {
+  color: #c20a0a;
+}
+
+/* line 98, ../sass/ads.sass */
+#omg2 {
+  margin-top: -9em;
+}
+
+/* line 101, ../sass/ads.sass */
+li.halflife {
+  width: 50%;
+}
+
+/* line 106, ../sass/ads.sass */
+.halflife .actions {
+  height: 3em;
+  margin-top: 1em;
+  width: 400px;
+}
+/* line 112, ../sass/ads.sass */
+.halflife label {
+  width: 170px;
+}
+/* line 115, ../sass/ads.sass */
+.halflife input[type=text] {
+  margin-top: 0.75em;
+  width: 210px;
+}
+/* line 119, ../sass/ads.sass */
+.halflife .nowrap {
+  margin-bottom: 0.5em;
+}
+/* line 122, ../sass/ads.sass */
+.halflife textarea {
+  width: 390px;
+}
+
+/* line 125, ../sass/ads.sass */
 form {
   color: #333333;
   font: normal normal 1.2em/1.5em sans-serif;
 }
-/* line 92, ../sass/screen.sass */
+/* line 129, ../sass/ads.sass */
 form ul {
   margin: 0;
 }
-/* line 95, ../sass/screen.sass */
+/* line 132, ../sass/ads.sass */
 form fieldset {
   padding: 0;
   border: none;
 }
-/* line 99, ../sass/screen.sass */
+/* line 136, ../sass/ads.sass */
 form li {
   margin-bottom: 0.3em;
   overflow: auto;
 }
-/* line 103, ../sass/screen.sass */
+/* line 140, ../sass/ads.sass */
 form h3 {
   color: black;
   border-bottom: 1px solid #cccccc;
@@ -292,34 +341,41 @@ form h3 {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
 }
-/* line 110, ../sass/screen.sass */
+/* line 147, ../sass/ads.sass */
 form label {
   text-align: right;
   vertical-align: middle;
   width: 270px;
 }
-/* line 116, ../sass/screen.sass */
+/* line 153, ../sass/ads.sass */
 form label.nowrap {
   text-align: left;
   margin-bottom: 1.5em;
   width: inherit;
 }
-/* line 121, ../sass/screen.sass */
+/* line 158, ../sass/ads.sass */
 form .desc {
-  margin: 0.5em 0;
+  border: 0.1em solid #999999;
+  -moz-border-radius: 0.25em;
+  -webkit-border-radius: 0.25em;
+  -o-border-radius: 0.25em;
+  -ms-border-radius: 0.25em;
+  -khtml-border-radius: 0.25em;
+  border-radius: 0.25em;
+  padding: 0.5em;
 }
-/* line 124, ../sass/screen.sass */
+/* line 163, ../sass/ads.sass */
 form .desc_left, form .desc_right {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
-  width: 310px;
+  width: 150px;
 }
-/* line 132, ../sass/screen.sass */
+/* line 171, ../sass/ads.sass */
 form input[type=text], form input[type=password] {
   width: 310px;
 }
-/* line 136, ../sass/screen.sass */
+/* line 175, ../sass/ads.sass */
 form input[type=submit] {
   color: #4d4d4d;
   cursor: pointer;
@@ -333,65 +389,49 @@ form input[type=submit] {
   -khtml-border-radius: 0.2em;
   border-radius: 0.2em;
 }
-/* line 144, ../sass/screen.sass */
+/* line 183, ../sass/ads.sass */
 form input[type=submit]:hover {
   border: 0.1em solid #f20d0d;
   color: #c20a0a;
 }
-/* line 148, ../sass/screen.sass */
-form input[type=submit]:active {
-  position: relative;
-  top: 1px;
-}
-/* line 152, ../sass/screen.sass */
+/* line 187, ../sass/ads.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 157, ../sass/screen.sass */
+/* line 192, ../sass/ads.sass */
 form input[type=submit].default[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 161, ../sass/screen.sass */
+/* line 196, ../sass/ads.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 165, ../sass/screen.sass */
+/* line 200, ../sass/ads.sass */
 form input[type=submit].default:hover[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 169, ../sass/screen.sass */
-form input[type=submit].default:active {
-  background: #da0b0b;
-  padding: 0.62em 0.5em;
-}
-/* line 173, ../sass/screen.sass */
-form input[type=submit].default:active[disabled] {
-  background: #999999;
-  border: 0.1em solid #999999;
-}
-/* line 177, ../sass/screen.sass */
+/* line 204, ../sass/ads.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 183, ../sass/screen.sass */
+/* line 210, ../sass/ads.sass */
 form .actions {
   height: 3em;
-  margin-top: 2em;
-  width: 680px;
+  width: 100%;
 }
-/* line 189, ../sass/screen.sass */
+/* line 214, ../sass/ads.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }
 
-/* line 193, ../sass/screen.sass */
+/* line 217, ../sass/ads.sass */
 .switch {
   background: #f42525;
   border: 0.1em solid gray;
@@ -415,11 +455,11 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 208, ../sass/screen.sass */
+/* line 232, ../sass/ads.sass */
 .switch .switch_text {
   position: relative;
 }
-/* line 211, ../sass/screen.sass */
+/* line 235, ../sass/ads.sass */
 .switch .switch_button {
   background: white;
   border: 0.1em solid gray;
@@ -443,7 +483,7 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 222, ../sass/screen.sass */
+/* line 246, ../sass/ads.sass */
 .switch.off {
   background: white;
   color: #333333;
@@ -452,31 +492,31 @@ form .actions input[type=submit] {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
 }
-/* line 227, ../sass/screen.sass */
+/* line 251, ../sass/ads.sass */
 .switch.off .switch_text {
   right: -35px;
 }
-/* line 230, ../sass/screen.sass */
+/* line 254, ../sass/ads.sass */
 .switch.off .switch_button {
   right: 46px;
 }
 
-/* line 233, ../sass/screen.sass */
+/* line 257, ../sass/ads.sass */
 table {
   border-collapse: collapse;
   font-size: 0.8em;
-  width: 100%;
+  width: 390px;
 }
-/* line 238, ../sass/screen.sass */
+/* line 262, ../sass/ads.sass */
 table th, table td {
   padding: 0.5em 0;
   cursor: pointer;
 }
-/* line 242, ../sass/screen.sass */
+/* line 266, ../sass/ads.sass */
 table tbody tr {
   border-top: 0.1em solid #d9d9d9;
 }
-/* line 245, ../sass/screen.sass */
+/* line 269, ../sass/ads.sass */
 table tbody tr:hover {
   background: #ffff99;
 }

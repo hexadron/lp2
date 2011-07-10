@@ -40,7 +40,7 @@ public class SecurityServlet extends ApplicationController {
 			andThenWeGoBackHome();
 		} else {
 			add("error", "Ingreso Fallido");
-			render("index");
+			render("login");
 		}
 	}
 

@@ -3,7 +3,8 @@ package app.beans;
 import app.util.ORZ;
 
 public class Modulo extends ORZ {
-	private int id;
+	
+	private long id;
 	private String descripcion;
 	private String uri;
 
@@ -15,11 +16,11 @@ public class Modulo extends ORZ {
 		this.uri = uri;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

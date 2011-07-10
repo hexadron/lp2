@@ -64,6 +64,16 @@
     <servlet-name>EjemplosServlet</servlet-name>
     <url-pattern>/ejemplos/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MantenimientoServlet</display-name>
+    <servlet-name>MantenimientoServlet</servlet-name>
+    <servlet-class>app.servlets.MantenimientoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MantenimientoServlet</servlet-name>
+    <url-pattern>/mantenimiento/*</url-pattern>
+  </servlet-mapping>
   <session-config>
     <session-timeout>45</session-timeout>
   </session-config>

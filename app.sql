@@ -4,7 +4,8 @@ use app;
 
 create table perfil (
   id int not null auto_increment primary key,
-  descripcion varchar(100) not null
+  descripcion varchar(100) not null,
+  uri varchar(120) not null
 );
 
 create table modulo (
@@ -38,16 +39,16 @@ insert into area (descripcion) values ('recursos humanos');
 insert into area (descripcion) values ('emergencias');
 insert into area (descripcion) values ('clinica');
 #perfil
-insert into perfil (descripcion) values ('superusuario');
-insert into perfil (descripcion) values ('jefe del area');
-insert into perfil (descripcion) values ('tecnico interno');
-insert into perfil (descripcion) values ('usuario');
+insert into perfil (descripcion, uri) values ('administrador', 'admin');
+insert into perfil (descripcion, uri) values ('jefe del area', 'jefe');
+insert into perfil (descripcion, uri) values ('tecnico interno', 'tecnico');
+insert into perfil (descripcion, uri) values ('usuario', 'usuario');
 #modulo
 insert into modulo (descripcion, uri) values ('diagnostico y reparacion', 'reparacion');
 insert into modulo (descripcion, uri) values ('reparacion externa', 'reparacion_externa');
 insert into modulo (descripcion, uri) values ('asignacion de tecnicos', 'asignacion');
 insert into modulo (descripcion, uri) values ('terceros', 'terceros');
-insert into modulo (descripcion, uri) values ('solicitud de mantenimiento', 'solicitud');
+insert into modulo (descripcion, uri) values ('solicitud de mantenimiento', 'mantenimiento/solicitar');
 #moduloporperfil
 insert into moduloPorPerfil values (1, 1);
 insert into moduloPorPerfil values (1, 2);

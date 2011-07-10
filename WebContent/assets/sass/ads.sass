@@ -5,6 +5,7 @@ $color : saturate($menu_color, 40)
 $disabled : hsl(0, 0, 60)
 
 html
+  font-size: 0.8em
   font-family: sans-serif
   background: hsl(0, 0, 90)
 
@@ -64,8 +65,8 @@ html
   background: white
   margin: 0 0 2.5em 0
   @extend .column
-  @include span(17.25)
-  @include prepend(3.25)
+  @include span(22)
+  @include prepend(1)
 
   h2
     color: black
@@ -84,6 +85,42 @@ html
 
 .text_container:focus
   border-color: $color
+
+.secondpane
+  float: right
+
+#omg1
+  margin-top: -14em
+  
+  .error
+    color: darken($color, 10)
+
+#omg2
+  margin-top: -9em
+
+li.halflife
+  width: 50%
+
+.halflife
+
+  .actions
+    height: 3em
+    margin-top: 1em
+    @extend .column
+    @include span(10.25)
+
+  label
+    @include span(4.5)
+  
+  input[type=text]
+    margin-top: .75em
+    @include span(5.5)
+  
+  .nowrap
+    margin-bottom: 0.5em
+
+  textarea
+    @include span(10)
 
 form
   color: hsl(0, 0, 20)
@@ -119,13 +156,15 @@ form
       width: inherit
 
   .desc
-    margin: 0.5em 0
+    border: 0.1em solid hsl(0, 0, 60)
+    @include border_radius(0.25em)
+    padding: 0.5em
 
   .desc_left, .desc_right
     display: inline-block
     text-align: left
     vertical-align: middle
-    @include span(8)
+    @include span(4)
 
   input
 
@@ -145,10 +184,6 @@ form
         border: 0.1em solid $color
         color: darken($color, 10)
 
-      &:active
-        position: relative
-        top: 1px
-
       &.default
         color: white
         background: $color
@@ -166,14 +201,6 @@ form
           background: $disabled
           border: 0.1em solid $disabled
 
-      &.default:active
-        background: darken($color, 5)
-        padding: 0.62em 0.5em
-
-        &[disabled]
-          background: $disabled
-          border: 0.1em solid $disabled
-
   textarea
     height: 4em
     font-family: sans-serif
@@ -182,13 +209,10 @@ form
 
   .actions
     height: 3em
-    margin-top: 2em
-    @extend .column
-    @include span(17.25)
+    width: 100%
 
     input[type=submit]
       margin-left: 1em
-
 
 .switch
   background: lighten($color, 5)
@@ -233,7 +257,7 @@ form
 table
   border-collapse: collapse
   font-size: 0.8em
-  width: 100%
+  @include span(10)
 
   th, td
     padding: 0.5em 0
