@@ -13,12 +13,12 @@ public class OrzTest extends TestCase {
 	
 	@Test
 	public void testObjects() throws Exception {
-		String username = "scott", password = "tiger";
 		List<Usuario> users = Usuario.where
-			(Usuario.class, "usuario = ? and password = ?", username, password);
+			(Usuario.class, "usuario = ? and password = ?", "scott", "tiger");
 		Usuario u =  (users.size() > 0) ? users.get(0) : null;
 		System.out.println(u.getUsuario());
 		assertNotNull(u);
+		assertNotNull(u.getPerfil());
 	}
 	
 	@Test

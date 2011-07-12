@@ -148,21 +148,8 @@
         </li>
       </ul>
     </div>
-    <jsp:include page="../templates/scripts.jsp">
+    <jsp:include page="../../templates/scripts.jsp">
     	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
     </jsp:include>
-    <script type="text/javascript">
-		$("document").ready(function() {
-			$("input[value='Enviar']").click(function(e) {
-				e.preventDefault();
-				$.post("ejemplos/imprimir", // direccion
-				{usuario: "Saul"}, // parametros del request
-				function(data) { // que hace con los datos
-					var v = JSON.parse(data);
-					$("textarea").val(v.usuario);
-				});
-			});
-		});
-	</script>
   </body>
 </html>

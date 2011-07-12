@@ -38,7 +38,7 @@
         </li>
       </ul>
     </div>
-    <jsp:include page="../templates/scripts.jsp">
+    <jsp:include page="../../templates/scripts.jsp">
     	<jsp:param value="defaults, dorotea" name="scripts"/>
     </jsp:include>
   </body>

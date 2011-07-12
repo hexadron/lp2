@@ -103,7 +103,7 @@ public class ApplicationController extends HttpServlet {
 	// controlador/accion   sitio.com/controlador/accion.jsp
 	// cobb/goes/to/limbo   sitio.com/cobb/goes/to/limbo.jsp	
 	protected void render(String template) {
-		String url = "/WEB-INF/";
+		String url = "/WEB-INF/interfaces/";
 		// si es que es una accion del mismo controlador
 		if (template.indexOf("/") == -1)
 			url += getControllerPath() + "/" + template + ".jsp";
@@ -171,6 +171,13 @@ public class ApplicationController extends HttpServlet {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	
+	public boolean isLoggedIn() {
+		boolean b = fromSession("user") == null ? false : true;
+		if (!b)
+			redirect("security/login");
+		return b;
 	}
 	
 	// app.servlets.LalalaServlet => lalala

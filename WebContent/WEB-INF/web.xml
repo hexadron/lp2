@@ -124,4 +124,14 @@
   <listener>
     <listener-class>app.listeners.DeafListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>ReparacionServlet</display-name>
+    <servlet-name>ReparacionServlet</servlet-name>
+    <servlet-class>app.servlets.ReparacionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReparacionServlet</servlet-name>
+    <url-pattern>/reparacion/*</url-pattern>
+  </servlet-mapping>
 </web-app>

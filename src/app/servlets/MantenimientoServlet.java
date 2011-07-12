@@ -6,7 +6,8 @@ public class MantenimientoServlet extends ApplicationController implements Servl
 	private static final long serialVersionUID = 1L;
 	
 	public void solicitar() {
-		render("solicitar_ads");
+		if (!isLoggedIn())
+			return;
 	}
 
 }
