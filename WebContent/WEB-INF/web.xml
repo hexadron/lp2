@@ -66,13 +66,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>MantenimientoServlet</display-name>
-    <servlet-name>MantenimientoServlet</servlet-name>
-    <servlet-class>app.servlets.MantenimientoServlet</servlet-class>
+    <display-name>ReparacionServlet</display-name>
+    <servlet-name>ReparacionServlet</servlet-name>
+    <servlet-class>app.servlets.ReparacionServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MantenimientoServlet</servlet-name>
-    <url-pattern>/mantenimiento/*</url-pattern>
+    <servlet-name>ReparacionServlet</servlet-name>
+    <url-pattern>/reparacion/*</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>45</session-timeout>
@@ -124,14 +124,4 @@
   <listener>
     <listener-class>app.listeners.DeafListener</listener-class>
   </listener>
-  <servlet>
-    <description></description>
-    <display-name>ReparacionServlet</display-name>
-    <servlet-name>ReparacionServlet</servlet-name>
-    <servlet-class>app.servlets.ReparacionServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReparacionServlet</servlet-name>
-    <url-pattern>/reparacion/*</url-pattern>
-  </servlet-mapping>
 </web-app>

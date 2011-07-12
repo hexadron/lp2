@@ -10,13 +10,15 @@ public class MainServlet extends ApplicationController {
 	
 	@Override
 	public void index() {
-		Usuario u = (Usuario) fromSession("user");
-		if (u == null)
+//		Usuario u = (Usuario) fromSession("user");
+//		if (u == null)
+//			render("security/login");
+//		else {
+//			add("perfil", u.getPerfil());
+//			add("modulos", service.getModules(u.getPerfil()));
+//		}
+		if (fromSession("nombre") == null)
 			render("security/login");
-		else {
-			add("perfil", u.getPerfil());
-			add("modulos", service.getModules(u.getPerfil()));
-		}
 	}
 
 }

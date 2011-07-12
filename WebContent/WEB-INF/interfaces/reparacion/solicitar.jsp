@@ -11,7 +11,8 @@
     <div id='menu'>
       <ul class='menu_items'>
         <li><a href="${pageContext.request.contextPath}/security/logout">Salir</a></li>
-        <li>${ sessionScope.user.usuario }</li>
+<%--         <li>${ sessionScope.user.usuario }</li> --%>
+        <li>${ sessionScope.nombre }</li>
         <li><a href="${pageContext.request.contextPath}">Men&uacute; principal</a></li>
       </ul>
     </div>
@@ -57,7 +58,7 @@
             </li>
             <li><h3>Problema</h3></li>
             <li>
-            <label class='nowrap' for='texto'>Ingresa una descripcion del problema:</label>
+            <label class='nowrap' for='texto'>Ingresa una descripci&oacute;n del problema:</label>
             </li>
             <li>
             <textarea></textarea>
@@ -112,6 +113,5 @@
     <jsp:include page="../../templates/scripts.jsp">
     	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
     </jsp:include>
-	</script>
   </body>
 </html>

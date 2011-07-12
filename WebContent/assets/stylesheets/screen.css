@@ -339,59 +339,44 @@ form input[type=submit]:hover {
   color: #c20a0a;
 }
 /* line 148, ../sass/screen.sass */
-form input[type=submit]:active {
-  position: relative;
-  top: 1px;
-}
-/* line 152, ../sass/screen.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 157, ../sass/screen.sass */
+/* line 153, ../sass/screen.sass */
 form input[type=submit].default[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 161, ../sass/screen.sass */
+/* line 157, ../sass/screen.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 165, ../sass/screen.sass */
+/* line 161, ../sass/screen.sass */
 form input[type=submit].default:hover[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 169, ../sass/screen.sass */
-form input[type=submit].default:active {
-  background: #da0b0b;
-  padding: 0.62em 0.5em;
-}
-/* line 173, ../sass/screen.sass */
-form input[type=submit].default:active[disabled] {
-  background: #999999;
-  border: 0.1em solid #999999;
-}
-/* line 177, ../sass/screen.sass */
+/* line 165, ../sass/screen.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 183, ../sass/screen.sass */
+/* line 171, ../sass/screen.sass */
 form .actions {
   height: 3em;
   margin-top: 2em;
   width: 680px;
 }
-/* line 189, ../sass/screen.sass */
+/* line 177, ../sass/screen.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }
 
-/* line 193, ../sass/screen.sass */
+/* line 181, ../sass/screen.sass */
 .switch {
   background: #f42525;
   border: 0.1em solid gray;
@@ -415,11 +400,11 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 208, ../sass/screen.sass */
+/* line 196, ../sass/screen.sass */
 .switch .switch_text {
   position: relative;
 }
-/* line 211, ../sass/screen.sass */
+/* line 199, ../sass/screen.sass */
 .switch .switch_button {
   background: white;
   border: 0.1em solid gray;
@@ -443,7 +428,7 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 222, ../sass/screen.sass */
+/* line 210, ../sass/screen.sass */
 .switch.off {
   background: white;
   color: #333333;
@@ -452,31 +437,31 @@ form .actions input[type=submit] {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
 }
-/* line 227, ../sass/screen.sass */
+/* line 215, ../sass/screen.sass */
 .switch.off .switch_text {
   right: -35px;
 }
-/* line 230, ../sass/screen.sass */
+/* line 218, ../sass/screen.sass */
 .switch.off .switch_button {
   right: 46px;
 }
 
-/* line 233, ../sass/screen.sass */
+/* line 221, ../sass/screen.sass */
 table {
   border-collapse: collapse;
   font-size: 0.8em;
   width: 100%;
 }
-/* line 238, ../sass/screen.sass */
+/* line 226, ../sass/screen.sass */
 table th, table td {
   padding: 0.5em 0;
   cursor: pointer;
 }
-/* line 242, ../sass/screen.sass */
+/* line 230, ../sass/screen.sass */
 table tbody tr {
   border-top: 0.1em solid #d9d9d9;
 }
-/* line 245, ../sass/screen.sass */
+/* line 233, ../sass/screen.sass */
 table tbody tr:hover {
   background: #ffff99;
 }

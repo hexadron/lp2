@@ -145,10 +145,6 @@ form
         border: 0.1em solid $color
         color: darken($color, 10)
 
-      &:active
-        position: relative
-        top: 1px
-
       &.default
         color: white
         background: $color
@@ -162,14 +158,6 @@ form
         color: white
         background: lighten($color, 5)
           
-        &[disabled]
-          background: $disabled
-          border: 0.1em solid $disabled
-
-      &.default:active
-        background: darken($color, 5)
-        padding: 0.62em 0.5em
-
         &[disabled]
           background: $disabled
           border: 0.1em solid $disabled

@@ -44,11 +44,11 @@ insert into perfil (descripcion, uri) values ('jefe del area', 'jefe');
 insert into perfil (descripcion, uri) values ('tecnico interno', 'tecnico');
 insert into perfil (descripcion, uri) values ('usuario', 'usuario');
 #modulo
-insert into modulo (descripcion, uri) values ('diagnostico y reparacion', 'reparacion');
-insert into modulo (descripcion, uri) values ('reparacion externa', 'reparacion_externa');
-insert into modulo (descripcion, uri) values ('asignacion de tecnicos', 'asignacion');
-insert into modulo (descripcion, uri) values ('terceros', 'terceros');
-insert into modulo (descripcion, uri) values ('solicitud de mantenimiento', 'mantenimiento/solicitar');
+insert into modulo (descripcion, uri) values ('Diagnóstico y Reparacion', 'reparacion');
+insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacion_externa');
+insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'asignacion');
+insert into modulo (descripcion, uri) values ('Terceros', 'terceros');
+insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'reparacion/solicitar');
 #moduloporperfil
 insert into moduloPorPerfil values (1, 1);
 insert into moduloPorPerfil values (1, 2);
