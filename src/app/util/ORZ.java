@@ -363,17 +363,18 @@ public abstract class ORZ {
     
     private String getTableFields(Class<?> c, String prefix) {
         try {
-            Connection cn = Database.getConnection();
-            DatabaseMetaData databaseMetaData = cn.getMetaData();
-            ResultSet rs = databaseMetaData.getColumns(null, null, getTable(c.getName()), "%");
-            
-            StringBuilder fields = new StringBuilder();
-            while (rs.next())
-                for (Field f : c.getDeclaredFields())
-                    if (f.getName().equals(rs.getString("COLUMN_NAME")))
-                        fields.append(prefix).append(f.getName()).append(", ");
+        	Connection cn = Database.getConnection();
 
+            StringBuilder fields = new StringBuilder();
+            PreparedStatement ps = cn.prepareStatement("describe " + getTable(c.getName()));
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next())
+            	if (!(rs.getString(1).equals("id")))
+            		fields.append(prefix).append(rs.getString(1)).append(", ");
+            
             fields.delete(fields.lastIndexOf(","), fields.length());
+
             return fields.toString();
         } catch (SQLException e) {
             e.printStackTrace();
