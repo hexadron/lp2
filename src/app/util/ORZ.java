@@ -72,7 +72,7 @@ public abstract class ORZ {
         String sql = "SELECT * FROM " + getTable() + " WHERE ";
         
         if (query.split(" ").length > 1) // si contiene una condicion
-            sql += query;
+            sql += query; 
         else
             sql += query + " = ?";
         
@@ -343,17 +343,17 @@ public abstract class ORZ {
     public String getTableFields() {
         try {
             Connection cn = Database.getConnection();
-            DatabaseMetaData databaseMetaData = cn.getMetaData();
-            ResultSet rs = databaseMetaData.getColumns(null, null, getTable(), "%");
-            
-            StringBuilder fields = new StringBuilder();
-            while (rs.next())
-                if (!(rs.getString("COLUMN_NAME").equals("id")))
-                    for (Field f : getClass().getDeclaredFields())
-                        if (f.getName().equals(rs.getString("COLUMN_NAME")))
-                            fields.append(f.getName()).append(", ");
 
+            StringBuilder fields = new StringBuilder();
+            PreparedStatement ps = cn.prepareStatement("describe " + getTable());
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next())
+            	if (!(rs.getString(1).equals("id")))
+            		fields.append(rs.getString(1)).append(", ");
+            
             fields.delete(fields.lastIndexOf(","), fields.length());
+
             return fields.toString();
         } catch (SQLException e) {
             e.printStackTrace();
