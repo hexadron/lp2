@@ -18,7 +18,7 @@ public abstract class ORZ {
     }
     
     @SuppressWarnings("unchecked")
-	public <T> T find(long id) {
+    public <T> T find(long id) {
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE id = ?";
         try {
@@ -66,7 +66,7 @@ public abstract class ORZ {
     }
     
     @SuppressWarnings("unchecked")
-	public <T> List<T> where(String query, Object... values) {
+    public <T> List<T> where(String query, Object... values) {
         List<T> all = new ArrayList<T>();
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE ";
@@ -97,10 +97,10 @@ public abstract class ORZ {
                     		Method m = getSetter(name);
                     		Class<?> type = m.getParameterTypes()[0];
                     		if (type.getSuperclass() != null &&
-	                    		type.getSuperclass().equals(this.getClass().getSuperclass()))
-	                    			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
+                        		type.getSuperclass().equals(this.getClass().getSuperclass()))
+                        			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
                     		else
-	                    		m.invoke(o, val);
+                        		m.invoke(o, val);
                     }
                 }
                 all.add(o);

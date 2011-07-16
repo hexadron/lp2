@@ -13,8 +13,8 @@ public class SecurityServlet extends ApplicationController {
 	}
 	
 	public void logout() {
-		destroySessionWithNuclearBombsAndTurtles();
-		andThenWeGoBackHome();
+		destroysession();
+		toHome();
 	}
 	
 	public void perfiles() {
@@ -31,22 +31,13 @@ public class SecurityServlet extends ApplicationController {
 			return;
 		}
 
-//		String name = param("nombre");
-//		String pwd = param("password");
-//		Usuario u = service.validate(name, pwd);
-//		
-//		if (u != null) {
-//			toSession("user", u);
-//			andThenWeGoBackHome();
-//		} else {
-//			add("error", "Ingreso Fallido");
-//			render("login");
-//		}
-		
 		String name = param("nombre");
-		if (name.equals("bob") || name.equals("scott")) {
-			toSession("nombre", name);
-			andThenWeGoBackHome();
+		String pwd = param("password");
+		Usuario u = service.validate(name, pwd);
+		
+		if (u != null) {
+			toSession("user", u);
+			toHome();
 		} else {
 			add("error", "Ingreso Fallido");
 			render("login");

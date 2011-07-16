@@ -4,8 +4,7 @@ use app;
 
 create table perfil (
   id int not null auto_increment primary key,
-  descripcion varchar(100) not null,
-  uri varchar(120) not null
+  descripcion varchar(100) not null
 );
 
 create table modulo (
@@ -39,26 +38,37 @@ insert into area (descripcion) values ('recursos humanos');
 insert into area (descripcion) values ('emergencias');
 insert into area (descripcion) values ('clinica');
 #perfil
-insert into perfil (descripcion, uri) values ('administrador', 'admin');
-insert into perfil (descripcion, uri) values ('jefe del area', 'jefe');
-insert into perfil (descripcion, uri) values ('tecnico interno', 'tecnico');
-insert into perfil (descripcion, uri) values ('usuario', 'usuario');
+insert into perfil (descripcion) values ('administrador');
+insert into perfil (descripcion) values ('jefe del area');
+insert into perfil (descripcion) values ('tecnico interno');
+insert into perfil (descripcion) values ('usuario');
 #modulo
-insert into modulo (descripcion, uri) values ('Diagnóstico y Reparacion', 'reparacion');
-insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacion_externa');
-insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'asignacion');
+insert into modulo (descripcion, uri) values ('Diagnóstico de Equipos', 'reparacion/diagnostico');
+insert into modulo (descripcion, uri) values ('Reparación de Equipos', 'reparacion/reparacion');
+insert into modulo (descripcion, uri) values ('Mantener Usuarios', 'security/usuarios');
+insert into modulo (descripcion, uri) values ('Mantener Perfiles', 'security/perfiles');
+insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'solicitud');
+insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'reparacion/asignar');
+insert into modulo (descripcion, uri) values ('Historial de Desempeño', 'reparacion/historial');
+#...
+insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacionexterna');
 insert into modulo (descripcion, uri) values ('Terceros', 'terceros');
-insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'reparacion/solicitar');
+
 #moduloporperfil
-insert into moduloPorPerfil values (1, 1);
-insert into moduloPorPerfil values (1, 2);
+#administrador del sistema
 insert into moduloPorPerfil values (1, 3);
 insert into moduloPorPerfil values (1, 4);
-insert into moduloPorPerfil values (2, 3);
-insert into moduloPorPerfil values (3, 1);
-insert into moduloPorPerfil values (4, 5);
 #usuario
-insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1);
-insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'sudo', 2, 1);
-insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1);
-insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3);
+insert into moduloPorPerfil values (4, 5); 
+#jefe de área
+insert into moduloPorPerfil values (2, 6);
+insert into moduloPorPerfil values (2, 7);
+#perfil de técnico interno
+insert into moduloPorPerfil values (3, 1);
+insert into moduloPorPerfil values (3, 2);
+
+#usuario
+insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -- administrador
+insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'sudo', 2, 1); -- jefe
+insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
+insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario

@@ -63,7 +63,31 @@
             </table>
             </li>
             <li>
-            <h2>Solicitudes</h2>
+            	  <h3>Filtros de Trabajos</h3>
+              
+              	<ul>
+              		<li>Área: 
+              		<select style="font-size: .9em; margin-right: 6.8em;">
+              			<option>Enfermeria</option>
+              			<option>Urgencias</option>
+              			<option>Mantenimiento</option>
+              		</select>
+              		Estado: 
+              		<select style="font-size: .9em;">
+              			<option>Reparado</option>
+              			<option>Dado de Baja</option>
+              			<option>Diagnosticado</option>
+              			<option>Asignado</option>
+              		</select>
+              		<li>Fecha de Inicio: <input style="width: 5em; margin-right: 4em" type="text" />
+              			Fecha de Fin: <input style="width: 5em;" type="text" /></li>
+              		<li><input type='submit' value='Buscar' style="margin-top: 2em"></li>
+              	</ul>
+              
+            </li>
+            <li>
+            <h2>Trabajos Realizados</h2>
+            <h4 style="font-size: 1.2em;color: hsl(0, 60%, 40%);">5 trabajos</h4>
             </li>
             <li>
            	<table>
@@ -75,7 +99,7 @@
                   <th title="${ tooltip }">Fecha Fin</th>
                   <th title="${ tooltip }">Estado</th>
                   <th title="${ tooltip }">&Aacute;rea solicitante</th>
-                  <th title="${ tooltip }"># Equipos</th>
+                  <th title="${ tooltip }">Equipo</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,7 +109,7 @@
                   <td>29/02/2011</td>
                   <td>Dada de baja</td>
                   <td>Recursos Humanos</td>
-                  <td>2</td>
+                  <td>Ventilador</td>
                 </tr>
                 <tr>
                   <td>0074579</td>
@@ -93,7 +117,7 @@
                   <td>04/05/2011</td>
                   <td>Dada de baja</td>
                   <td>Finanzas</td>
-                  <td>3</td>
+                  <td>Aire Acondicionado</td>
                 </tr>
               </tbody>
             </table>

@@ -17,5 +17,13 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	public void historial() {
 		
 	}
+	
+	public void reparacion() {
+		
+	}
+	
+	public void diagnostico() {
+		
+	}
 
 }

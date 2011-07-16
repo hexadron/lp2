@@ -68,11 +68,11 @@ public class ApplicationController extends HttpServlet {
 		req.setAttribute(name, o);
 	}
 	
-	protected void destroySessionWithNuclearBombsAndTurtles() {
+	protected void destroysession() {
 		req.getSession().invalidate();
 	}
 	
-	protected void andThenWeGoBackHome() {
+	protected void toHome() {
 		redirect("/");
 	}
 	

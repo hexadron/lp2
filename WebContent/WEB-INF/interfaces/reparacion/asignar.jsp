@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html lang='es'>
   <head>
-    <title>Asignar T&eacute;cnico a Solicitud</title>
+    <title>Asignar T&eacute;cnicos a Solicitud</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
+    <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
   </head>
   <body>
     <div id='menu'>
@@ -20,7 +21,7 @@
     </div>
     <div class='container'>
       <div id='header'>
-        <h1>Asignar T&eacute;cnico a Solicitud</h1>
+        <h1>Asignar T&eacute;cnicos a Solicitud</h1>
       </div>
       <ul class='content'>
         <li>
@@ -34,16 +35,19 @@
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
+                  <th title="${ tooltip }">Código</th>
                   <th title="${ tooltip }">Fecha y hora</th>
                   <th title="${ tooltip }">&Aacute;rea solicitante</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>00000001</td>
                   <td>10/01/2011 4:50</td>
                   <td>Recursos Humanos</td>
                 </tr>
                 <tr>
+                  <td>00000002</td>
                   <td>20/03/2011 19:21</td>
                   <td>Finanzas</td>
                 </tr>
@@ -51,8 +55,10 @@
             </table>
             </li>
             <li><h3>Equipos</h3></li>
+            <li><span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione un equipo para ver el problema</span></li>
+            <!-- Arturo, dale estilo a este span -->
             <li>
-           	<table>
+           	<table id="equipos">
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
@@ -118,7 +124,50 @@
             </li>
             <li>
             <div class='actions'>
-              <input class='default' type='submit' value='Asignar' />
+              <input type='submit' value='Asignar' />
+              <input class='default' type='submit' value='Historial Técnico' />
+            </div>
+            </li>
+            <li>
+            <h2>Equipos Asignados</h2>
+            </li>
+            <li>
+           	<table>
+              <thead>
+                <tr>
+                  <fmt:message key='table.tooltip' var="tooltip" />
+                  <th title="${ tooltip }">Solicitud</th>
+                  <th title="${ tooltip }">Equipo</th>
+                  <th title="${ tooltip }">Denominación</th>
+                  <th title="${ tooltip }">Técnico Encargado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0003561</td>
+                  <td>0000001</td>
+                  <td>Máquina de Rayos X</td>
+                  <td>Juan Flores</td>
+                </tr>
+                <tr>
+                  <td>0003561</td>
+                  <td>0000002</td>
+                  <td>Máquina de Rayos Z</td>
+                  <td>Juan Flores</td>
+                </tr>
+                <tr>
+                  <td>000356</td>
+                  <td>0000004</td>
+                  <td>Máquina de Rayos Y</td>
+                  <td>Juan Flores</td>
+                </tr>
+              </tbody>
+            </table>
+            </li>
+            <li>
+            <div class='actions'>
+              <input type='submit' value='Confirmar' />
+              <input class='default' type='submit' value='Quitar' />
             </div>
             </li>
           </ul>
@@ -129,5 +178,27 @@
     <jsp:include page="../../templates/scripts.jsp">
     	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
     </jsp:include>
+    <script type="text/javascript">
+    		$(function() {
+    			$("#equipos td").click(function() {
+    				// este problema se carga usando ajax enviando el id de la solicitud y
+    				// el id del equipo. Éstos se obtienen del atributo id del elemento
+    				// seleccionado.
+    				var problema = 
+    					"<h2>Ventilador [000233]</h2>" + 
+					"<h4>Solicitud #1111</h4>" + 
+					"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit." + 
+					" Duis venenatis metus ut purus molestie facilisis. Morbi" + 
+					" fermentum tincidunt ipsum quis pretium. Ut in elit risus." + 
+					" Nulla pellentesque odio et augue varius sed pellentesque augue" +
+					" accumsan. Vivamus at quam diam. Quisque sollicitudin nisi ut" + 
+					" mauris consectetur eu molestie ante lacinia. Aenean at diam" +
+					" ipsum, a vestibulum magna. Sed vel neque ligula, at viverra nunc." +
+					" Cum sociis natoque penatibus et magnis dis parturient montes," + 
+					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p> "
+    				apprise(problema, {verify: true, textYes: 'seleccionar', textNo: 'cancelar'});
+    			});	
+    		});
+    </script>
   </body>
 </html>
