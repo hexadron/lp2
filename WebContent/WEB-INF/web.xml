@@ -16,26 +16,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>EquipoAPI</display-name>
-    <servlet-name>EquipoAPI</servlet-name>
-    <servlet-class>app.api.EquipoAPI</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EquipoAPI</servlet-name>
-    <url-pattern>/api/equipo/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>UsuarioAPI</display-name>
-    <servlet-name>UsuarioAPI</servlet-name>
-    <servlet-class>app.api.UsuarioAPI</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UsuarioAPI</servlet-name>
-    <url-pattern>/api/usuario/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>SecurityServlet</display-name>
     <servlet-name>SecurityServlet</servlet-name>
     <servlet-class>app.servlets.SecurityServlet</servlet-class>

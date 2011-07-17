@@ -419,7 +419,7 @@ public abstract class ORZ {
     private Method getSetter(String field, Class<?> c) {
         for (Method m : c.getDeclaredMethods())
             if (m.getName().startsWith("set"))
-                if (m.getName().toLowerCase().endsWith(field))
+                if (m.getName().toLowerCase().endsWith(field.toLowerCase()))
                     return m;
         return null;
     }

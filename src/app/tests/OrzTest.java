@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import app.beans.Equipo;
 import app.beans.Usuario;
 
 import junit.framework.TestCase;
@@ -27,6 +28,14 @@ public class OrzTest extends TestCase {
 		String n = (u != null) ? u.getPerfil().getDescripcion() : null;
 		System.out.println(n);
 		assertNotNull(n);
+	}
+	
+	@Test
+	public void testEquipos() {
+		List<Equipo> e = Equipo.where
+		(Equipo.class, "codigoPatrimonial = ?", 1);
+		System.out.println(e);
+		assertNotNull(e.get(0));
 	}
 	
 	public static void main(String[] args) {

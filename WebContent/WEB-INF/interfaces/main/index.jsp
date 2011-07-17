@@ -18,11 +18,12 @@
 			</c:forEach>
 		</ul>
 	</div>
+	
 	<div class='container'>
       <div id='header'>
         <h1>Men&uacute; Principal</h1>
       </div>
-      <ul class='content'>
+      <ul class='content' id='mp'>
       	<c:forEach var='m' items="${ modulos }">
 			<li><a href="${ m.uri }">${ m.descripcion }</a></li>
 		</c:forEach>

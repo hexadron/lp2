@@ -14,4 +14,9 @@ public class MySQLDaoFactory extends DaoFactory {
 		return new MySqlSecurityDao();
 	}
 
+	@Override
+	public SolicitudDao getSolicitudDao() {
+		return new MySqlSolicitudDao();
+	}
+
 }

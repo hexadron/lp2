@@ -31,6 +31,15 @@ create table usuario (
   area_id int null references area
 );
 
+create table equipo (
+	id int not null auto_increment primary key,
+	codigoPatrimonial int not null,
+	denominacion text not null,
+	fabricante text not null,
+	area_id int not null references area,
+	estado varchar(15) not null
+);
+
 #dummy data
 #area
 insert into area (descripcion) values ('mantenimiento');
@@ -72,3 +81,6 @@ insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -
 insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'sudo', 2, 1); -- jefe
 insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
 insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
+
+# equipos
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values (1, 'ventilador', 'General Electrics', 3, 'disponible');

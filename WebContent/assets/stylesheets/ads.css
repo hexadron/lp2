@@ -1,4 +1,4 @@
-/* line 1, ../sass/_reset.sass */
+/* line 1, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 html, body, div, span, h1, h2, h3, p, a, em, img, strong, form, input, ol, ul, li, textarea, table, th, td, tr {
   margin: 0;
   padding: 0;
@@ -11,125 +11,125 @@ html, body, div, span, h1, h2, h3, p, a, em, img, strong, form, input, ol, ul, l
   background: transparent;
 }
 
-/* line 12, ../sass/_reset.sass */
+/* line 23, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 ol, ul {
   list-style: none;
 }
 
-/* line 15, ../sass/_reset.sass */
+/* line 29, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 p, ol, ul {
   margin: 0 0 1.5em 0;
 }
 
-/* line 18, ../sass/_reset.sass */
+/* line 35, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 th, td, caption {
   text-align: left;
   vertical-align: middle;
 }
 
-/* line 22, ../sass/_reset.sass */
+/* line 43, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h1 {
   font-size: 3em;
   line-height: 1;
   margin-bottom: 0.5em;
 }
 
-/* line 27, ../sass/_reset.sass */
+/* line 53, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h2 {
   font-size: 2em;
   margin-bottom: 0.75em;
 }
 
-/* line 31, ../sass/_reset.sass */
+/* line 61, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h3 {
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 1em;
 }
 
-/* line 36, ../sass/_reset.sass */
+/* line 71, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h4 {
   font-size: 1.2em;
   line-height: 1.25;
   margin-bottom: 1.25em;
 }
 
-/* line 41, ../sass/_reset.sass */
+/* line 81, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h5 {
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 1.5em;
 }
 
-/* line 46, ../sass/_reset.sass */
+/* line 91, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 h6 {
   font-size: 1em;
   font-weight: bold;
 }
 
-/* line 50, ../sass/_reset.sass */
+/* line 99, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 blockquote {
   margin: 1.5em;
   color: #666666;
   font-style: italic;
 }
 
-/* line 55, ../sass/_reset.sass */
+/* line 109, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 strong, dfn {
   font-weight: bold;
 }
 
-/* line 58, ../sass/_reset.sass */
+/* line 115, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 em, dfn {
   font-style: italic;
 }
 
-/* line 61, ../sass/_reset.sass */
+/* line 121, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 sup, sub {
   line-height: 0;
 }
 
-/* line 64, ../sass/_reset.sass */
+/* line 127, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 abbr, acronym {
   border-bottom: 1px dotted #666666;
 }
 
-/* line 67, ../sass/_reset.sass */
+/* line 133, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 address {
   margin: 0 0 1.5em;
   font-style: italic;
 }
 
-/* line 71, ../sass/_reset.sass */
+/* line 141, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 del {
   color: #666666;
 }
 
-/* line 74, ../sass/_reset.sass */
+/* line 147, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 pre {
   margin: 1.5em 0;
   white-space: pre;
 }
 
-/* line 78, ../sass/_reset.sass */
+/* line 155, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 pre, code, tt {
   font: 1em "menlo", "monaco", "consolas", "andale mono", "lucida console", monospace;
   line-height: 1.5;
 }
 
-/* line 82, ../sass/_reset.sass */
+/* line 163, /Users/juliogarcia/proyectos/proy/lp2/WebContent/assets/sass/_reset.sass */
 th {
   font-weight: bold;
 }
 
-/* line 7, ../sass/ads.sass */
+/* line 13, ../sass/ads.sass */
 html {
   font-size: 0.8em;
   font-family: sans-serif;
   background: #e6e6e6;
 }
 
-/* line 12, ../sass/ads.sass */
+/* line 23, ../sass/ads.sass */
 #menu {
   background: #a43737;
   height: 2.75em;
@@ -138,6 +138,7 @@ html {
   background-image: -webkit-linear-gradient(#bf4040, #862d2d);
   background-image: -moz-linear-gradient(#bf4040, #862d2d);
   background-image: -o-linear-gradient(#bf4040, #862d2d);
+  background-image: -ms-linear-gradient(#bf4040, #862d2d);
   background-image: linear-gradient(#bf4040, #862d2d);
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
@@ -145,12 +146,12 @@ html {
   box-shadow: rgba(0, 0, 0, 0.5) 0 0.15em 0.2em;
 }
 
-/* line 19, ../sass/ads.sass */
+/* line 37, ../sass/ads.sass */
 .menu_items {
   width: 950px;
   margin: 0 auto;
 }
-/* line 23, ../sass/ads.sass */
+/* line 45, ../sass/ads.sass */
 .menu_items > li {
   color: #d9d9d9;
   cursor: pointer;
@@ -160,12 +161,12 @@ html {
   margin: 0.5em;
   text-align: center;
 }
-/* line 32, ../sass/ads.sass */
+/* line 63, ../sass/ads.sass */
 .menu_items > li a {
   color: #d9d9d9;
   text-decoration: none;
 }
-/* line 36, ../sass/ads.sass */
+/* line 71, ../sass/ads.sass */
 .menu_items > li:hover {
   color: white;
   background: #913030;
@@ -180,12 +181,12 @@ html {
   -o-box-shadow: #c65353 0 -1px 0 inset;
   box-shadow: #c65353 0 -1px 0 inset;
 }
-/* line 42, ../sass/ads.sass */
+/* line 83, ../sass/ads.sass */
 .menu_items > li:hover a {
   color: white;
 }
 
-/* line 45, ../sass/ads.sass */
+/* line 89, ../sass/ads.sass */
 .container {
   background: white;
   width: 950px;
@@ -207,37 +208,37 @@ html {
   margin-top: 1.5em;
 }
 
-/* line 51, ../sass/ads.sass */
+/* line 101, ../sass/ads.sass */
 .column, #header, .content, .halflife .actions, form label {
   display: inline;
   float: left;
   margin-right: 10px;
 }
-/* line 147, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.11.1/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+/* line 147, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .column, * html #header, * html .content, * html .halflife .actions, .halflife * html .actions, * html form label, form * html label {
   overflow-x: hidden;
 }
 
-/* line 54, ../sass/ads.sass */
+/* line 107, ../sass/ads.sass */
 #header {
   text-align: center;
   width: 950px;
 }
-/* line 59, ../sass/ads.sass */
+/* line 117, ../sass/ads.sass */
 #header h1 {
   color: #b3b3b3;
   padding: 0.5em 0;
   border-bottom: 0.025em solid #e6e6e6;
 }
 
-/* line 64, ../sass/ads.sass */
+/* line 127, ../sass/ads.sass */
 .content {
   background: white;
   margin: 0 0 2.5em 0;
   width: 870px;
   padding-left: 40px;
 }
-/* line 71, ../sass/ads.sass */
+/* line 141, ../sass/ads.sass */
 .content h2 {
   color: black;
   border-bottom: 0.1em solid #f20d0d;
@@ -246,7 +247,7 @@ html {
   padding: 0.5em 0;
 }
 
-/* line 78, ../sass/ads.sass */
+/* line 155, ../sass/ads.sass */
 .text_container, form input[type=text], form input[type=password], form textarea {
   border: 1px solid #b3b3b3;
   padding: 0.25em;
@@ -256,84 +257,84 @@ html {
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px 0px inset;
 }
 
-/* line 83, ../sass/ads.sass */
+/* line 165, ../sass/ads.sass */
 .text_container:hover, form input[type=text]:hover, form input[type=password]:hover, form textarea:hover {
   border-color: gray;
 }
 
-/* line 86, ../sass/ads.sass */
+/* line 171, ../sass/ads.sass */
 .text_container:focus, form input[type=text]:focus, form input[type=password]:focus, form textarea:focus {
   border-color: #f20d0d;
 }
 
-/* line 89, ../sass/ads.sass */
+/* line 177, ../sass/ads.sass */
 .secondpane {
   float: right;
 }
 
-/* line 92, ../sass/ads.sass */
+/* line 183, ../sass/ads.sass */
 #omg1 {
   margin-top: -14em;
 }
-/* line 95, ../sass/ads.sass */
+/* line 189, ../sass/ads.sass */
 #omg1 .error {
   color: #c20a0a;
 }
 
-/* line 98, ../sass/ads.sass */
+/* line 195, ../sass/ads.sass */
 #omg2 {
   margin-top: -9em;
 }
 
-/* line 101, ../sass/ads.sass */
+/* line 201, ../sass/ads.sass */
 li.halflife {
   width: 50%;
 }
 
-/* line 106, ../sass/ads.sass */
+/* line 211, ../sass/ads.sass */
 .halflife .actions {
   height: 3em;
   margin-top: 1em;
   width: 400px;
 }
-/* line 112, ../sass/ads.sass */
+/* line 223, ../sass/ads.sass */
 .halflife label {
   width: 170px;
 }
-/* line 115, ../sass/ads.sass */
+/* line 229, ../sass/ads.sass */
 .halflife input[type=text] {
   margin-top: 0.75em;
   width: 210px;
 }
-/* line 119, ../sass/ads.sass */
+/* line 237, ../sass/ads.sass */
 .halflife .nowrap {
   margin-bottom: 0.5em;
 }
-/* line 122, ../sass/ads.sass */
+/* line 243, ../sass/ads.sass */
 .halflife textarea {
   width: 390px;
 }
 
-/* line 125, ../sass/ads.sass */
+/* line 249, ../sass/ads.sass */
 form {
   color: #333333;
   font: normal normal 1.2em/1.5em sans-serif;
 }
-/* line 129, ../sass/ads.sass */
+/* line 257, ../sass/ads.sass */
 form ul {
   margin: 0;
 }
-/* line 132, ../sass/ads.sass */
+/* line 263, ../sass/ads.sass */
 form fieldset {
   padding: 0;
   border: none;
 }
-/* line 136, ../sass/ads.sass */
+/* line 271, ../sass/ads.sass */
 form li {
   margin-bottom: 0.3em;
   overflow: auto;
 }
-/* line 140, ../sass/ads.sass */
+/* line 279, ../sass/ads.sass */
 form h3 {
   color: black;
   border-bottom: 1px solid #cccccc;
@@ -341,19 +342,19 @@ form h3 {
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
 }
-/* line 147, ../sass/ads.sass */
+/* line 293, ../sass/ads.sass */
 form label {
   text-align: right;
   vertical-align: middle;
   width: 270px;
 }
-/* line 153, ../sass/ads.sass */
+/* line 305, ../sass/ads.sass */
 form label.nowrap {
   text-align: left;
   margin-bottom: 1.5em;
   width: inherit;
 }
-/* line 158, ../sass/ads.sass */
+/* line 315, ../sass/ads.sass */
 form .desc {
   border: 0.1em solid #999999;
   -moz-border-radius: 0.25em;
@@ -364,18 +365,18 @@ form .desc {
   border-radius: 0.25em;
   padding: 0.5em;
 }
-/* line 163, ../sass/ads.sass */
+/* line 325, ../sass/ads.sass */
 form .desc_left, form .desc_right {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
   width: 150px;
 }
-/* line 171, ../sass/ads.sass */
+/* line 341, ../sass/ads.sass */
 form input[type=text], form input[type=password] {
   width: 310px;
 }
-/* line 175, ../sass/ads.sass */
+/* line 349, ../sass/ads.sass */
 form input[type=submit] {
   color: #4d4d4d;
   cursor: pointer;
@@ -389,49 +390,49 @@ form input[type=submit] {
   -khtml-border-radius: 0.2em;
   border-radius: 0.2em;
 }
-/* line 183, ../sass/ads.sass */
+/* line 365, ../sass/ads.sass */
 form input[type=submit]:hover {
   border: 0.1em solid #f20d0d;
   color: #c20a0a;
 }
-/* line 187, ../sass/ads.sass */
+/* line 373, ../sass/ads.sass */
 form input[type=submit].default {
   color: white;
   background: #f20d0d;
   border: 0.1em solid #f20d0d;
 }
-/* line 192, ../sass/ads.sass */
+/* line 383, ../sass/ads.sass */
 form input[type=submit].default[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 196, ../sass/ads.sass */
+/* line 391, ../sass/ads.sass */
 form input[type=submit].default:hover {
   color: white;
   background: #f42525;
 }
-/* line 200, ../sass/ads.sass */
+/* line 399, ../sass/ads.sass */
 form input[type=submit].default:hover[disabled] {
   background: #999999;
   border: 0.1em solid #999999;
 }
-/* line 204, ../sass/ads.sass */
+/* line 407, ../sass/ads.sass */
 form textarea {
   height: 4em;
   font-family: sans-serif;
   width: 510px;
 }
-/* line 210, ../sass/ads.sass */
+/* line 419, ../sass/ads.sass */
 form .actions {
   height: 3em;
   width: 100%;
 }
-/* line 214, ../sass/ads.sass */
+/* line 427, ../sass/ads.sass */
 form .actions input[type=submit] {
   margin-left: 1em;
 }
 
-/* line 217, ../sass/ads.sass */
+/* line 433, ../sass/ads.sass */
 .switch {
   background: #f42525;
   border: 0.1em solid gray;
@@ -455,11 +456,11 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 232, ../sass/ads.sass */
+/* line 463, ../sass/ads.sass */
 .switch .switch_text {
   position: relative;
 }
-/* line 235, ../sass/ads.sass */
+/* line 469, ../sass/ads.sass */
 .switch .switch_button {
   background: white;
   border: 0.1em solid gray;
@@ -471,6 +472,7 @@ form .actions input[type=submit] {
   background-image: -webkit-linear-gradient(#d9d9d9, #ffffff);
   background-image: -moz-linear-gradient(#d9d9d9, #ffffff);
   background-image: -o-linear-gradient(#d9d9d9, #ffffff);
+  background-image: -ms-linear-gradient(#d9d9d9, #ffffff);
   background-image: linear-gradient(#d9d9d9, #ffffff);
   -moz-box-shadow: #f2f2f2 0 0.15em 0 inset;
   -webkit-box-shadow: #f2f2f2 0 0.15em 0 inset;
@@ -483,7 +485,7 @@ form .actions input[type=submit] {
   -khtml-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 246, ../sass/ads.sass */
+/* line 491, ../sass/ads.sass */
 .switch.off {
   background: white;
   color: #333333;
@@ -492,31 +494,31 @@ form .actions input[type=submit] {
   -o-box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 0.15em 0.2em inset, #f5f5f5 0 1em 0.1em inset;
 }
-/* line 251, ../sass/ads.sass */
+/* line 501, ../sass/ads.sass */
 .switch.off .switch_text {
   right: -35px;
 }
-/* line 254, ../sass/ads.sass */
+/* line 507, ../sass/ads.sass */
 .switch.off .switch_button {
   right: 46px;
 }
 
-/* line 257, ../sass/ads.sass */
+/* line 513, ../sass/ads.sass */
 table {
   border-collapse: collapse;
   font-size: 0.8em;
   width: 390px;
 }
-/* line 262, ../sass/ads.sass */
+/* line 523, ../sass/ads.sass */
 table th, table td {
   padding: 0.5em 0;
   cursor: pointer;
 }
-/* line 266, ../sass/ads.sass */
+/* line 531, ../sass/ads.sass */
 table tbody tr {
   border-top: 0.1em solid #d9d9d9;
 }
-/* line 269, ../sass/ads.sass */
+/* line 537, ../sass/ads.sass */
 table tbody tr:hover {
   background: #ffff99;
 }

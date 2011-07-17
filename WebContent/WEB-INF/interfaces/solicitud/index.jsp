@@ -31,7 +31,7 @@
             </li>
             <li>
             <label for='nombre'>C&oacute;digo Patrimonial</label>
-            <input id='nombre' name="nombre" type='text' />
+            <input id='equipo' name="equipo" type='text' />
             </li>
             <li>
             <div class='actions'>
@@ -40,7 +40,7 @@
             </li>
             <li>
             	<ul class="desc">
-            	<li>
+            	<!-- <li>
             	<span class="desc_left">C&oacute;digo Patrimonial</span>
             	<span class="desc_right">0002033</span>
             	</li>
@@ -55,23 +55,23 @@
             	<li>
             	<span class="desc_left">&Aacute;rea a la que pertenece</span>
             	<span class="desc_right">Emergencias</span>
-            	</li>
+            	</li> -->
             	</ul>
             </li>
             <li><h3>Problema</h3></li>
             <li>
-            <label class='nowrap' for='texto'>Ingresa una descripci&oacute;n del problema:</label>
+            <label class='nowrap' for='problema'>Ingresa una descripci&oacute;n del problema:</label>
             </li>
             <li>
-            <textarea></textarea>
+            <textarea name='problema' id='problema'></textarea>
             </li>
             <li>
             <div class='actions'>
-              <input class='default' type='submit' value='Agregar a solicitud' disabled />
+              <input class='default ' id='agregar' type='submit' value='Agregar a solicitud' disabled />
             </div>
             <li><h2>Solicitud</h2></li>
             <li>
-            <table>
+            <table id="solicitudes">
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
@@ -81,7 +81,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <!-- <tr>
                   <td>0002034</td>
                   <td>Ventilador</td>
                   <td>Samsung</td>
@@ -95,7 +95,7 @@
                   <td>0204014</td>
                   <td>Monitor 24"</td>
                   <td>Toshiba</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
             </li>
@@ -113,7 +113,7 @@
       </ul>
     </div>
     <jsp:include page="../../templates/scripts.jsp">
-    	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
+    	<jsp:param value="defaults, ix.switch, ix.initialize, solicitud" name="scripts"/>
     </jsp:include>
   </body>
 </html>

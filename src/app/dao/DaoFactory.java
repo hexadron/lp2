@@ -17,4 +17,6 @@ public abstract class DaoFactory {
 	public abstract AdministradorDao getAdministradorDao();
 	
 	public abstract SecurityDao getSecurityDao();
+
+	public abstract SolicitudDao getSolicitudDao();
 }

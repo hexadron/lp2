@@ -30,6 +30,7 @@ public class ValidateSessionFilter implements Filter {
 			// que mal, estan tratando de entrar como sea
 			req.getRequestDispatcher("/logueo.jsp").forward(request, response);
 		}
+		System.out.println("FILTRO");
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
