@@ -1,6 +1,6 @@
 package app.servlets;
 
-import app.beans.Equipo;
+import app.beans.*;
 import app.services.SolicitudService;
 
 public class SolicitudServlet extends ApplicationController {
@@ -9,10 +9,16 @@ public class SolicitudServlet extends ApplicationController {
 	private SolicitudService service = new SolicitudService(); 
 	
 	public void buscarequipo() {
-		Equipo e = service.buscarEquipo(Integer.valueOf(param("equipo")));
+		Equipo e = service.buscarEquipo(param("equipo"));
 		if (e != null)
 			renderJSON(e);
 		else
 			renderText("notfound");
 	}
+	
+	public void guardar() {
+		Solicitud s = service.guardar(param("solicitud"), (Usuario) fromSession("user"));
+		renderText("" + s.getId());
+	}
+	
 }

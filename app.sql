@@ -33,11 +33,23 @@ create table usuario (
 
 create table equipo (
 	id int not null auto_increment primary key,
-	codigoPatrimonial int not null,
+	codigoPatrimonial char(8) not null,
 	denominacion text not null,
 	fabricante text not null,
 	area_id int not null references area,
 	estado varchar(15) not null
+);
+
+create table solicitud (
+	id int not null auto_increment primary key,
+	fecha timestamp,
+	usuario_id int not null references usuario
+);
+
+create table detalleSolicitud (
+	solicitud_id int not null references solicitud,
+	equipo_id int not null references equipo,
+	problema text not null
 );
 
 #dummy data
@@ -83,4 +95,5 @@ insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo
 insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
 
 # equipos
-insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values (1, 'ventilador', 'General Electrics', 3, 'disponible');
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values ('00000001', 'Ventilador', 'General Electrics', 3, 'disponible');
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values ('00000002', 'Cocina', 'Imaco', 2, 'disponible');

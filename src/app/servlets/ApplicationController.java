@@ -148,6 +148,10 @@ public class ApplicationController extends HttpServlet {
 		}
 	}
 	
+	protected Object deserializeJSON(String jsonstring, Class<?> clase) {
+		return new Gson().fromJson(jsonstring, clase);
+	}
+	
 	protected void skipRender() {
 		 rendered = true;
 	}

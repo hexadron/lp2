@@ -12,7 +12,7 @@
 	<div id='menu'>
       	<ul class='menu_items'>
       		<li><a href="security/logout">salir</a></li>
-      		<li>${sessionScope.user.usuario}</li>
+      		<li>${sessionScope.user.perfil.descripcion}</li>
 			<c:forEach var='m' items="${ modulos }">
 				<li><a href="${ m.uri }">${ m.descripcion }</a></li>
 			</c:forEach>

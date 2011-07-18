@@ -30,7 +30,7 @@
             <h2>Trabajos</h2>
             </li>
             <li>
-              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione una reparación para ver el problema y el diagnóstico</span>
+              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione una reparación para ver el diagnóstico</span>
             </li>
             <li>
            	<table id="reparaciones">
@@ -56,27 +56,35 @@
               </tbody>
             </table>
             </li>
-            <li><h3>Diagnóstico</h3></li>
+            <li>
+              <div class='actions'>
+              	<input class='default' type='submit' value='Dar de Baja' />
+              </div>
+            </li>
+            <li><h3>Trabajo Realizado</h3></li>
             <li>
              <textarea></textarea>
             </li>
-            <li><h3>Prioridad</h3></li>
             <li>
               <ul>
                 <li>
-                  <label style="width: 7em; text-align: left;">Programable</label>
-                  <input type="radio" name="prioridad" value="Programable" /></li>
+                  <label style="width: 5em; text-align: left;">costo</label>
+                  <input type="text" style="width: 5em;" name="costo" />
+                </li>
                 <li>
-                  <label style="width: 7em; text-align: left;">Urgente</label>
-                  <input type="radio" name="prioridad" value="Urgente" /></li>
-                <li>
-                  <label style="width: 7em; text-align: left;">Muy Urgente</label>
-                  <input type="radio" name="prioridad" value="Muy Urgente" /></li>
+                  <label style="width: 5em; text-align: left;">garantía</label>
+                  <input type="text" style="width: 5em;" name="garantia" />
+                </li>
               </ul>
+            </li>
+            <li><h3>Recomendaciones</h3></li>
+            <li>
+             <textarea></textarea>
             </li>
             <li>
             <div class='actions'>
               <input class='default' type='submit' value='Guardar' />
+              <input type='submit' value='Cancelar' />
             </div>
             </li>
           </ul>
@@ -94,8 +102,9 @@
     				// el id del equipo. Éstos se obtienen del atributo id del elemento
     				// seleccionado.
     				var problema = 
-    					"<h2>Ventilador [000233]</h2>" + 
-					"<h4>Reparación #1111</h4>" + 
+    					"<div class='contentapprise'><h2>Ventilador [000233]</h2>" + 
+					"<h4>Reparación #1111</h4>" +
+					"<h3> Diagnóstico </h3>" +
 					"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit." + 
 					" Duis venenatis metus ut purus molestie facilisis. Morbi" + 
 					" fermentum tincidunt ipsum quis pretium. Ut in elit risus." + 
@@ -104,7 +113,7 @@
 					" mauris consectetur eu molestie ante lacinia. Aenean at diam" +
 					" ipsum, a vestibulum magna. Sed vel neque ligula, at viverra nunc." +
 					" Cum sociis natoque penatibus et magnis dis parturient montes," + 
-					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p> "
+					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p></div>"
     				apprise(problema, {verify: true, textYes: 'seleccionar', textNo: 'cancelar'});
     			});	
     		});

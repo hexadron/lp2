@@ -10,7 +10,7 @@
   <body>
     <div class='container'>
       <div id='header'>
-        <h1>Inicia Sesi&oacute;n</h1>
+        <h1>Ingresar al Sistema</h1>
       </div>
       <ul class='content'>
         <li>
@@ -39,7 +39,7 @@
       </ul>
     </div>
     <jsp:include page="../../templates/scripts.jsp">
-    	<jsp:param value="defaults, dorotea" name="scripts"/>
+    	<jsp:param value="defaults" name="scripts"/>
     </jsp:include>
   </body>
 </html>

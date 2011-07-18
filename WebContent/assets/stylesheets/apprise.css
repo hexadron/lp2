@@ -32,6 +32,11 @@
 	text-shadow:0px 1px 0px #fff;
 	font-size:20px;
 	}
+.appriseInner .contentapprise
+	{
+	max-height: 475px;
+	overflow: auto;
+	}
 .appriseInner button
 	{
 	border:1px solid #bbb;

@@ -3,8 +3,8 @@ package app.beans;
 import app.util.ORZ;
 
 public class Equipo extends ORZ {
-	private int id; // primary key
-	private int codigoPatrimonial; //unique key
+	private long id; // primary key
+	private String codigoPatrimonial; //unique key
 	private String denominacion;
 	private String fabricante;
 	private Area area;
@@ -26,19 +26,19 @@ public class Equipo extends ORZ {
 		this.fabricante = fabricante;
 	}
 
-	public void setCodigoPatrimonial(int codigoPatrimonial) {
+	public void setCodigoPatrimonial(String codigoPatrimonial) {
 		this.codigoPatrimonial = codigoPatrimonial;
 	}
 
-	public int getCodigoPatrimonial() {
+	public String getCodigoPatrimonial() {
 		return codigoPatrimonial;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

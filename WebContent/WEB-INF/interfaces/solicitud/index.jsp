@@ -6,6 +6,10 @@
   <head>
     <title>Solicitar Mantenimiento Correctivo</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
+    <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
+    <style>
+    		.selected {background-color: #FF8;}
+    </style>
   </head>
   <body>
     <div id='menu'>
@@ -40,22 +44,7 @@
             </li>
             <li>
             	<ul class="desc">
-            	<!-- <li>
-            	<span class="desc_left">C&oacute;digo Patrimonial</span>
-            	<span class="desc_right">0002033</span>
-            	</li>
-            	<li>
-            	<span class="desc_left">Denominaci&oacute;n</span>
-            	<span class="desc_right">M&aacute;quina de coser</span>
-            	</li>
-            	<li>
-            	<span class="desc_left">Fabricante</span>
-            	<span class="desc_right">Black & Decker</span>
-            	</li>
-            	<li>
-            	<span class="desc_left">&Aacute;rea a la que pertenece</span>
-            	<span class="desc_right">Emergencias</span>
-            	</li> -->
+            	
             	</ul>
             </li>
             <li><h3>Problema</h3></li>
@@ -81,30 +70,15 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr>
-                  <td>0002034</td>
-                  <td>Ventilador</td>
-                  <td>Samsung</td>
-                </tr>
-                <tr>
-                  <td>0001045</td>
-                  <td>Estetoscopio</td>
-                  <td>EKG</td>
-                </tr>
-                <tr>
-                  <td>0204014</td>
-                  <td>Monitor 24"</td>
-                  <td>Toshiba</td>
-                </tr> -->
               </tbody>
             </table>
             </li>
             <li><h3>Problema Descrito</h3></li>
-            <li><textarea id='texto'></textarea></li>
+            <li><textarea id='problemadescrito'></textarea></li>
             <li>
             <div class='actions'>
-              <input class='default' type='submit' value='Enviar' />
-              <input type='submit' value='Quitar' />
+              <input class='default' type='submit' id='enviar' value='Enviar' disabled />
+              <input type='submit' id="quitar" value='Quitar' />
             </div>
             </li>
           </ul>

@@ -1,12 +1,15 @@
 package app.util;
 
+import java.io.Serializable;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 
-public abstract class ORZ {
+public abstract class ORZ implements Serializable {
     
-    public static <T> T find(Class<? extends ORZ> c, long id) {
+	private static final long serialVersionUID = 1L;
+
+	public static <T> T find(Class<? extends ORZ> c, long id) {
         try {
             return c.newInstance().find(id);
         } catch (InstantiationException e) {
@@ -125,7 +128,8 @@ public abstract class ORZ {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        } else
+        		create();
         return (T) this;
     }
     
@@ -150,6 +154,8 @@ public abstract class ORZ {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+        		create(params);
         }
         return (T) this;
     }
@@ -176,10 +182,21 @@ public abstract class ORZ {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql.toString(), 
                         Statement.RETURN_GENERATED_KEYS);
-            
             for (int i = 0; i <= fields.length - 1; i++) {
-                Field f = getClass().getDeclaredField(fields[i]);
-                ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
+            		Field f = null;
+            		if (fields[i].endsWith("_id"))
+            			f = getClass().getDeclaredField(fields[i].
+            					substring(0, fields[i].length() - 3));
+            		else
+            			f = getClass().getDeclaredField(fields[i]);
+            		if (f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
+            			Method idGetter = null;
+            			Object obj = getGetter(f.getName()).invoke(this);
+            			if (obj.getClass().getMethod("getId") != null)
+            				idGetter = obj.getClass().getMethod("getId");
+            			ps.setObject(i + 1, idGetter.invoke(obj));
+            		} else
+            			ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
             }
             
             ps.executeUpdate();
