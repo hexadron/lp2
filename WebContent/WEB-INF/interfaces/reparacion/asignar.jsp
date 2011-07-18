@@ -87,7 +87,7 @@
             </table>
             </li>
             <li>
-            <h2>T&eacute;cnicos</h2>
+            <h3>T&eacute;cnicos</h3>
             </li>
             <li>
            	<table>
@@ -129,7 +129,7 @@
             </div>
             </li>
             <li>
-            <h2>Equipos Asignados</h2>
+            <h3>Equipos Asignados</h3>
             </li>
             <li>
            	<table>

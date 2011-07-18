@@ -90,7 +90,7 @@ insert into moduloPorPerfil values (3, 2);
 
 #usuario
 insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -- administrador
-insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'sudo', 2, 1); -- jefe
+insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'boss', 2, 1); -- jefe
 insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
 insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
 

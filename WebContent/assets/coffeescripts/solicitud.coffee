@@ -16,10 +16,10 @@ showEquipo = (r) ->
 	"<span class='desc_left'>&Aacute;rea a la que pertenece" +
 	"</span><span class='desc_right'>#{r.area.descripcion}</span></li>"
 
-showNotNumber = ->
+showNotCode = ->
 	equipoSel = undefined
 	($ '.desc').html ''
-	($ '.desc').append 'Debes colocar un número'
+	($ '.desc').append 'Debes colocar un código'
 	
 eraseFields = ->
 	$(e).val '' for e in ['#equipo', '#problema']
@@ -36,15 +36,16 @@ evaluarAgregar = ->
 	
 evaluarEnviar = ->
 	($ '#enviar').attr("disabled", ($.trim($('#solicitudes tbody').html()) is ""))
+	
+detalle = (rowid) ->
+	pair = {equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
 
 $ -> 
 	($ '#buscar').click (e) ->
 		e.preventDefault()
 		equipo = $.trim ($ '#equipo').val()
-		console.log ($ '#equipo').val()
-		console.log equipo
 		if not equipo
-			showNotNumber()
+			showNotCode()
 		else
 			$.post 'solicitud/buscarequipo',
 				equipo: equipo,
@@ -82,9 +83,6 @@ $ ->
 		($ '.selected').remove()
 		($ '#problemadescrito').val ""
 		evaluarEnviar()
-		
-	detalle = (rowid) ->
-		pair = {equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
 		
 	($ '#enviar').click (e) ->
 		e.preventDefault()

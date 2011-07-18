@@ -1,14 +1,11 @@
 package app.util;
 
-import java.io.Serializable;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 
-public abstract class ORZ implements Serializable {
+public abstract class ORZ {
     
-	private static final long serialVersionUID = 1L;
-
 	public static <T> T find(Class<? extends ORZ> c, long id) {
         try {
             return c.newInstance().find(id);
