@@ -97,4 +97,7 @@ insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'ti
 
 # equipos
 insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000001', 'Ventilador', 'General Electrics', 3);
-insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000002', 'Cocina', 'Imaco', 2);
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000002', 'Cocina', 'Imaco', 2);               
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000003', 'Refrigerador', 'Mabe', 3);
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000004', 'Rayos X', 'SuperFabricante', 3);
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000005', 'Rayos Y', 'SuperFabricante', 3);

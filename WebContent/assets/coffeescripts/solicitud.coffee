@@ -1,30 +1,32 @@
 equipoSel = undefined
 
-showNotFound = ->
+errorEnDetalle = (msg) ->
 	equipoSel = undefined
 	($ '.desc').html ''
-	($ '.desc').append 'Equipo no encontrado'
-	
-showEquipoEnUso = ->
-	equipoSel = undefined
-	($ '.desc').html ''
-	($ '.desc').append 'El equipo ya se encuentra en una solicitud de reparación'
-
-showEquipo = (r) -> 
-	equipoSel = r
-	($ '.desc').html ''
-	($ '.desc').append "<li><span class='desc_left'>C&oacute;digo Patrimonial</span>" +
-        "<span class='desc_right'>#{r.codigoPatrimonial}</span></li><li><span class='desc_left'>" + 
-	"Denominaci&oacute;n</span><span class='desc_right'>#{r.denominacion}" +
-	"</span></li><li><span class='desc_left'>Fabricante</span>" + 
-	"<span class='desc_right'>#{r.fabricante}</span></li><li>" + 
-	"<span class='desc_left'>&Aacute;rea a la que pertenece" +
-	"</span><span class='desc_right'>#{r.area.descripcion}</span></li>"
+	($ '.desc').append msg	
 
 showNotCode = ->
-	equipoSel = undefined
+	errorEnDetalle 'Debes colocar un código'
+	
+showAddedYet = ->
+	errorEnDetalle 'El equipo ya ha sido agregado a la solicitud'
+
+showNotFound = ->
+	errorEnDetalle 'Equipo no encontrado'
+	
+showEquipoEnUso = ->
+	errorEnDetalle 'El equipo ya se encuentra en una solicitud de reparación'
+
+showEquipo = (e) -> 
+	equipoSel = e
 	($ '.desc').html ''
-	($ '.desc').append 'Debes colocar un código'
+	($ '.desc').append "<li><span class='desc_left'>C&oacute;digo Patrimonial</span>" +
+        "<span class='desc_right'>#{e.codigoPatrimonial}</span></li><li><span class='desc_left'>" + 
+	"Denominaci&oacute;n</span><span class='desc_right'>#{e.denominacion}" +
+	"</span></li><li><span class='desc_left'>Fabricante</span>" + 
+	"<span class='desc_right'>#{e.fabricante}</span></li><li>" + 
+	"<span class='desc_left'>&Aacute;rea a la que pertenece" +
+	"</span><span class='desc_right'>#{e.area.descripcion}</span></li>"
 	
 eraseFields = ->
 	$(e).val '' for e in ['#equipo', '#problema']
@@ -42,8 +44,11 @@ evaluarAgregar = ->
 evaluarEnviar = ->
 	($ '#enviar').attr("disabled", ($.trim($('#solicitudes tbody').html()) is ""))
 	
+isInTable = (e) ->
+	($ '#solicitudes tbody').find("##{e}").attr('id') != undefined
+	
 detalle = (rowid) ->
-	pair = {equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
+	{equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
 
 $ -> 
 	($ '#buscar').click (e) ->
@@ -51,23 +56,27 @@ $ ->
 		equipo = $.trim ($ '#equipo').val()
 		if not equipo
 			showNotCode()
+		else if isInTable(equipo)
+			showAddedYet()
 		else
 			$.post 'solicitud/buscarequipo',
 				equipo: equipo,
 				(r) ->
 					if ($.trim r) is 'notfound'
 						showNotFound()
-					else if JSON.parse(r).enproceso
-						showEquipoEnUso()
 					else
-						showEquipo JSON.parse r
-					evaluarAgregar()
+						eq = JSON.parse(r)
+						if eq.enproceso
+							showEquipoEnUso()
+						else
+							showEquipo eq
+						evaluarAgregar()
 		
 	($ '#problema').keyup -> evaluarAgregar()
 		
 	($ '#agregar').click (e) ->
 		e.preventDefault()
-		row = "<tr id='#{equipoSel.id}'><td>#{equipoSel.codigoPatrimonial}</td>" +
+		row = "<tr id='#{equipoSel.id}'><td id='#{equipoSel.codigoPatrimonial}'>#{equipoSel.codigoPatrimonial}</td>" +
 				"<td>#{equipoSel.denominacion}</td>" +
 				"<td>#{equipoSel.fabricante}</td>" + 
 				"<td class='hiddenproblem' style='display: none;'>#{$.trim ($ '#problema').val()}</td></tr>"
