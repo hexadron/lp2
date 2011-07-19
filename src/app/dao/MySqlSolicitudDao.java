@@ -13,8 +13,7 @@ import app.interfaces.SolicitudDao;
 
 public class MySqlSolicitudDao implements SolicitudDao {
 
-	public Equipo buscarEquipo(String codigoPatrimonial) {
-		// que no esten dados de baja y que no esten siendo usados... bueno xD
+	public Equipo buscarEquipo(long codigoPatrimonial) {
 		List<Equipo> e = Equipo.where(Equipo.class, 
 					"codigoPatrimonial = ? and dadodebaja = ?", 
 					codigoPatrimonial, "false");
@@ -30,7 +29,7 @@ public class MySqlSolicitudDao implements SolicitudDao {
 		sol.setFecha(tstamp);
 		sol.save();
 		for (DetalleSolicitud d : parse(jsonparam, sol)) {
-			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getId());
+			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getCodigoPatrimonial());
 			e.setEnproceso(true);
 			e.save();
 			d.save();
@@ -60,7 +59,7 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			String problema = p.substring(in + 13, p.length() - 1);
 			DetalleSolicitud det = new DetalleSolicitud();
 			Equipo e = new Equipo();
-			e.setId(Long.valueOf(equipo));
+			e.setCodigoPatrimonial(Long.valueOf(equipo));
 			det.setEquipo(e);
 			det.setProblema(problema);
 			det.setSolicitud(sol);

@@ -9,7 +9,8 @@ public class SolicitudServlet extends ApplicationController {
 	private SolicitudService service = new SolicitudService(); 
 	
 	public void buscarequipo() {
-		Equipo e = service.buscarEquipo(param("equipo"));
+		System.out.println(param("equipo"));
+		Equipo e = service.buscarEquipo(Long.valueOf(param("equipo")));
 		if (e != null)
 			renderJSON(e);
 		else

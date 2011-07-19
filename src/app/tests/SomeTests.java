@@ -69,7 +69,7 @@ public class SomeTests extends TestCase {
 			String problema = p.substring(in + 13, p.length() - 1);
 			DetalleSolicitud det = new DetalleSolicitud();
 			Equipo e = new Equipo();
-			e.setId(Long.valueOf(equipo));
+			e.setCodigoPatrimonial(Long.valueOf(equipo));
 			det.setEquipo(e);
 			det.setProblema(problema);
 			det.setSolicitud(sol);
@@ -84,6 +84,7 @@ public class SomeTests extends TestCase {
 			(Calendar.getInstance().getTime().getTime());
 		sol.setFecha(tstamp);
 		sol.save();
+		System.out.println(sol.getUsuario().getUsuario());
 		assertNotNull(sol);
 	}
 	

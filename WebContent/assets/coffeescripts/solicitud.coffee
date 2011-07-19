@@ -2,20 +2,7 @@ equipoSel = undefined
 
 errorEnDetalle = (msg) ->
 	equipoSel = undefined
-	($ '.desc').html ''
-	($ '.desc').append msg	
-
-showNotCode = ->
-	errorEnDetalle 'Debes colocar un código'
-	
-showAddedYet = ->
-	errorEnDetalle 'El equipo ya ha sido agregado a la solicitud'
-
-showNotFound = ->
-	errorEnDetalle 'Equipo no encontrado'
-	
-showEquipoEnUso = ->
-	errorEnDetalle 'El equipo ya se encuentra en una solicitud de reparación'
+	($ '.desc').html msg
 
 showEquipo = (e) -> 
 	equipoSel = e
@@ -55,19 +42,19 @@ $ ->
 		e.preventDefault()
 		equipo = $.trim ($ '#equipo').val()
 		if not equipo
-			showNotCode()
+			errorEnDetalle 'Debes colocar un código'
 		else if isInTable(equipo)
-			showAddedYet()
+			errorEnDetalle 'El equipo ya ha sido agregado a la solicitud'
 		else
 			$.post 'solicitud/buscarequipo',
 				equipo: equipo,
 				(r) ->
 					if ($.trim r) is 'notfound'
-						showNotFound()
+						errorEnDetalle 'Equipo no encontrado'
 					else
 						eq = JSON.parse(r)
 						if eq.enproceso
-							showEquipoEnUso()
+							errorEnDetalle 'El equipo ya se encuentra en una solicitud de reparación'
 						else
 							showEquipo eq
 						evaluarAgregar()
@@ -76,7 +63,7 @@ $ ->
 		
 	($ '#agregar').click (e) ->
 		e.preventDefault()
-		row = "<tr id='#{equipoSel.id}'><td id='#{equipoSel.codigoPatrimonial}'>#{equipoSel.codigoPatrimonial}</td>" +
+		row = "<tr id='#{equipoSel.codigoPatrimonial}'><td id='#{equipoSel.codigoPatrimonial}'>#{equipoSel.codigoPatrimonial}</td>" +
 				"<td>#{equipoSel.denominacion}</td>" +
 				"<td>#{equipoSel.fabricante}</td>" + 
 				"<td class='hiddenproblem' style='display: none;'>#{$.trim ($ '#problema').val()}</td></tr>"
@@ -105,6 +92,7 @@ $ ->
 		t = $ '#solicitudes tbody'
 		sol = []
 		sol.push(detalle(row.id)) for row in t.children()
+		console.log sol
 		$.post 'solicitud/guardar',
 			solicitud: JSON.stringify(sol),
 			(r) ->

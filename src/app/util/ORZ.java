@@ -20,7 +20,7 @@ public abstract class ORZ {
     @SuppressWarnings("unchecked")
     public <T> T find(long id) {
         Connection db = null;
-        String sql = "SELECT * FROM " + getTable() + " WHERE id = ?";
+        String sql = "SELECT * FROM " + getTable() + " WHERE " + getColumnaBase() + " = ?";
         try {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
@@ -99,8 +99,10 @@ public abstract class ORZ {
                     		if (type.getSuperclass() != null &&
                         		type.getSuperclass().equals(this.getClass().getSuperclass()))
                         			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
-                    		else
+                    		else {
+                    			System.out.println(val);
                         		m.invoke(o, val);
+                    		}
                     }
                 }
                 all.add(o);
@@ -115,9 +117,9 @@ public abstract class ORZ {
     
     @SuppressWarnings("unchecked")
     public <T> T save() {
-        if (getGetter("id") != null) {
+        if (getGetter(getColumnaBase()) != null) {
             try {
-                Object id = getGetter("id").invoke(this);
+                Object id = getGetter(getColumnaBase()).invoke(this);
                 if (id.toString().equals("0"))
                     create();
                 else
@@ -141,9 +143,9 @@ public abstract class ORZ {
     
     @SuppressWarnings("unchecked")
     public <T> T save(Object... params) {
-        if (getGetter("id") != null) {
+        if (getGetter(getColumnaBase()) != null) {
             try {
-                Object id = getGetter("id").invoke(this);
+                Object id = getGetter(getColumnaBase()).invoke(this);
                 if (id.toString().equals("0"))
                     create(params);
                 else
@@ -189,8 +191,8 @@ public abstract class ORZ {
             		if (f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
             			Method idGetter = null;
             			Object obj = getGetter(f.getName()).invoke(this);
-            			if (obj.getClass().getMethod("getId") != null)
-            				idGetter = obj.getClass().getMethod("getId");
+            			if (obj.getClass().getMethod("get" + capitalize(((ORZ) obj).getColumnaBase())) != null)
+            				idGetter = obj.getClass().getMethod("get" + capitalize(((ORZ) obj).getColumnaBase()));
             			ps.setObject(i + 1, idGetter.invoke(obj));
             		} else
             			ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
@@ -200,7 +202,7 @@ public abstract class ORZ {
             ResultSet rs = ps.getGeneratedKeys();
             
             if (rs.next())
-                getSetter("id").invoke(this, rs.getLong(1));
+                getSetter(getColumnaBase()).invoke(this, rs.getLong(1));
             return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +212,14 @@ public abstract class ORZ {
         return null;
     }
     
-    @SuppressWarnings("unchecked")
+    private String capitalize(String columnaBase) {
+    		StringBuilder builder = new StringBuilder();
+    		builder.append(columnaBase.substring(0, 1).toUpperCase());
+    		builder.append(columnaBase.subSequence(1, columnaBase.length()));
+		return builder.toString();
+	}
+
+	@SuppressWarnings("unchecked")
     public <T> T create(Object... params) {
         Connection db = null;
         StringBuilder sql = new StringBuilder();
@@ -262,7 +271,7 @@ public abstract class ORZ {
             sql.append(fields[i]).append(" = ?, ");
         
         sql.delete(sql.length() - 2, sql.length());
-        sql.append(" WHERE id = ?");
+        sql.append(" WHERE " + getColumnaBase() + " = ?");
         try {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql.toString());
@@ -286,7 +295,7 @@ public abstract class ORZ {
         				ps.setObject(i, getGetter(f.getName()).invoke(this));
             	}
             
-            ps.setLong(i, (Long) getGetter("id").invoke(this));
+            ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
             ps.executeUpdate();
             return (T) this;
         } catch (Exception e) {
@@ -309,7 +318,7 @@ public abstract class ORZ {
             sql.append(fields[i]).append(" = ?, ");
         
         sql.delete(sql.length() - 2, sql.length());
-        sql.append(" WHERE id = ?");
+        sql.append(" WHERE " + getColumnaBase() + " = ?");
         
         try {
             db = Database.getConnection();
@@ -319,9 +328,9 @@ public abstract class ORZ {
             for (; i <= params.length; i++)
                 ps.setObject(i, params[i - 1]);
             
-            ps.setLong(i, (Long) getGetter("id").invoke(this));
+            ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
             ps.executeUpdate();
-            updateAttributes((Long) getGetter("id").invoke(this));
+            updateAttributes((Long) getGetter(getColumnaBase()).invoke(this));
             return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
@@ -334,11 +343,11 @@ public abstract class ORZ {
     @SuppressWarnings("unchecked")
     public <T> T delete() {
         Connection db = null;
-        String sql = "DELETE FROM " + getTable() + " WHERE id = ?";
+        String sql = "DELETE FROM " + getTable() + " WHERE " + getColumnaBase() + " = ?";
         try {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
-            ps.setLong(1, (Long) getGetter("id").invoke(this));
+            ps.setLong(1, (Long) getGetter(getColumnaBase()).invoke(this));
             ps.executeUpdate();
             return (T) this;
         } catch (Exception e) {
@@ -352,7 +361,8 @@ public abstract class ORZ {
     public static <T> T delete(Class<? extends ORZ> c, long id) {
         Connection db = null;
         try {
-            String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE id = ?";
+            String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE " + 
+            		c.newInstance().getColumnaBase() + " = ?";
             T o = c.newInstance().find(id);
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
@@ -376,7 +386,7 @@ public abstract class ORZ {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next())
-            	if (!(rs.getString(1).equals("id")))
+            	if (!(rs.getString(1).equals(getColumnaBase())))
             		fields.append(rs.getString(1)).append(", ");
             
             fields.delete(fields.lastIndexOf(","), fields.length());
@@ -397,7 +407,7 @@ public abstract class ORZ {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next())
-            	if (!(rs.getString(1).equals("id")))
+            	if (!(rs.getString(1).equals(getColumnaBase())))
             		fields.append(prefix).append(rs.getString(1)).append(", ");
             
             fields.delete(fields.lastIndexOf(","), fields.length());
@@ -459,93 +469,8 @@ public abstract class ORZ {
         return name.toLowerCase().toString();
     }
     
-    /* ActiveRelation? No U_U */
-    
-    public <T> List<T> parent(Class<T> c) {
-        List<T> all = new ArrayList<T>();
-        Connection db = null;
-        
-        String sql = "SELECT " + getTableFields(c, "parent.") +
-        " FROM " + getTable(c.getName()) + " AS parent INNER JOIN " + 
-        getTable(getClass().getName()) + " AS child ON child." +
-        getTable(c.getName()) + "_id = parent.id WHERE child.id = ?";
-        
-        try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql);
-            ps.setLong(1, (Long) getGetter("id").invoke(this));
-            ResultSet rs = ps.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            
-            while (rs.next()) {
-                String name;
-                T o = c.newInstance();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    name = rsmd.getColumnName(i);
-                    Field f = c.getDeclaredField(name);
-                    Object val = rs.getObject(name);
-                    getSetter(f.getName(), c).invoke(o, val);
-                }
-                all.add(o);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Database.close(db);
-        }
-        return all;
-    }
-    
-    public <T> List<T> children(Class<T> c) {
-        List<T> all = new ArrayList<T>();
-        Connection db = null;
-        
-        String sql = "SELECT " + getTableFields(c, "child.") +
-        " FROM " + getTable(c.getName()) + " AS child INNER JOIN " + 
-        getTable(getClass().getName()) + " AS parent ON child." +
-        getTable(getClass().getName()) + "_id = parent.id WHERE parent.id = ?";
-        
-        try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql);
-            ps.setLong(1, (Long) getGetter("id").invoke(this));
-            ResultSet rs = ps.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            
-            while (rs.next()) {
-                String name;
-                T o = c.newInstance();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    name = rsmd.getColumnName(i);
-                    Field f = c.getDeclaredField(name);
-                    Object val = rs.getObject(name);
-                    getSetter(f.getName(), c).invoke(o, val);
-                }
-                all.add(o);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Database.close(db);
-        }
-        return all;
-    }
-    
-    public boolean equals(Object o) {
-        try {
-            for (Field f : this.getClass().getDeclaredFields())
-                if (o.getClass().getDeclaredField(f.getName()) != null)
-                    if (getGetter(f.getName()).invoke(o) != getGetter(f.getName()).invoke(this))
-                    	return false;
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-    
-    public int hashCode() {
-        //por terminar
-        return 1;
+    protected String getColumnaBase() {
+    		return "id";
     }
 
 }

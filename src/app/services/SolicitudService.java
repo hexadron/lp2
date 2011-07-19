@@ -11,7 +11,7 @@ public class SolicitudService {
 	
 	DaoFactory factory = DaoFactory.getFactory(Factories.MYSQL);
 	
-	public Equipo buscarEquipo(String codigoPatrimonial) {
+	public Equipo buscarEquipo(long codigoPatrimonial) {
 		SolicitudDao dao = factory.getSolicitudDao();
 		return dao.buscarEquipo(codigoPatrimonial);
 	}
