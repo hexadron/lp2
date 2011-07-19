@@ -132,33 +132,6 @@ public abstract class ORZ {
         return (T) this;
     }
     
-    public static <T> T save(Class<? extends ORZ> c, Object... params) {
-        try {
-            return c.newInstance().save(params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    @SuppressWarnings("unchecked")
-    public <T> T save(Object... params) {
-        if (getGetter(getColumnaBase()) != null) {
-            try {
-                Object id = getGetter(getColumnaBase()).invoke(this);
-                if (id.toString().equals("0"))
-                    create(params);
-                else
-                    update(params);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-        		create(params);
-        }
-        return (T) this;
-    }
-    
     @SuppressWarnings("unchecked")
     public <T> T create() {
         Connection db = null;
@@ -219,45 +192,6 @@ public abstract class ORZ {
 		return builder.toString();
 	}
 
-	@SuppressWarnings("unchecked")
-    public <T> T create(Object... params) {
-        Connection db = null;
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO " + getTable() + " (");
-        String[] fields = getTableFields().split(", ");
-        
-        for (int i = 0; i < fields.length; i++)
-            sql.append(fields[i]).append(", ");
-        
-        sql.delete(sql.length() - 2, sql.length());
-        sql.append(") VALUES (");
-        
-        for (int i = 0; i < fields.length; i++)
-            sql.append("?, ");
-        
-        sql.delete(sql.length() - 2, sql.length());
-        sql.append(")");
-        try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql.toString(), 
-                        Statement.RETURN_GENERATED_KEYS);
-            
-            for (int i = 1; i <= params.length; i++)
-                ps.setObject(i, params[i - 1]);
-            
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            if (rs.next())
-                updateAttributes(rs.getLong(1));
-            return (T) this;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Database.close(db);
-        }
-        return null;
-    }
     
     @SuppressWarnings("unchecked")
     public <T> T update() {
@@ -297,40 +231,6 @@ public abstract class ORZ {
             
             ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
             ps.executeUpdate();
-            return (T) this;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            Database.close(db);
-        }
-        return null;
-    }
-    
-    @SuppressWarnings("unchecked")
-    public <T> T update(Object... params) {
-        Connection db = null;
-        
-        StringBuilder sql = new StringBuilder();
-        sql.append("UPDATE " + getTable() + " SET ");
-        String[] fields = getTableFields().split(", ");
-        
-        for (int i = 0; i < fields.length; i++)
-            sql.append(fields[i]).append(" = ?, ");
-        
-        sql.delete(sql.length() - 2, sql.length());
-        sql.append(" WHERE " + getColumnaBase() + " = ?");
-        
-        try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql.toString());
-            
-            int i = 1;
-            for (; i <= params.length; i++)
-                ps.setObject(i, params[i - 1]);
-            
-            ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
-            ps.executeUpdate();
-            updateAttributes((Long) getGetter(getColumnaBase()).invoke(this));
             return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
@@ -396,45 +296,6 @@ public abstract class ORZ {
             e.printStackTrace();
         }
         return null;
-    }
-    
-    private String getTableFields(Class<?> c, String prefix) {
-        try {
-        	Connection cn = Database.getConnection();
-
-            StringBuilder fields = new StringBuilder();
-            PreparedStatement ps = cn.prepareStatement("describe " + getTable(c.getName()));
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next())
-            	if (!(rs.getString(1).equals(getColumnaBase())))
-            		fields.append(prefix).append(rs.getString(1)).append(", ");
-            
-            fields.delete(fields.lastIndexOf(","), fields.length());
-
-            return fields.toString();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } 
-        return null;
-    }
-    
-    @SuppressWarnings("unchecked")
-    private <T> T updateAttributes(long id) {
-        T o = find(id);
-        for (Method m : o.getClass().getDeclaredMethods()) {
-            if (m.getName().startsWith("set")) {
-                StringBuilder setter = new StringBuilder(m.getName());
-                String field = setter.delete(0, 3).toString().toLowerCase();
-                try {
-                    Object val = getGetter(field).invoke(o);
-                    getSetter(field).invoke(this, val);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return (T) this;
     }
     
     private Method getGetter(String field) {

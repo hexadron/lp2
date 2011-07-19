@@ -32,8 +32,7 @@ create table usuario (
 );
 
 create table equipo (
-	id int not null auto_increment primary key,
-	codigoPatrimonial int not null auto_increment,
+	codigoPatrimonial int not null auto_increment primary key,
 	denominacion text not null,
 	fabricante text not null,
 	area_id int not null references area,
