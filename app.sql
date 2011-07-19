@@ -37,7 +37,8 @@ create table equipo (
 	denominacion text not null,
 	fabricante text not null,
 	area_id int not null references area,
-	estado varchar(15) not null
+	enproceso boolean not null default false,
+	dadodebaja boolean not null default false
 );
 
 create table solicitud (
@@ -95,5 +96,5 @@ insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo
 insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
 
 # equipos
-insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values ('00000001', 'Ventilador', 'General Electrics', 3, 'disponible');
-insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id, estado) values ('00000002', 'Cocina', 'Imaco', 2, 'disponible');
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000001', 'Ventilador', 'General Electrics', 3);
+insert into equipo (codigoPatrimonial, denominacion, fabricante, area_id) values ('00000002', 'Cocina', 'Imaco', 2);

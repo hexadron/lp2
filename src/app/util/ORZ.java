@@ -269,9 +269,22 @@ public abstract class ORZ {
             
             int i = 1;
             for (; i <= fields.length; i++) {
-                Field f = getClass().getDeclaredField(fields[i - 1]);
-                ps.setObject(i, getGetter(f.getName()).invoke(this));
-            }
+		        	Field f = null;
+		    		if (fields[i - 1].endsWith("_id"))
+		    			f = getClass().getDeclaredField(fields[i - 1].
+		    					substring(0, fields[i - 1].length() - 3));
+		    		else
+		    			f = getClass().getDeclaredField(fields[i - 1]);
+                if (f.getType().getSuperclass() != null && 
+                		f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
+                		Method idGetter = null;
+                		Object obj = getGetter(f.getName()).invoke(this);
+                		if (obj.getClass().getMethod("getId") != null)
+                			idGetter = obj.getClass().getMethod("getId");
+                		ps.setObject(i, idGetter.invoke(obj));
+        			} else
+        				ps.setObject(i, getGetter(f.getName()).invoke(this));
+            	}
             
             ps.setLong(i, (Long) getGetter("id").invoke(this));
             ps.executeUpdate();
@@ -421,7 +434,7 @@ public abstract class ORZ {
     private Method getGetter(String field, Class<?> c) {
         for (Method m : c.getDeclaredMethods())
             if (m.getName().startsWith("get"))
-                if (m.getName().toLowerCase().endsWith(field))
+                if (m.getName().toLowerCase().endsWith(field.toLowerCase()))
                     return m;
         return null;
     }

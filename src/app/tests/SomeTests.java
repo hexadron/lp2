@@ -87,6 +87,13 @@ public class SomeTests extends TestCase {
 		assertNotNull(sol);
 	}
 	
+	public void testEquipo() {
+		Equipo e = Equipo.find(Equipo.class, 1);
+		e.setEnproceso(true);
+		e.save();
+		assertNotNull(e);
+	}
+	
 	public static void main(String[] args) {
 		TestRunner.run(SomeTests.class);
 	}

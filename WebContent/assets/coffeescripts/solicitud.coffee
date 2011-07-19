@@ -4,6 +4,11 @@ showNotFound = ->
 	equipoSel = undefined
 	($ '.desc').html ''
 	($ '.desc').append 'Equipo no encontrado'
+	
+showEquipoEnUso = ->
+	equipoSel = undefined
+	($ '.desc').html ''
+	($ '.desc').append 'El equipo ya se encuentra en una solicitud de reparación'
 
 showEquipo = (r) -> 
 	equipoSel = r
@@ -52,7 +57,9 @@ $ ->
 				(r) ->
 					if ($.trim r) is 'notfound'
 						showNotFound()
-					else 
+					else if JSON.parse(r).enproceso
+						showEquipoEnUso()
+					else
 						showEquipo JSON.parse r
 					evaluarAgregar()
 		

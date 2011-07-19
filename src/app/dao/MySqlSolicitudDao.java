@@ -14,8 +14,10 @@ import app.interfaces.SolicitudDao;
 public class MySqlSolicitudDao implements SolicitudDao {
 
 	public Equipo buscarEquipo(String codigoPatrimonial) {
-		List<Equipo> e = Equipo.where
-			(Equipo.class, "codigoPatrimonial = ?", codigoPatrimonial);
+		// que no esten dados de baja y que no esten siendo usados... bueno xD
+		List<Equipo> e = Equipo.where(Equipo.class, 
+					"codigoPatrimonial = ? and dadodebaja = ?", 
+					codigoPatrimonial, "false");
 		return e.size() != 0 ? e.get(0) : null; 
 	}
 
@@ -27,8 +29,13 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			(Calendar.getInstance().getTime().getTime());
 		sol.setFecha(tstamp);
 		sol.save();
-		for (DetalleSolicitud d : parse(jsonparam, sol))
+		for (DetalleSolicitud d : parse(jsonparam, sol)) {
+			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getId());
+			e.setEnproceso(true);
+			e.save();
 			d.save();
+		}
+		// los equipos de cada detalle deben pasar a enproceso = true 
 		return sol;
 	}
 	

@@ -4,11 +4,12 @@ import app.util.ORZ;
 
 public class Equipo extends ORZ {
 	private long id; // primary key
-	private String codigoPatrimonial; //unique key
+	private String codigoPatrimonial; // unique key
 	private String denominacion;
 	private String fabricante;
 	private Area area;
-	private String estado;
+	private boolean enproceso;
+	private boolean dadodebaja;
 
 	public String getDenominacion() {
 		return denominacion;
@@ -50,11 +51,19 @@ public class Equipo extends ORZ {
 		return area;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setDadodebaja(boolean dadodebaja) {
+		this.dadodebaja = dadodebaja;
 	}
 
-	public String getEstado() {
-		return estado;
+	public boolean getDadodebaja() {
+		return dadodebaja;
+	}
+
+	public void setEnproceso(boolean enproceso) {
+		this.enproceso = enproceso;
+	}
+
+	public boolean getEnproceso() {
+		return enproceso;
 	}
 }
