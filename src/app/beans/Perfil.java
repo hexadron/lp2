@@ -6,7 +6,6 @@ public class Perfil extends ORZ {
 
 	private long id;
 	private String descripcion;
-	private String uri;
 
 	public long getId() {
 		return id;
@@ -22,14 +21,6 @@ public class Perfil extends ORZ {
 
 	public String getDescripcion() {
 		return descripcion;
-	}
-	
-	public String getUri() {
-		return uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
 	}
 
 }

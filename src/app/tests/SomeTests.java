@@ -1,6 +1,6 @@
 package app.tests;
 
-import static app.util.Utilities.ToUTF;
+import static app.util.Utilities.*;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
@@ -132,11 +132,7 @@ public class SomeTests extends TestCase {
 	public void testSave() {
 		Tecnico t = new Tecnico();
 		String v = "áéíóúñ";
-		try {
-			t.setNombres(new String(v.getBytes("utf-8"), "iso-8859-1"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		t.setNombres(ToISO(v));
 		t.setApellidos("otro normal");
 		t.setFechaIngreso(new Date());
 		t.setEspecialidad("y otro");
@@ -157,6 +153,24 @@ public class SomeTests extends TestCase {
 			System.out.println(m.getDescripcion());
 		}
 		
+	}
+	
+	@Test
+	public void testOrzUtfSave() {
+		Tecnico t = new Tecnico();
+		String v = "áéíóúñ";
+		t.setNombres(v);
+		t.setApellidos("otro normal");
+		t.setFechaIngreso(new Date());
+		t.setEspecialidad("y otro");
+		t.save();
+	}
+	
+	@Test
+	public void testOrzUtfGet() {
+		List<Tecnico> tecs = Tecnico.where(Tecnico.class, "nombres = ?", "alan");
+		for (Tecnico t : tecs)
+			System.out.println(t.getNombres() + " " + t.getApellidos());
 	}
 	
 	public static void main(String[] args) {
