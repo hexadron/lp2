@@ -74,17 +74,16 @@ insert into perfil (descripcion) values ('jefe del area');
 insert into perfil (descripcion) values ('tecnico interno');
 insert into perfil (descripcion) values ('usuario');
 #modulo
-insert into modulo (descripcion, uri) values ('Diagnóstico de Equipos', 'reparacion/diagnostico', 'Diagnóstico');
-insert into modulo (descripcion, uri) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
-insert into modulo (descripcion, uri) values ('Mantener Usuarios', 'security/usuarios', 'Usuarios');
-insert into modulo (descripcion, uri) values ('Mantener Perfiles', 'security/perfiles', 'Perfiles');
-insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'solicitud', 'Solicitar Mantenimiento');
-insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'reparacion/asignar', 'Asignar');
-insert into modulo (descripcion, uri) values ('Historial de Desempeño', 'reparacion/historial', 'Historial');
-insert into modulo (descripcion, uri) values ('Mantenimiento de Equipos', 'equipos', 'Equipos');
-#...
-insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacionexterna');
-insert into modulo (descripcion, uri) values ('Terceros', 'terceros');
+insert into modulo (descripcion, uri, shorthand) values ('Diagnóstico de Equipos', 'reparacion/diagnostico', 'Diagnóstico'); 
+insert into modulo (descripcion, uri, shorthand) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
+insert into modulo (descripcion, uri, shorthand) values ('Mantener Usuarios', 'security/usuarios', 'Usuarios');
+insert into modulo (descripcion, uri, shorthand) values ('Mantener Perfiles', 'security/perfiles', 'Perfiles');
+insert into modulo (descripcion, uri, shorthand) values ('Solicitud de Mantenimiento', 'solicitud', 'Solicitar Mantenimiento');
+insert into modulo (descripcion, uri, shorthand) values ('Asignación de Técnicos', 'reparacion/asignar', 'Asignar');
+insert into modulo (descripcion, uri, shorthand) values ('Historial de Desempeño', 'reparacion/historial', 'Historial');
+insert into modulo (descripcion, uri, shorthand) values ('Mantenimiento de Equipos', 'equipos', 'Equipos');
+insert into modulo (descripcion, uri, shorthand) values ('Reparación externa', 'reparacionexterna', 'Externa');
+insert into modulo (descripcion, uri, shorthand) values ('Terceros', 'terceros', 'Terceros');
 
 #moduloporperfil
 #administrador del sistema
