@@ -80,6 +80,7 @@ insert into modulo (descripcion, uri) values ('Mantener Perfiles', 'security/per
 insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'solicitud');
 insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'reparacion/asignar');
 insert into modulo (descripcion, uri) values ('Historial de Desempeño', 'reparacion/historial');
+insert into modulo (descripcion, uri) values ('Mantenimiento de Equipos', 'equipos');
 #...
 insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacionexterna');
 insert into modulo (descripcion, uri) values ('Terceros', 'terceros');
@@ -93,6 +94,7 @@ insert into moduloPorPerfil values (4, 5);
 #jefe de área
 insert into moduloPorPerfil values (2, 6);
 insert into moduloPorPerfil values (2, 7);
+insert into moduloPorPerfil values (2, 8);
 #perfil de técnico interno
 insert into moduloPorPerfil values (3, 1);
 insert into moduloPorPerfil values (3, 2);

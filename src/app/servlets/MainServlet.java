@@ -6,7 +6,7 @@ import app.beans.Modulo;
 import app.beans.Perfil;
 import app.beans.Usuario;
 import app.services.SecurityService;
-import static app.util.Utilities.ToUtf;
+import static app.util.Utilities.ToUTF;
 
 public class MainServlet extends ApplicationController {
     
@@ -20,10 +20,10 @@ public class MainServlet extends ApplicationController {
 			render("security/login");
 		else {
 			Perfil p = u.getPerfil();
-			p.setDescripcion(ToUtf(p.getDescripcion()));
+			p.setDescripcion(ToUTF(p.getDescripcion()));
 			List<Modulo> mods = service.getModules(u.getPerfil());
 			for (Modulo m : mods) {
-				m.setDescripcion(ToUtf(m.getDescripcion()));
+				m.setDescripcion(ToUTF(m.getDescripcion()));
 			}
 			toSession("perfil", p);
 			toSession("modulos", mods);

@@ -6,7 +6,7 @@ import app.beans.DetalleSolicitud;
 import app.beans.Solicitud;
 import app.beans.Tecnico;
 import app.interfaces.ReparacionDao;
-import static app.util.Utilities.ToUtf;
+import static app.util.Utilities.ToUTF;
 
 public class MySqlReparacionDao implements ReparacionDao {
 
@@ -17,9 +17,9 @@ public class MySqlReparacionDao implements ReparacionDao {
 	public List<Tecnico> getTecnicos() {
 		List<Tecnico> tecs = Tecnico.all(Tecnico.class);
 		for (Tecnico t : tecs) {
-			t.setNombres(ToUtf(t.getNombres()));
-			t.setApellidos(ToUtf(t.getApellidos()));
-			t.setEspecialidad(ToUtf(t.getEspecialidad()));
+			t.setNombres(ToUTF(t.getNombres()));
+			t.setApellidos(ToUTF(t.getApellidos()));
+			t.setEspecialidad(ToUTF(t.getEspecialidad()));
 		}
 		return tecs;
 	}

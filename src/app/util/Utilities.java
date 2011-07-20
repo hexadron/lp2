@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 public abstract class Utilities {
 	
-	public static String ToUtf(String val) {
+	public static String ToUTF(String val) {
 		try {
 			return new String(val.getBytes("iso-8859-1"), "utf-8");
 		} catch (UnsupportedEncodingException e) {

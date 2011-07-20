@@ -1,10 +1,9 @@
 package app.tests;
 
-import static app.util.Utilities.ToUtf;
+import static app.util.Utilities.ToUTF;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -149,10 +148,10 @@ public class SomeTests extends TestCase {
 	public void testUtf8() {
 		Usuario u = Usuario.find(Usuario.class, 2);
 		Perfil p = u.getPerfil();
-		p.setDescripcion(ToUtf(p.getDescripcion()));
+		p.setDescripcion(ToUTF(p.getDescripcion()));
 		List<Modulo> mods = new SecurityService().getModules(u.getPerfil());
 		for (Modulo m : mods) {
-			m.setDescripcion(ToUtf(m.getDescripcion()));
+			m.setDescripcion(ToUTF(m.getDescripcion()));
 		}
 		for (Modulo m : mods) {
 			System.out.println(m.getDescripcion());

@@ -104,4 +104,14 @@
   <listener>
     <listener-class>app.listeners.DeafListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>EquipoServlet</display-name>
+    <servlet-name>EquipoServlet</servlet-name>
+    <servlet-class>app.servlets.EquipoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EquipoServlet</servlet-name>
+    <url-pattern>/equipo/*</url-pattern>
+  </servlet-mapping>
 </web-app>
