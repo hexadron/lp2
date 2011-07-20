@@ -22,7 +22,7 @@
       		<li><a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
       		<li>${sessionScope.user.usuario}</li>
 			<c:forEach var='m' items="${ modulos }">
-				<li><a href="${ m.uri }">${ m.descripcion }</a></li>
+				<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
 			</c:forEach>
 			<li><a href="${pageContext.request.contextPath}">Men&uacute; Principal</a></li>
 		</ul>

@@ -7,6 +7,7 @@ public class Modulo extends ORZ {
 	private long id;
 	private String descripcion;
 	private String uri;
+	private String shorthand;
 
 	public String getUri() {
 		return uri;
@@ -30,6 +31,14 @@ public class Modulo extends ORZ {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public void setShorthand(String shorthand) {
+		this.shorthand = shorthand;
+	}
+
+	public String getShorthand() {
+		return shorthand;
 	}
 
 }

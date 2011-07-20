@@ -10,7 +10,8 @@ create table perfil (
 create table modulo (
   id int not null auto_increment primary key,
   descripcion varchar(100) not null,
-  uri varchar(120) not null
+  uri varchar(120) not null,
+  shorthand varchar(50) not null
 ) DEFAULT CHARSET=utf8;
 
 create table moduloPorPerfil (
@@ -73,14 +74,14 @@ insert into perfil (descripcion) values ('jefe del area');
 insert into perfil (descripcion) values ('tecnico interno');
 insert into perfil (descripcion) values ('usuario');
 #modulo
-insert into modulo (descripcion, uri) values ('Diagnóstico de Equipos', 'reparacion/diagnostico');
-insert into modulo (descripcion, uri) values ('Reparación de Equipos', 'reparacion/reparacion');
-insert into modulo (descripcion, uri) values ('Mantener Usuarios', 'security/usuarios');
-insert into modulo (descripcion, uri) values ('Mantener Perfiles', 'security/perfiles');
-insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'solicitud');
-insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'reparacion/asignar');
-insert into modulo (descripcion, uri) values ('Historial de Desempeño', 'reparacion/historial');
-insert into modulo (descripcion, uri) values ('Mantenimiento de Equipos', 'equipos');
+insert into modulo (descripcion, uri) values ('Diagnóstico de Equipos', 'reparacion/diagnostico', 'Diagnóstico');
+insert into modulo (descripcion, uri) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
+insert into modulo (descripcion, uri) values ('Mantener Usuarios', 'security/usuarios', 'Usuarios');
+insert into modulo (descripcion, uri) values ('Mantener Perfiles', 'security/perfiles', 'Perfiles');
+insert into modulo (descripcion, uri) values ('Solicitud de Mantenimiento', 'solicitud', 'Solicitar Mantenimiento');
+insert into modulo (descripcion, uri) values ('Asignación de Técnicos', 'reparacion/asignar', 'Asignar');
+insert into modulo (descripcion, uri) values ('Historial de Desempeño', 'reparacion/historial', 'Historial');
+insert into modulo (descripcion, uri) values ('Mantenimiento de Equipos', 'equipos', 'Equipos');
 #...
 insert into modulo (descripcion, uri) values ('Reparación externa', 'reparacionexterna');
 insert into modulo (descripcion, uri) values ('Terceros', 'terceros');

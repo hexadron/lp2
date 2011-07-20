@@ -10,12 +10,12 @@
   <body>
     <div id='menu'>
       <ul class='menu_items'>
-        <li><a href="${pageContext.request.contextPath}/security/logout">Salir</a></li>
-<%--         <li>${ sessionScope.user.usuario }</li> --%>
-        <li>${ sessionScope.nombre }</li>
-        <li><a href="${pageContext.request.contextPath}/reparacion/asignar">Asignar</a></li>
-        <li><a href="${pageContext.request.contextPath}/reparacion/historial">Historial</a></li>
-        <li><a href="${pageContext.request.contextPath}">Men&uacute; principal</a></li>
+        <li><a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
+      	<li>${sessionScope.user.usuario}</li>
+		<c:forEach var='m' items="${ modulos }">
+		<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
+		</c:forEach>
+		<li><a href="${pageContext.request.contextPath}">Men&uacute; Principal</a></li>
       </ul>
     </div>
     <div class='container'>
