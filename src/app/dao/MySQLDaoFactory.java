@@ -19,4 +19,9 @@ public class MySQLDaoFactory extends DaoFactory {
 		return new MySqlSolicitudDao();
 	}
 
+	@Override
+	public ReparacionDao getReparacionDao() {
+		return new MySqlReparacionDao();
+	}
+
 }

@@ -34,7 +34,6 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			e.save();
 			d.save();
 		}
-		// los equipos de cada detalle deben pasar a enproceso = true 
 		return sol;
 	}
 	

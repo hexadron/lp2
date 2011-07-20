@@ -15,6 +15,7 @@ public class SecurityServlet extends ApplicationController {
 	public void logout() {
 		destroysession();
 		toHome();
+		skipRender();
 	}
 	
 	public void perfiles() {

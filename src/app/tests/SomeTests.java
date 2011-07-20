@@ -1,16 +1,25 @@
 package app.tests;
 
+import static app.util.Utilities.ToUtf;
+
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 
 import app.beans.DetalleSolicitud;
 import app.beans.Equipo;
+import app.beans.Modulo;
+import app.beans.Perfil;
 import app.beans.Solicitud;
+import app.beans.Tecnico;
 import app.beans.Usuario;
+import app.services.SecurityService;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
@@ -77,6 +86,7 @@ public class SomeTests extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testSol() {
 		Solicitud sol = new Solicitud();
 		sol.setUsuario((Usuario) Usuario.find(Usuario.class, 1));
@@ -88,11 +98,66 @@ public class SomeTests extends TestCase {
 		assertNotNull(sol);
 	}
 	
+	@Test
 	public void testEquipo() {
 		Equipo e = Equipo.find(Equipo.class, 1);
 		e.setEnproceso(true);
 		e.save();
 		assertNotNull(e);
+	}
+	
+	@Test
+	public void testGetSolicitudes() {
+		List<Solicitud> sols = Solicitud.where(Solicitud.class, 
+				"enatencion = ?", "false");
+		System.out.println(sols.size());
+		assertNotNull(sols);
+	}
+	
+	@Test
+	public void testGetTecnicos() { // and utf8
+		List<Tecnico> tecs = Tecnico.all(Tecnico.class);
+		for (Tecnico t : tecs)
+			try {
+				t.setNombres(new String(t.getNombres().getBytes("iso-8859-1"), "utf-8"));
+				t.setApellidos(new String(t.getApellidos().getBytes("iso-8859-1"), "utf-8"));
+				System.out.println(t.getNombres());
+				System.out.println(t.getApellidos());
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		assertTrue(tecs.size() > 0);
+	}
+	
+	@Test
+	public void testSave() {
+		Tecnico t = new Tecnico();
+		String v = "áéíóúñ";
+		try {
+			t.setNombres(new String(v.getBytes("utf-8"), "iso-8859-1"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		t.setApellidos("otro normal");
+		t.setFechaIngreso(new Date());
+		t.setEspecialidad("y otro");
+		t.save();
+		assertNotNull(t);
+	}
+	
+	@Test
+	public void testUtf8() {
+		Usuario u = Usuario.find(Usuario.class, 2);
+		Perfil p = u.getPerfil();
+		p.setDescripcion(ToUtf(p.getDescripcion()));
+		List<Modulo> mods = new SecurityService().getModules(u.getPerfil());
+		for (Modulo m : mods) {
+			m.setDescripcion(ToUtf(m.getDescripcion()));
+		}
+		for (Modulo m : mods) {
+			System.out.println(m.getDescripcion());
+		}
+		
 	}
 	
 	public static void main(String[] args) {

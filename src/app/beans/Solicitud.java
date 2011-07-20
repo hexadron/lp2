@@ -8,6 +8,7 @@ public class Solicitud extends ORZ {
 	private long id;
 	private Timestamp fecha;
 	private Usuario usuario;
+	private boolean enatencion;
 
 	public long getId() {
 		return id;
@@ -31,5 +32,13 @@ public class Solicitud extends ORZ {
 
 	public Timestamp getFecha() {
 		return fecha;
+	}
+
+	public void setEnatencion(boolean enatencion) {
+		this.enatencion = enatencion;
+	}
+
+	public boolean getEnatencion() {
+		return enatencion;
 	}
 }

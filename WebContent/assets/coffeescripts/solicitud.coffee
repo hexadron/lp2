@@ -92,7 +92,6 @@ $ ->
 		t = $ '#solicitudes tbody'
 		sol = []
 		sol.push(detalle(row.id)) for row in t.children()
-		console.log sol
 		$.post 'solicitud/guardar',
 			solicitud: JSON.stringify(sol),
 			(r) ->

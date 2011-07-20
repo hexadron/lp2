@@ -5,23 +5,23 @@ use app;
 create table perfil (
   id int not null auto_increment primary key,
   descripcion varchar(100) not null
-);
+) DEFAULT CHARSET=utf8;
 
 create table modulo (
   id int not null auto_increment primary key,
   descripcion varchar(100) not null,
   uri varchar(120) not null
-);
+) DEFAULT CHARSET=utf8;
 
 create table moduloPorPerfil (
   perfil_id int not null references perfil,
   modulo_id int not null references modulo
-);
+) DEFAULT CHARSET=utf8;
 
 create table area (
   id int not null auto_increment primary key,
   descripcion varchar(30) not null
-);
+) DEFAULT CHARSET=utf8;
 
 create table usuario (
   id int not null auto_increment primary key,
@@ -29,7 +29,7 @@ create table usuario (
   password varchar(64) not null,
   perfil_id int not null references perfil,
   area_id int null references area
-);
+) DEFAULT CHARSET=utf8;
 
 create table equipo (
 	codigoPatrimonial int not null auto_increment primary key,
@@ -38,19 +38,28 @@ create table equipo (
 	area_id int not null references area,
 	enproceso boolean not null default false,
 	dadodebaja boolean not null default false
-);
+) DEFAULT CHARSET=utf8;
+
+create table tecnico (
+	id int not null auto_increment primary key,
+	nombres varchar(50) not null,
+	apellidos varchar(50) not null,
+	fechaIngreso date not null,
+	especialidad varchar(50) not null
+) DEFAULT CHARSET=utf8;
 
 create table solicitud (
 	id int not null auto_increment primary key,
 	fecha timestamp,
-	usuario_id int not null references usuario
-);
+	usuario_id int not null references usuario,
+	enatencion boolean not null default false
+) DEFAULT CHARSET=utf8;
 
 create table detalleSolicitud (
 	solicitud_id int not null references solicitud,
 	equipo_id int not null references equipo,
 	problema text not null
-);
+) DEFAULT CHARSET=utf8;
 
 #dummy data
 #area
@@ -100,3 +109,8 @@ insert into equipo (denominacion, fabricante, area_id) values ('Cocina', 'Imaco'
 insert into equipo (denominacion, fabricante, area_id) values ('Refrigerador', 'Mabe', 3);
 insert into equipo (denominacion, fabricante, area_id) values ('Rayos X', 'SuperFabricante', 3);
 insert into equipo (denominacion, fabricante, area_id) values ('Rayos Y', 'SuperFabricante', 3);
+	
+#tecnicos
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Linus', 'Torvalds', now(), 'informática');
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Alan', 'García Perez', now(), 'gasfitería');
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Diego Armando', 'Maradona', now(), 'electricista');

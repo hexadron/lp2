@@ -3,6 +3,7 @@ package app.util;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
+import static app.util.Utilities.Capitalize;
 
 public abstract class ORZ {
     
@@ -56,6 +57,15 @@ public abstract class ORZ {
         return null;
     }
     
+	public static <T> List<T> all(Class<? extends ORZ> c) {
+		try {
+			return c.newInstance().where("1 = 1");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+    
     public static <T> List<T> where(Class<? extends ORZ> c, String query, Object... values) {
         try {
             return c.newInstance().where(query, values);
@@ -99,10 +109,8 @@ public abstract class ORZ {
                     		if (type.getSuperclass() != null &&
                         		type.getSuperclass().equals(this.getClass().getSuperclass()))
                         			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
-                    		else {
-                    			System.out.println(val);
+                    		else
                         		m.invoke(o, val);
-                    		}
                     }
                 }
                 all.add(o);
@@ -161,11 +169,12 @@ public abstract class ORZ {
             					substring(0, fields[i].length() - 3));
             		else
             			f = getClass().getDeclaredField(fields[i]);
-            		if (f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
+            		if (f.getType().getSuperclass() != null &&
+            				f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
             			Method idGetter = null;
             			Object obj = getGetter(f.getName()).invoke(this);
-            			if (obj.getClass().getMethod("get" + capitalize(((ORZ) obj).getColumnaBase())) != null)
-            				idGetter = obj.getClass().getMethod("get" + capitalize(((ORZ) obj).getColumnaBase()));
+            			if (obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase())) != null)
+            				idGetter = obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase()));
             			ps.setObject(i + 1, idGetter.invoke(obj));
             		} else
             			ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
@@ -184,14 +193,6 @@ public abstract class ORZ {
         }
         return null;
     }
-    
-    private String capitalize(String columnaBase) {
-    		StringBuilder builder = new StringBuilder();
-    		builder.append(columnaBase.substring(0, 1).toUpperCase());
-    		builder.append(columnaBase.subSequence(1, columnaBase.length()));
-		return builder.toString();
-	}
-
     
     @SuppressWarnings("unchecked")
     public <T> T update() {
