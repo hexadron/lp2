@@ -15,6 +15,7 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	public void asignar() {
 		add("solicitudes", service.getSolicitudesSinAsignar());
 		add("tecnicos", service.getTecnicos());
+		render();
 	}
 	
 	public void detallesolicitud() {

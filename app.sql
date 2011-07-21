@@ -64,10 +64,10 @@ create table detalleSolicitud (
 
 #dummy data
 #area
-insert into area (descripcion) values ('mantenimiento');
-insert into area (descripcion) values ('recursos humanos');
-insert into area (descripcion) values ('emergencias');
-insert into area (descripcion) values ('clinica');
+insert into area (descripcion) values ('Mantenimiento');
+insert into area (descripcion) values ('Recursos Humanos');
+insert into area (descripcion) values ('Emergencias');
+insert into area (descripcion) values ('Clinica');
 #perfil
 insert into perfil (descripcion) values ('administrador');
 insert into perfil (descripcion) values ('jefe del area');
@@ -78,10 +78,10 @@ insert into modulo (descripcion, uri, shorthand) values ('Diagnóstico de Equipo
 insert into modulo (descripcion, uri, shorthand) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
 insert into modulo (descripcion, uri, shorthand) values ('Mantener Usuarios', 'security/usuarios', 'Usuarios');
 insert into modulo (descripcion, uri, shorthand) values ('Mantener Perfiles', 'security/perfiles', 'Perfiles');
-insert into modulo (descripcion, uri, shorthand) values ('Solicitud de Mantenimiento', 'solicitud', 'Solicitar Mantenimiento');
-insert into modulo (descripcion, uri, shorthand) values ('Asignación de Técnicos', 'reparacion/asignar', 'Asignar');
-insert into modulo (descripcion, uri, shorthand) values ('Historial de Desempeño', 'reparacion/historial', 'Historial');
-insert into modulo (descripcion, uri, shorthand) values ('Mantenimiento de Equipos', 'equipos', 'Equipos');
+insert into modulo (descripcion, uri, shorthand) values ('Solicitar Mantenimiento Correctivo', 'solicitud', 'Solicitar Mantenimiento');
+insert into modulo (descripcion, uri, shorthand) values ('Asignar Técnicos a Solicitud', 'reparacion/asignar', 'Asignar');
+insert into modulo (descripcion, uri, shorthand) values ('Consultar Historial de Desempeño', 'reparacion/historial', 'Historial');
+insert into modulo (descripcion, uri, shorthand) values ('Mantener Equipos', 'equipos', 'Equipos');
 insert into modulo (descripcion, uri, shorthand) values ('Reparación externa', 'reparacionexterna', 'Externa');
 insert into modulo (descripcion, uri, shorthand) values ('Terceros', 'terceros', 'Terceros');
 

@@ -34,7 +34,7 @@
             <h2>Datos del Equipo</h2>
             </li>
             <li>
-            <label for='nombre'>C&oacute;digo Patrimonial</label>
+            <label for='equipo'>C&oacute;digo Patrimonial</label>
             <input id='equipo' name="equipo" type='text' />
             </li>
             <li>
