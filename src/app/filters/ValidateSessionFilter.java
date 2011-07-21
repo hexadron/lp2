@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ValidateSessionFilter implements Filter {
@@ -18,19 +19,13 @@ public class ValidateSessionFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		
+		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-		if (session != null) {
-			if (session.getAttribute("usuDTO") != null) {
+		if (session != null && session.getAttribute("user") != null) {
 				chain.doFilter(request, response);
-			} else {
-				req.getRequestDispatcher("/logueo.jsp").forward(request, response);
-			}
 		} else {
-			// que mal, estan tratando de entrar como sea
-			req.getRequestDispatcher("/logueo.jsp").forward(request, response);
+			res.sendRedirect("/proyecto/security/login");
 		}
-		System.out.println("FILTRO");
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
