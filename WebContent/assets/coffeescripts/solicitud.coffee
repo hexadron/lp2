@@ -37,12 +37,14 @@ isInTable = (e) ->
 detalle = (rowid) ->
 	{equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
 
-$ -> 
+$ ->
 	($ '#buscar').click (e) ->
 		e.preventDefault()
 		equipo = $.trim ($ '#equipo').val()
 		if not equipo
 			errorEnDetalle 'Debes colocar un código'
+    else if isNaN equipo
+      errorEnDetalle 'Debes colocar un valor numérico'
 		else if isInTable(equipo)
 			errorEnDetalle 'El equipo ya ha sido agregado a la solicitud'
 		else
