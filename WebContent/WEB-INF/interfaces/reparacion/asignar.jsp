@@ -12,7 +12,7 @@
     		.message {
     			font-size: 1em;
     			color: hsl(0, 60%, 40%); }
-    		.selected, .eqselected, .tselected { 
+    		.selected, .eqselected, .tselected, .aselected { 
     			background-color: #FF8; }
     </style>
   </head>
@@ -72,21 +72,6 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr>
-                  <td>0002034</td>
-                  <td>Ventilador</td>
-                  <td>Samsung</td>
-                </tr>
-                <tr>
-                  <td>0001045</td>
-                  <td>Estetoscopio</td>
-                  <td>EKG</td>
-                </tr>
-                <tr>
-                  <td>0204014</td>
-                  <td>Monitor 24"</td>
-                  <td>Toshiba</td>
-                </tr> -->
               </tbody>
             </table>
             </li>
@@ -107,8 +92,8 @@
               <tbody>
               <c:forEach var='t' items="${ tecnicos }">
 				<tr>
-					<td>${ t.id }</td>
-					<td>${ t.nombres }&nbsp;${ t.apellidos }</td>
+					<td class='tid'>${ t.id }</td>
+					<td class='tnombre'>${ t.nombres }&nbsp;${ t.apellidos }</td>
 					<td>${ t.fechaIngreso }</td>
 					<td>${ t.especialidad }</td>
 				</tr>
@@ -125,7 +110,7 @@
             <h3>Equipos Asignados</h3>
             </li>
             <li>
-           	<table>
+           	<table id="asignados">
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
@@ -136,31 +121,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>0003561</td>
-                  <td>0000001</td>
-                  <td>Máquina de Rayos X</td>
-                  <td>Juan Flores</td>
-                </tr>
-                <tr>
-                  <td>0003561</td>
-                  <td>0000002</td>
-                  <td>Máquina de Rayos Z</td>
-                  <td>Juan Flores</td>
-                </tr>
-                <tr>
-                  <td>000356</td>
-                  <td>0000004</td>
-                  <td>Máquina de Rayos Y</td>
-                  <td>Juan Flores</td>
-                </tr>
               </tbody>
             </table>
             </li>
             <li>
             <div class='actions'>
-              <input type='submit' value='Confirmar' />
-              <input class='default' type='submit' value='Quitar' />
+              <input type='submit' id='confirmar' value='Confirmar' disabled/>
+              <input class='default' id='quitar' type='submit' value='Quitar' disabled/>
             </div>
             </li>
           </ul>

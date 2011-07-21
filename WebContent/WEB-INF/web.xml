@@ -81,10 +81,14 @@
   </filter>
   <filter-mapping>
     <filter-name>ValidateSessionFilter</filter-name>
-    <url-pattern>/equipos/*</url-pattern>
-    <url-pattern>/main/*</url-pattern>
-    <url-pattern>/reparacion/*</url-pattern>
-    <url-pattern>/solicitud/*</url-pattern>
+    <url-pattern>/equipos/index</url-pattern>
+    <url-pattern>/reparacion/asignar</url-pattern>
+    <url-pattern>/reparacion/historial</url-pattern>
+    <url-pattern>/reparacion/diagnostico</url-pattern>
+    <url-pattern>/reparacion/reparacion</url-pattern>
+    <url-pattern>/solicitud</url-pattern>
+    <url-pattern>/security/usuarios</url-pattern>
+    <url-pattern>/security/perfiles</url-pattern>
   </filter-mapping>
   <servlet>
     <servlet-name>nanana</servlet-name>

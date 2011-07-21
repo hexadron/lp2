@@ -41,16 +41,15 @@ $ ->
 	($ '#buscar').click (e) ->
 		e.preventDefault()
 		equipo = $.trim ($ '#equipo').val()
-		if not equipo
+		if not equipo or isNaN(equipo)
 			errorEnDetalle 'Debes colocar un código'
-    else if isNaN equipo
-      errorEnDetalle 'Debes colocar un valor numérico'
 		else if isInTable(equipo)
 			errorEnDetalle 'El equipo ya ha sido agregado a la solicitud'
 		else
 			$.post 'solicitud/buscarequipo',
 				equipo: equipo,
 				(r) ->
+					console.log r
 					if ($.trim r) is 'notfound'
 						errorEnDetalle 'Equipo no encontrado'
 					else
