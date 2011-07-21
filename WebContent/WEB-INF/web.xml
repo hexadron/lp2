@@ -82,6 +82,9 @@
   <filter-mapping>
     <filter-name>ValidateSessionFilter</filter-name>
     <url-pattern>/equipos/index</url-pattern>
+    <url-pattern>/equipos/agregar</url-pattern>
+    <url-pattern>/equipos/actualizar</url-pattern>
+    <url-pattern>/equipos/eliminar</url-pattern>
     <url-pattern>/reparacion/asignar</url-pattern>
     <url-pattern>/reparacion/historial</url-pattern>
     <url-pattern>/reparacion/diagnostico</url-pattern>
