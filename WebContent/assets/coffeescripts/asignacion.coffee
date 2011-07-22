@@ -20,9 +20,11 @@ $ ->
 		($ '.selected').removeClass 'selected'
 		$(@).parent().addClass 'selected'
 		sol = $(@).parent().find('.solid').text()
+		alert "antes"
 		$.post 'detallesolicitud',
 			solicitud: sol,
 			(r) ->
+				alert "llega"
 				det = JSON.parse r
 				($ '#equipos tbody').html ''		
 				((d)->

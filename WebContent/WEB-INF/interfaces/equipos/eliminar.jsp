@@ -36,7 +36,7 @@
             </li>
             <li>
             <div class='actions'>
-              <input class='default buscar_eliminar' type='submit' value='Buscar' />
+              <input class='default buscar_eliminar' type='submit' value='Dar de Baja' />
             </div>
             </li>
             <li>

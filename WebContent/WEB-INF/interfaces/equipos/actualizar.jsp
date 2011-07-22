@@ -59,7 +59,7 @@
             </li>
             <li>
             <div class='actions'>
-              <input id="buscar" class='default' type='submit' value='Guardar' />
+              <input id="buscar" class='default' type='submit' value='Guardar' disabled/>
               <input id="buscar" type='submit' value='Limpiar' />
             </div>
             </li>

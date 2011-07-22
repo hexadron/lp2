@@ -29,11 +29,10 @@ public class ValidateSessionFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("user") != null) {
 			boolean pass = false;
-			List<Modulo> mods = new SecurityService().
-				getModules((Perfil) session.getAttribute("perfil"));
+			List<Modulo> mods = new SecurityService().getModules((Perfil) session.getAttribute("perfil"));
 			for (Modulo m : mods) {
-				if (req.getRequestURI().substring(10, req.getRequestURI().length()).
-						equals(m.getUri())) {
+				if (req.getRequestURI().substring(10, req.getRequestURI().length())
+						.startsWith(m.getUri())) {
 					pass = true;
 					break;
 				}
