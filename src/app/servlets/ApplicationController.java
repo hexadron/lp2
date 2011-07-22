@@ -22,6 +22,7 @@ public class ApplicationController extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			System.out.println("renderiza: " + request.getPathInfo());
 			String path = request.getPathInfo();
 			req = request;
 			res = response;
@@ -41,6 +42,7 @@ public class ApplicationController extends HttpServlet {
 				for (Method m : methods)
 					if (m.getName().equals(path)) {
 						rendered = false;
+						System.out.println("va a invocar a su accion");
 						m.invoke(this);
 						if (!rendered && !ajax)
 							render(m.getName());
@@ -111,6 +113,7 @@ public class ApplicationController extends HttpServlet {
 			url += template + ".jsp";
 		skipRender();
 		try {
+			System.out.println("va a renderizar " + template + " con el url: " + url);
 			req.getRequestDispatcher(url).forward(req, res);
 		} catch (ServletException e) {
 			e.printStackTrace();

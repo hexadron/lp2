@@ -18,6 +18,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 	}
 
 	public List<DetalleSolicitud> getDetalles(Long sol) {
+		System.out.println("antes del metodo del orm");
 		return DetalleSolicitud.where(DetalleSolicitud.class, "solicitud_id = ?", sol);
 	}
 

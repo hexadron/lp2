@@ -1,12 +1,15 @@
 package app.util;
 
+import java.io.Serializable;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 import static app.util.Utilities.*;
 
-public abstract class ORZ {
+public abstract class ORZ implements Serializable {
     
+	private static final long serialVersionUID = 1L;
+
 	public static <T> T find(Class<? extends ORZ> c, long id) {
         try {
             return c.newInstance().find(id);
@@ -22,6 +25,7 @@ public abstract class ORZ {
     public <T> T find(long id) {
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE " + getColumnaBase() + " = ?";
+        System.out.println(sql);
         try {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
@@ -45,6 +49,7 @@ public abstract class ORZ {
                     			m.invoke(o, find((Class<? extends ORZ>) type, (Integer)val));
                     		else
                     			m.invoke(o, val);
+                    		
                     }
                 }
                 return ObjectToUTF(o);
@@ -95,22 +100,23 @@ public abstract class ORZ {
             
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
-            
             while (rs.next()) {
                 String name, colname;
                 T o = (T) getClass().newInstance();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                 		colname = rsmd.getColumnName(i); 
-                    name = colname.endsWith("_id") ? colname.replace("_id", "") : colname;
+                		name = colname.endsWith("_id") ? colname.replace("_id", "") : colname;
                     Object val = rs.getObject(colname);
                     if (val != null) {
                     		Method m = getSetter(name);
                     		Class<?> type = m.getParameterTypes()[0];
                     		if (type.getSuperclass() != null &&
-                        		type.getSuperclass().equals(this.getClass().getSuperclass()))
+                        		type.getSuperclass().equals(this.getClass().getSuperclass())) {
                         			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
-                    		else
+                    		}
+                    		else {
                         		m.invoke(o, val);
+                        	}
                     }
                 }
                 all.add(ObjectToUTF(o));

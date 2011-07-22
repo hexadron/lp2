@@ -1,7 +1,10 @@
 package app.servlets;
 
+import java.util.List;
+
 import javax.servlet.Servlet;
 
+import app.beans.DetalleSolicitud;
 import app.services.ReparacionService;
 
 public class ReparacionServlet extends ApplicationController implements Servlet {
@@ -19,7 +22,11 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void detallesolicitud() {
-		renderJSON(service.getDetalles(Long.valueOf(param("solicitud"))));
+		System.out.println("antes de pedir los detalles");
+		List<DetalleSolicitud> dets = 
+			service.getDetalles(Long.valueOf(param("solicitud")));
+		System.out.println("llega aqui");
+		renderJSON(dets);
 	}
 	
 	public void historial() {
