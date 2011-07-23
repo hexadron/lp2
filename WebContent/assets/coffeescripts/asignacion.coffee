@@ -24,12 +24,11 @@ $ ->
 			(equipos) ->
 				($ '#equipos tbody').html ''
 				equipos = JSON.parse equipos
-				for equipo in equipos # when not isInTable eq.codigoPatrimonial
-					do (equipo) ->
-						[eq, problema] = JSON.parse equipo
-						($ '#equipos tbody').append("<tr><td class='cp'>#{eq.codigoPatrimonial}</td>" +
-							"<td class='denom'>#{eq.denominacion}</td><td class='fab'>#{eq.fabricante}" +
-							"</td><td class='problema' style='display: none;'>#{problema}</td></tr>")
+				for equipo in equipos
+					[eq, problema] = JSON.parse equipo
+					($ '#equipos tbody').append("<tr><td class='cp'>#{eq.codigoPatrimonial}</td>" +
+						"<td class='denom'>#{eq.denominacion}</td><td class='fab'>#{eq.fabricante}" +
+						"</td><td class='problema' style='display: none;'>#{problema}</td></tr>")
 				evaluarAsignar()
 		
 
