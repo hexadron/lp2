@@ -23,8 +23,7 @@ $ ->
 			solicitud: sol,
 			(equipos) ->
 				($ '#equipos tbody').html ''
-				equipos = JSON.parse equipos
-				for equipo in equipos
+				for equipo in JSON.parse equipos
 					[eq, problema] = JSON.parse equipo
 					($ '#equipos tbody').append("<tr><td class='cp'>#{eq.codigoPatrimonial}</td>" +
 						"<td class='denom'>#{eq.denominacion}</td><td class='fab'>#{eq.fabricante}" +
