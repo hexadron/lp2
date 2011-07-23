@@ -45,8 +45,8 @@ $ ->
 			(r) ->
 				if r
 					($ '.eqselected').removeClass 'eqselected'
-				row.addClass 'eqselected'
-				evaluarAsignar()
+					row.addClass 'eqselected'
+					evaluarAsignar()
 
 	($ '#tecnicos td').live 'click', ->
 		($ '.tselected').removeClass 'tselected'
