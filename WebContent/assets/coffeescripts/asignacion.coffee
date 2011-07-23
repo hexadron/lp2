@@ -19,23 +19,19 @@ $ ->
 		($ '.selected').removeClass 'selected'
 		$(@).parent().addClass 'selected'
 		sol = $(@).parent().find('.solid').text()
-		$.post 'detallesolicitud',
+		$.post 'equipospordetalle',
 			solicitud: sol,
-			(r) ->
-				det = JSON.parse r
+			(equipos) ->
 				($ '#equipos tbody').html ''
-				((d)->
-					if not isInTable(d.equipo)
-						$.post '/proyecto/api/equipo',
-							id: d.equipo,
-							(eq) ->
-								eq = JSON.parse eq
-								console.log eq
-								($ '#equipos tbody').append("<tr><td class='cp'>#{d.equipo}</td>" +
-									"<td class='denom'>#{eq.denominacion}</td><td class='fab'>#{eq.fabricante}" +
-									"</td><td class='problema' style='display: none;'>#{d.problema}</td></tr>")
-				)(d) for d in det
+				equipos = JSON.parse equipos
+				for equipo in equipos # when not isInTable eq.codigoPatrimonial
+					do (equipo) ->
+						[eq, problema] = JSON.parse equipo
+						($ '#equipos tbody').append("<tr><td class='cp'>#{eq.codigoPatrimonial}</td>" +
+							"<td class='denom'>#{eq.denominacion}</td><td class='fab'>#{eq.fabricante}" +
+							"</td><td class='problema' style='display: none;'>#{problema}</td></tr>")
 				evaluarAsignar()
+		
 
 	($ '#equipos td').live 'click', ->
 		row = $(@).parent()

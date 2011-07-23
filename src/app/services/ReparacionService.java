@@ -25,5 +25,9 @@ public class ReparacionService {
 	public List<DetalleSolicitud> getDetalles(Long sol) {
 		return dao.getDetalles(sol);
 	}
+	
+	public List<Object> getEquiposPorDetalle(Long sol) {
+		return dao.getEquiposPorDetalles(sol);
+	}
 
 }

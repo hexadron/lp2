@@ -10,4 +10,5 @@ public interface ReparacionDao {
 	public List<Solicitud> getSolicitudesSinAsignar();
 	public List<Tecnico> getTecnicos();
 	public List<DetalleSolicitud> getDetalles(Long sol);
+	public List<Object> getEquiposPorDetalles(Long sol);
 }

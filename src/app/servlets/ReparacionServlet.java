@@ -1,10 +1,12 @@
 package app.servlets;
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.Servlet;
 
-import app.beans.DetalleSolicitud;
+import com.google.gson.*;
+
+import app.beans.*;
 import app.services.ReparacionService;
 
 public class ReparacionServlet extends ApplicationController implements Servlet {
@@ -25,6 +27,10 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 		List<DetalleSolicitud> dets = 
 			service.getDetalles(Long.valueOf(param("solicitud")));
 		renderJSON(dets);
+	}
+	
+	public void equipospordetalle() {
+		renderJSON(service.getEquiposPorDetalle(Long.valueOf(param("solicitud"))));
 	}
 	
 	public void historial() {
