@@ -22,10 +22,8 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void detallesolicitud() {
-		System.out.println("antes de pedir los detalles");
 		List<DetalleSolicitud> dets = 
 			service.getDetalles(Long.valueOf(param("solicitud")));
-		System.out.println("llega aqui");
 		renderJSON(dets);
 	}
 	

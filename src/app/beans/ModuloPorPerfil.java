@@ -5,8 +5,8 @@ import app.util.ORZ;
 public class ModuloPorPerfil extends ORZ {
 	
 	private long id;
-	private Modulo modulo;
-	private Perfil perfil;
+	private long modulo;
+	private long perfil;
 	
 	public long getId() {
 		return id;
@@ -16,19 +16,19 @@ public class ModuloPorPerfil extends ORZ {
 		this.id = id;
 	}
 
-	public Modulo getModulo() {
+	public long getModulo() {
 		return modulo;
 	}
 
-	public void setModulo(Modulo modulo) {
+	public void setModulo(long modulo) {
 		this.modulo = modulo;
 	}
 
-	public Perfil getPerfil() {
+	public long getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(Perfil perfil) {
+	public void setPerfil(long perfil) {
 		this.perfil = perfil;
 	}
 

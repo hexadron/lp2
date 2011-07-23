@@ -9,7 +9,6 @@ public class SolicitudServlet extends ApplicationController {
 	private SolicitudService service = new SolicitudService();
 	
 	public void index() {
-		System.out.println("Aqui debe ocurrir algo");
 		render("index");
 	}
 	
@@ -23,7 +22,6 @@ public class SolicitudServlet extends ApplicationController {
 	
 	public void guardar() {
 		Solicitud s = service.guardar(param("solicitud"), (Usuario) fromSession("user"));
-		System.out.println("GUARDO EQUIPO");
 		renderText("" + s.getId());
 	}
 	

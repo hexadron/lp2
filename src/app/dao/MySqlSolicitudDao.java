@@ -23,13 +23,13 @@ public class MySqlSolicitudDao implements SolicitudDao {
 	@Override
 	public Solicitud guardar(String jsonparam, Usuario usuario) {
 		Solicitud sol = new Solicitud();
-		sol.setUsuario(usuario);
+		sol.setUsuario(usuario.getId());
 		Timestamp tstamp = new Timestamp
 			(Calendar.getInstance().getTime().getTime());
 		sol.setFecha(tstamp);
 		sol.save();
 		for (DetalleSolicitud d : parse(jsonparam, sol)) {
-			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getCodigoPatrimonial());
+			Equipo e = Equipo.find(Equipo.class, d.getEquipo());
 			e.setEnproceso(true);
 			e.save();
 			d.save();
@@ -59,9 +59,9 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			DetalleSolicitud det = new DetalleSolicitud();
 			Equipo e = new Equipo();
 			e.setCodigoPatrimonial(Long.valueOf(equipo));
-			det.setEquipo(e);
+			det.setEquipo(e.getCodigoPatrimonial());
 			det.setProblema(problema);
-			det.setSolicitud(sol);
+			det.setSolicitud(sol.getId());
 			dets.add(det);
 		}
 		return dets;

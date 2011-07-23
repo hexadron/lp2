@@ -15,8 +15,9 @@ create table modulo (
 ) DEFAULT CHARSET=utf8;
 
 create table moduloPorPerfil (
-  perfil_id int not null references perfil,
-  modulo_id int not null references modulo
+  id int not null auto_increment primary key,
+  perfil int not null references perfil,
+  modulo int not null references modulo
 ) DEFAULT CHARSET=utf8;
 
 create table area (
@@ -28,15 +29,15 @@ create table usuario (
   id int not null auto_increment primary key,
   usuario varchar(32) not null,
   password varchar(64) not null,
-  perfil_id int not null references perfil,
-  area_id int null references area
+  perfil int not null references perfil,
+  area int null references area
 ) DEFAULT CHARSET=utf8;
 
 create table equipo (
-	codigoPatrimonial int not null auto_increment primary key,
+ 	codigoPatrimonial int not null auto_increment primary key,
 	denominacion text not null,
 	fabricante text not null,
-	area_id int not null references area,
+	area int not null references area,
 	enproceso boolean not null default false,
 	dadodebaja boolean not null default false
 ) DEFAULT CHARSET=utf8;
@@ -52,13 +53,13 @@ create table tecnico (
 create table solicitud (
 	id int not null auto_increment primary key,
 	fecha timestamp,
-	usuario_id int not null references usuario,
+	usuario int not null references usuario,
 	enatencion boolean not null default false
 ) DEFAULT CHARSET=utf8;
 
 create table detalleSolicitud (
-	solicitud_id int not null references solicitud,
-	equipo_id int not null references equipo,
+	solicitud int not null references solicitud,
+	equipo int not null references equipo,
 	problema text not null
 ) DEFAULT CHARSET=utf8;
 
@@ -87,30 +88,30 @@ insert into modulo (descripcion, uri, shorthand) values ('Terceros', 'terceros',
 
 #moduloporperfil
 #administrador del sistema
-insert into moduloPorPerfil values (1, 3);
-insert into moduloPorPerfil values (1, 4);
+insert into moduloPorPerfil (perfil, modulo) values (1, 3);
+insert into moduloPorPerfil (perfil, modulo) values (1, 4);
 #usuario
-insert into moduloPorPerfil values (4, 5); 
+insert into moduloPorPerfil (perfil, modulo) values (4, 5); 
 #jefe de área
-insert into moduloPorPerfil values (2, 6);
-insert into moduloPorPerfil values (2, 7);
-insert into moduloPorPerfil values (2, 8);
+insert into moduloPorPerfil (perfil, modulo) values (2, 6);
+insert into moduloPorPerfil (perfil, modulo) values (2, 7);
+insert into moduloPorPerfil (perfil, modulo) values (2, 8);
 #perfil de técnico interno
-insert into moduloPorPerfil values (3, 1);
-insert into moduloPorPerfil values (3, 2);
+insert into moduloPorPerfil (perfil, modulo) values (3, 1);
+insert into moduloPorPerfil (perfil, modulo) values (3, 2);
 
 #usuario
-insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -- administrador
-insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'boss', 2, 1); -- jefe
-insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
-insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
+insert into usuario (usuario, password, perfil) values ('root', 'sudo', 1); -- administrador
+insert into usuario (usuario, password, perfil, area) values ('jefe', 'boss', 2, 1); -- jefe
+insert into usuario (usuario, password, perfil, area) values ('bob', 'sudo', 3, 1); -- técnico interno
+insert into usuario (usuario, password, perfil, area) values ('scott', 'tiger', 4, 3); -- usuario
 
 #equipos
-insert into equipo (denominacion, fabricante, area_id) values ('Ventilador', 'General Electrics', 3);
-insert into equipo (denominacion, fabricante, area_id) values ('Cocina', 'Imaco', 2);               
-insert into equipo (denominacion, fabricante, area_id) values ('Refrigerador', 'Mabe', 3);
-insert into equipo (denominacion, fabricante, area_id) values ('Rayos X', 'SuperFabricante', 3);
-insert into equipo (denominacion, fabricante, area_id) values ('Rayos Y', 'SuperFabricante', 3);
+insert into equipo (denominacion, fabricante, area) values ('Ventilador', 'General Electrics', 3);
+insert into equipo (denominacion, fabricante, area) values ('Cocina', 'Imaco', 2);               
+insert into equipo (denominacion, fabricante, area) values ('Refrigerador', 'Mabe', 3);
+insert into equipo (denominacion, fabricante, area) values ('Rayos X', 'SuperFabricante', 4);
+insert into equipo (denominacion, fabricante, area) values ('Rayos Y', 'SuperFabricante', 4);
 	
 #tecnicos
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Linus', 'Torvalds', now(), 'informática');

@@ -25,7 +25,6 @@ public abstract class ORZ implements Serializable {
     public <T> T find(long id) {
         Connection db = null;
         String sql = "SELECT * FROM " + getTable() + " WHERE " + getColumnaBase() + " = ?";
-        System.out.println(sql);
         try {
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
@@ -35,25 +34,17 @@ public abstract class ORZ implements Serializable {
             ResultSetMetaData rsmd = rs.getMetaData();
             
             if (rs.next()) {
-                String colname, name;
-                T o = (T) getClass().newInstance();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    colname = rsmd.getColumnName(i);
-                    name = colname.endsWith("_id") ? colname.replace("_id", "") : colname;
-                    Object val = rs.getObject(colname);
-                    if (val != null) {
-                    		Method m = getSetter(name);
-                    		Class<?> type = m.getParameterTypes()[0];
-                    		if (type.getSuperclass() != null &&
-                    				type.getSuperclass().equals(this.getClass().getSuperclass()))
-                    			m.invoke(o, find((Class<? extends ORZ>) type, (Integer)val));
-                    		else
-                    			m.invoke(o, val);
-                    		
-                    }
-                }
-                return ObjectToUTF(o);
-            }
+				String name;
+				T o = (T) getClass().newInstance();
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					name = rsmd.getColumnName(i);
+					Field f = getClass().getDeclaredField(name);
+					Object val = rs.getObject(name);
+					if (f != null && val != null)
+						getSetter(f.getName()).invoke(o, val);
+				}
+				return ObjectToUTF(o);
+			}
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -100,27 +91,18 @@ public abstract class ORZ implements Serializable {
             
             ResultSet rs = ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
+            
             while (rs.next()) {
-                String name, colname;
-                T o = (T) getClass().newInstance();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                		colname = rsmd.getColumnName(i); 
-                		name = colname.endsWith("_id") ? colname.replace("_id", "") : colname;
-                    Object val = rs.getObject(colname);
-                    if (val != null) {
-                    		Method m = getSetter(name);
-                    		Class<?> type = m.getParameterTypes()[0];
-                    		if (type.getSuperclass() != null &&
-                        		type.getSuperclass().equals(this.getClass().getSuperclass())) {
-                        			m.invoke(o, find((Class<? extends ORZ>) type, (Integer) val));
-                    		}
-                    		else {
-                        		m.invoke(o, val);
-                        	}
-                    }
-                }
-                all.add(ObjectToUTF(o));
-            }
+				String name;
+				T o = (T) getClass().newInstance();
+				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+					name = rsmd.getColumnName(i);
+					Field f = getClass().getDeclaredField(name);
+					Object val = rs.getObject(name);
+					getSetter(f.getName()).invoke(o, val);
+				}
+				all.add(ObjectToUTF(o));
+			}
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -131,22 +113,22 @@ public abstract class ORZ implements Serializable {
     
     @SuppressWarnings("unchecked")
     public <T> T save() {
-    		ObjectToISO(this);
-        if (getGetter(getColumnaBase()) != null) {
-            try {
-                Object id = getGetter(getColumnaBase()).invoke(this);
-                if (id.toString().equals("0"))
-                    create();
-                else
-                    update();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else
-        		create();
-        return (T) this;
+		ObjectToISO(this);
+		if (getGetter(getColumnaBase()) != null) {
+			try {
+				Object id = getGetter(getColumnaBase()).invoke(this);
+				if (id.toString().equals("0"))
+					create();
+				else
+					update();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else
+			create();
+		return (T) this;
     }
-    
+
     @SuppressWarnings("unchecked")
     public <T> T create() {
         Connection db = null;
@@ -166,33 +148,20 @@ public abstract class ORZ implements Serializable {
         sql.delete(sql.length() - 2, sql.length());
         sql.append(")");
         try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql.toString(), 
-                        Statement.RETURN_GENERATED_KEYS);
-            for (int i = 0; i <= fields.length - 1; i++) {
-            		Field f = null;
-            		if (fields[i].endsWith("_id"))
-            			f = getClass().getDeclaredField(fields[i].
-            					substring(0, fields[i].length() - 3));
-            		else
-            			f = getClass().getDeclaredField(fields[i]);
-            		if (f.getType().getSuperclass() != null &&
-            				f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
-            			Method idGetter = null;
-            			Object obj = getGetter(f.getName()).invoke(this);
-            			if (obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase())) != null)
-            				idGetter = obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase()));
-            			ps.setObject(i + 1, idGetter.invoke(obj));
-            		} else
-            			ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
-            }
-            
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            if (rs.next())
-                getSetter(getColumnaBase()).invoke(this, rs.getLong(1));
-            return (T) this;
+        	db = Database.getConnection();
+			PreparedStatement ps = db.prepareStatement(sql.toString(), 
+						Statement.RETURN_GENERATED_KEYS);
+			
+			for (int i = 0; i <= fields.length - 1; i++) {
+				Field f = getClass().getDeclaredField(fields[i]);
+				ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
+			}
+
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys();
+			if (rs.next())
+				getSetter(getColumnaBase()).invoke(this, rs.getLong(1));
+			return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -215,31 +184,16 @@ public abstract class ORZ implements Serializable {
         sql.delete(sql.length() - 2, sql.length());
         sql.append(" WHERE " + getColumnaBase() + " = ?");
         try {
-            db = Database.getConnection();
-            PreparedStatement ps = db.prepareStatement(sql.toString());
-            
-            int i = 1;
-            for (; i <= fields.length; i++) {
-		        	Field f = null;
-		    		if (fields[i - 1].endsWith("_id"))
-		    			f = getClass().getDeclaredField(fields[i - 1].
-		    					substring(0, fields[i - 1].length() - 3));
-		    		else
-		    			f = getClass().getDeclaredField(fields[i - 1]);
-                if (f.getType().getSuperclass() != null && 
-                		f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
-                		Method idGetter = null;
-                		Object obj = getGetter(f.getName()).invoke(this);
-                		if (obj.getClass().getMethod("getId") != null)
-                			idGetter = obj.getClass().getMethod("getId");
-                		ps.setObject(i, idGetter.invoke(obj));
-        			} else
-        				ps.setObject(i, getGetter(f.getName()).invoke(this));
-            	}
-            
-            ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
-            ps.executeUpdate();
-            return (T) this;
+        	db = Database.getConnection();
+			PreparedStatement ps = db.prepareStatement(sql.toString());
+			int i = 1;
+			for (; i <= fields.length; i++) {
+				Field f = getClass().getDeclaredField(fields[i - 1]);
+				ps.setObject(i, getGetter(f.getName()).invoke(this));
+			}
+			ps.setLong(i, (Long) getGetter(getColumnaBase()).invoke(this));
+			ps.executeUpdate();
+			return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
