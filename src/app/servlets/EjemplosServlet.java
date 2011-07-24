@@ -9,10 +9,7 @@ public class EjemplosServlet extends ApplicationController implements Servlet {
 	
 	public void imprimir() {
 		Usuario u = Usuario.find(Usuario.class, 1);
-		String cadena = param("usuario");
-		System.out.println(cadena.toLowerCase());
 		renderJSON(u);
-		//renderText("Hola Mundo");
 	}
 
 }

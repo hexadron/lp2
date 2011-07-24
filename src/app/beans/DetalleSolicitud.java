@@ -4,23 +4,23 @@ import app.util.ORZ;
 
 public class DetalleSolicitud extends ORZ {
 	
-	private Solicitud solicitud;
-	private Equipo equipo;
+	private long solicitud;
+	private long equipo;
 	private String problema;
 
-	public Solicitud getSolicitud() {
+	public long getSolicitud() {
 		return solicitud;
 	}
 
-	public void setSolicitud(Solicitud solicitud) {
+	public void setSolicitud(long solicitud) {
 		this.solicitud = solicitud;
 	}
 
-	public Equipo getEquipo() {
+	public long getEquipo() {
 		return equipo;
 	}
 
-	public void setEquipo(Equipo equipo) {
+	public void setEquipo(long equipo) {
 		this.equipo = equipo;
 	}
 

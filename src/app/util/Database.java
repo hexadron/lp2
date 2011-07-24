@@ -17,7 +17,7 @@ public class Database {
 
 	public static Connection getConnection() {
 		try {
-			return source.getConnection();
+			return getDataSource().getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

@@ -6,7 +6,7 @@ public class Equipo extends ORZ {
 	private long codigoPatrimonial;
 	private String denominacion;
 	private String fabricante;
-	private Area area;
+	private long area;
 	private boolean enproceso;
 	private boolean dadodebaja;
 
@@ -34,11 +34,11 @@ public class Equipo extends ORZ {
 		return codigoPatrimonial;
 	}
 
-	public void setArea(Area area) {
+	public void setArea(long area) {
 		this.area = area;
 	}
 
-	public Area getArea() {
+	public long getArea() {
 		return area;
 	}
 

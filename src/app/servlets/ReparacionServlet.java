@@ -1,7 +1,10 @@
 package app.servlets;
 
+import java.util.*;
+
 import javax.servlet.Servlet;
 
+import app.beans.*;
 import app.services.ReparacionService;
 import static app.util.Utilities.*;
 
@@ -23,10 +26,6 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 		String json = ToUTF(param("reparaciones"));
 		service.guardarReparaciones(json);
 		renderText("ok");
-	}
-	
-	public void detallesolicitud() {
-		renderJSON(service.getDetalles(Long.valueOf(param("solicitud"))));
 	}
 	
 	public void historial() {

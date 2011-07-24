@@ -7,8 +7,9 @@ import app.util.ORZ;
 public class Solicitud extends ORZ {
 	private long id;
 	private Timestamp fecha;
-	private Usuario usuario;
+	private long usuario;
 	private boolean enatencion;
+	private String descripcionArea;
 
 	public long getId() {
 		return id;
@@ -18,12 +19,13 @@ public class Solicitud extends ORZ {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	public long getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(long usuario) {
 		this.usuario = usuario;
+		setDescripcionArea(((Area)Area.find(Area.class, usuario)).getDescripcion());
 	}
 
 	public void setFecha(Timestamp fecha) {
@@ -40,5 +42,13 @@ public class Solicitud extends ORZ {
 
 	public boolean getEnatencion() {
 		return enatencion;
+	}
+
+	public void setDescripcionArea(String descripcionArea) {
+		this.descripcionArea = descripcionArea;
+	}
+
+	public String getDescripcionArea() {
+		return descripcionArea;
 	}
 }
