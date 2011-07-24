@@ -148,7 +148,7 @@ public abstract class ORZ implements Serializable {
         sql.delete(sql.length() - 2, sql.length());
         sql.append(")");
         try {
-        	db = Database.getConnection();
+        		db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString(), 
 						Statement.RETURN_GENERATED_KEYS);
 			
@@ -156,7 +156,7 @@ public abstract class ORZ implements Serializable {
 				Field f = getClass().getDeclaredField(fields[i]);
 				ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
 			}
-
+			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next())

@@ -28,11 +28,12 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			(Calendar.getInstance().getTime().getTime());
 		sol.setFecha(tstamp);
 		sol.save();
-		for (DetalleSolicitud d : parse(jsonparam, sol)) {
+		List<DetalleSolicitud> dets = parse(jsonparam, sol);
+		for (DetalleSolicitud d : dets) {
 			Equipo e = Equipo.find(Equipo.class, d.getEquipo());
 			e.setEnproceso(true);
-			e.save();
 			d.save();
+			e.save();
 		}
 		return sol;
 	}

@@ -59,7 +59,9 @@ $ ->
 		eq = ($ '.eqselected').find('.cp').text()
 		den = ($ '.eqselected').find('.denom').text()
 		tec = ($ '.tselected').find('.tnombre').text()
-		row = "<tr id='#{eq}'><td>#{sol}</td><td>#{eq}</td><td>#{den}</td><td>#{tec}</td></tr>"
+		tid = ($ '.tselected').find('.tid').text()
+		row = "<tr id='#{eq}'><td class='sol'>#{sol}</td><td class='eq'>#{eq}</td>" +
+			 "<td>#{den}</td><td class='tec'>#{tec}</td><td class='tid' style='display: none;'>#{tid}</tr>"
 		($ '#asignados tbody').append row
 		($ '.eqselected').remove()
 		evaluarAsignar()
@@ -76,4 +78,16 @@ $ ->
 
 	($ '#confirmar').click (e) ->
 		e.preventDefault()
-
+		arreglo = []
+		for arow in ($ '#asignados tbody').children()
+			if $(arow).find('.sol').text() != ""
+				sol = $(arow).find('.sol').text()
+				eq = $(arow).find('.eq').text()
+				tec = $(arow).find('.tid').text()
+				o = { solicitud: sol, equipo: eq, tecnico: tec }
+				arreglo.push o
+		
+		$.post 'realizarAsignacion',
+			reparaciones: JSON.stringify arreglo,
+			(r) ->
+				alert "Yeah!"

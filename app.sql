@@ -58,9 +58,18 @@ create table solicitud (
 ) DEFAULT CHARSET=utf8;
 
 create table detalleSolicitud (
+	#id int not null primary key,
 	solicitud int not null references solicitud,
 	equipo int not null references equipo,
 	problema text not null
+) DEFAULT CHARSET=utf8;
+
+create table reparacion (
+	solicitud int not null references solicitud,
+	equipo int not null references equipo,
+	#detallesolicitud int not null references detallesolicitud
+	tecnico int not null references tecnico,
+	unique(solicitud, equipo)
 ) DEFAULT CHARSET=utf8;
 
 #dummy data
@@ -117,3 +126,4 @@ insert into equipo (denominacion, fabricante, area) values ('Rayos Y', 'SuperFab
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Linus', 'Torvalds', now(), 'informática');
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Alan', 'García Perez', now(), 'gasfitería');
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Diego Armando', 'Maradona', now(), 'electricista');
+	
