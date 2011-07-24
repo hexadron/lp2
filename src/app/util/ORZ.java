@@ -240,8 +240,9 @@ public abstract class ORZ implements Serializable {
     }
     
     public String getTableFields() {
+	Connection db = null;
         try {
-            Connection cn = Database.getConnection();
+            db = Database.getConnection();
 
             StringBuilder fields = new StringBuilder();
             PreparedStatement ps = cn.prepareStatement("describe " + getTable());
@@ -256,6 +257,8 @@ public abstract class ORZ implements Serializable {
             return fields.toString();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Database.close(db);
         }
         return null;
     }
