@@ -224,8 +224,8 @@ public abstract class ORZ implements Serializable {
         Connection db = null;
         try {
 			T o = c.newInstance().find(id);
-            String sql = "DELETE FROM " + o.getTable() + " WHERE " + 
-            		o.getColumnaBase() + " = ?";
+            String sql = "DELETE FROM " + ((ORZ) o).getTable() + " WHERE " + 
+            		((ORZ) o).getColumnaBase() + " = ?";
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
             ps.setLong(1, id);
@@ -240,12 +240,12 @@ public abstract class ORZ implements Serializable {
     }
     
     public String getTableFields() {
-	Connection db = null;
+    	Connection db = null;
         try {
             db = Database.getConnection();
 
             StringBuilder fields = new StringBuilder();
-            PreparedStatement ps = cn.prepareStatement("describe " + getTable());
+            PreparedStatement ps = db.prepareStatement("describe " + getTable());
             ResultSet rs = ps.executeQuery();
             
             while (rs.next())
