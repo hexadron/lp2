@@ -6,7 +6,7 @@ public abstract class Collections {
 
 	public static <T> List<T> List(T... params) {
 		List<T> list = new ArrayList<T>();
-		for (T e : params)
+		for (T e : params) 
 			list.add(e);
 		return list;
 	}

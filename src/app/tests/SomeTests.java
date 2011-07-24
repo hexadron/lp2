@@ -38,8 +38,8 @@ public class SomeTests extends TestCase {
 	@Test
 	public void testFindId() {
 		Usuario u = Usuario.find(Usuario.class, 1);
-		Perfil p = (Perfil) ((u != null) ? Perfil.find(Perfil.class, u.getPerfil()) : null);
-		String n = p.getDescripcion();
+		String n = (u != null) ? u.getPerfil().getDescripcion() : null;
+		System.out.println(n);
 		assertNotNull(n);
 	}
 	
@@ -78,9 +78,9 @@ public class SomeTests extends TestCase {
 			DetalleSolicitud det = new DetalleSolicitud();
 			Equipo e = new Equipo();
 			e.setCodigoPatrimonial(Long.valueOf(equipo));
-			det.setEquipo(e.getCodigoPatrimonial());
+			det.setEquipo(e);
 			det.setProblema(problema);
-			det.setSolicitud(sol.getId());
+			det.setSolicitud(sol);
 			dets.add(det);
 		}
 	}
@@ -88,13 +88,12 @@ public class SomeTests extends TestCase {
 	@Test
 	public void testSol() {
 		Solicitud sol = new Solicitud();
-		sol.setUsuario(((Usuario) Usuario.find(Usuario.class, 1)).getId());
+		sol.setUsuario((Usuario) Usuario.find(Usuario.class, 1));
 		Timestamp tstamp = new Timestamp
 			(Calendar.getInstance().getTime().getTime());
 		sol.setFecha(tstamp);
 		sol.save();
-		Usuario u = Usuario.find(Usuario.class, sol.getUsuario());
-		System.out.println(u.getUsuario());
+		System.out.println(sol.getUsuario().getUsuario());
 		assertNotNull(sol);
 	}
 	
@@ -144,9 +143,9 @@ public class SomeTests extends TestCase {
 	@Test
 	public void testUtf8() {
 		Usuario u = Usuario.find(Usuario.class, 2);
-		Perfil p = Perfil.find(Perfil.class, u.getPerfil());
+		Perfil p = u.getPerfil();
 		p.setDescripcion(ToUTF(p.getDescripcion()));
-		List<Modulo> mods = new SecurityService().getModules(p);
+		List<Modulo> mods = new SecurityService().getModules(u.getPerfil());
 		for (Modulo m : mods) {
 			m.setDescripcion(ToUTF(m.getDescripcion()));
 		}

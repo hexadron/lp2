@@ -7,8 +7,8 @@ public class Usuario extends ORZ {
 	private long id;
 	private String usuario;
 	private String password;
-	private long perfil;
-	private long area;
+	private Perfil perfil;
+	private Area area;
 
 	public long getId() {
 		return id;
@@ -34,19 +34,19 @@ public class Usuario extends ORZ {
 		this.password = password;
 	}
 
-	public long getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(long perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
 
-	public long getArea() {
+	public Area getArea() {
 		return area;
 	}
 
-	public void setArea(long area) {
+	public void setArea(Area area) {
 		this.area = area;
 	}
 

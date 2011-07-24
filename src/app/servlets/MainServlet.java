@@ -1,6 +1,6 @@
 package app.servlets;
 
-import app.beans.*;
+import app.beans.Usuario;
 import app.services.SecurityService;
 
 public class MainServlet extends ApplicationController {
@@ -14,9 +14,8 @@ public class MainServlet extends ApplicationController {
 		if (u == null)
 			render("security/login");
 		else {
-			Perfil p = Perfil.find(Perfil.class, u.getPerfil());
-			toSession("perfil", p);
-			toSession("modulos", service.getModules(p));
+			toSession("perfil", u.getPerfil());
+			toSession("modulos", service.getModules(u.getPerfil()));
 		}
     }
 

@@ -6,11 +6,7 @@ import app.services.SolicitudService;
 public class SolicitudServlet extends ApplicationController {
 
 	private static final long serialVersionUID = 1L;
-	private SolicitudService service = new SolicitudService();
-	
-	public void index() {
-		render("index");
-	}
+	private SolicitudService service = new SolicitudService(); 
 	
 	public void buscarequipo() {
 		Equipo e = service.buscarEquipo(Long.valueOf(param("equipo")));

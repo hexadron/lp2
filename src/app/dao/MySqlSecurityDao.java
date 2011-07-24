@@ -21,10 +21,10 @@ public class MySqlSecurityDao implements SecurityDao {
 	@Override
 	public List<Modulo> getModules(Perfil p) {
 		List<ModuloPorPerfil> modsp = 
-			ModuloPorPerfil.where(ModuloPorPerfil.class, "perfil = ?", p.getId());
+			ModuloPorPerfil.where(ModuloPorPerfil.class, "perfil_id = ?", p.getId());
 		List<Modulo> mods = new ArrayList<Modulo>();
 		for (ModuloPorPerfil mpp : modsp)
-			mods.add((Modulo) Modulo.find(Modulo.class, mpp.getModulo()));
+			mods.add(mpp.getModulo());
 		return mods;
 	}
 

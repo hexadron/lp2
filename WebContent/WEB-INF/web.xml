@@ -124,14 +124,4 @@
     <servlet-name>EquiposServlet</servlet-name>
     <url-pattern>/equipos/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>EquipoAPI</display-name>
-    <servlet-name>EquipoAPI</servlet-name>
-    <servlet-class>app.api.EquipoAPI</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EquipoAPI</servlet-name>
-    <url-pattern>/api/equipo/*</url-pattern>
-  </servlet-mapping>
 </web-app>

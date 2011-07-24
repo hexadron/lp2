@@ -1,4 +1,3 @@
-<%@page import="app.beans.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -54,7 +53,7 @@
 				<tr>
 					<td class='solid'>${ s.id }</td>
 					<td>${ s.fecha }</td>
-					<td>${ s.descripcionArea }</td>
+					<td>${ s.usuario.area.descripcion }</td>
 				</tr>
 			  </c:forEach>
               </tbody>
