@@ -223,9 +223,9 @@ public abstract class ORZ implements Serializable {
     public static <T> T delete(Class<? extends ORZ> c, long id) {
         Connection db = null;
         try {
-            String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE " + 
-            		c.newInstance().getColumnaBase() + " = ?";
-            T o = c.newInstance().find(id);
+			T o = c.newInstance().find(id);
+            String sql = "DELETE FROM " + o.getTable() + " WHERE " + 
+            		o.getColumnaBase() + " = ?";
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
             ps.setLong(1, id);
