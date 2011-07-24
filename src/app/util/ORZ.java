@@ -148,7 +148,7 @@ public abstract class ORZ implements Serializable {
         sql.delete(sql.length() - 2, sql.length());
         sql.append(")");
         try {
-        	db = Database.getConnection();
+        		db = Database.getConnection();
 			PreparedStatement ps = db.prepareStatement(sql.toString(), 
 						Statement.RETURN_GENERATED_KEYS);
 			
@@ -156,7 +156,7 @@ public abstract class ORZ implements Serializable {
 				Field f = getClass().getDeclaredField(fields[i]);
 				ps.setObject(i + 1, getGetter(f.getName()).invoke(this));
 			}
-
+			
 			ps.executeUpdate();
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next())
@@ -223,9 +223,9 @@ public abstract class ORZ implements Serializable {
     public static <T> T delete(Class<? extends ORZ> c, long id) {
         Connection db = null;
         try {
-            String sql = "DELETE FROM " + c.newInstance().getTable() + " WHERE " + 
-            		c.newInstance().getColumnaBase() + " = ?";
-            T o = c.newInstance().find(id);
+			T o = c.newInstance().find(id);
+            String sql = "DELETE FROM " + o.getTable() + " WHERE " + 
+            		o.getColumnaBase() + " = ?";
             db = Database.getConnection();
             PreparedStatement ps = db.prepareStatement(sql);
             ps.setLong(1, id);
@@ -240,8 +240,9 @@ public abstract class ORZ implements Serializable {
     }
     
     public String getTableFields() {
+	Connection db = null;
         try {
-            Connection cn = Database.getConnection();
+            db = Database.getConnection();
 
             StringBuilder fields = new StringBuilder();
             PreparedStatement ps = cn.prepareStatement("describe " + getTable());
@@ -256,6 +257,8 @@ public abstract class ORZ implements Serializable {
             return fields.toString();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            Database.close(db);
         }
         return null;
     }

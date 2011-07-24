@@ -40,7 +40,6 @@ public class SomeTests extends TestCase {
 		Usuario u = Usuario.find(Usuario.class, 1);
 		Perfil p = (Perfil) ((u != null) ? Perfil.find(Perfil.class, u.getPerfil()) : null);
 		String n = p.getDescripcion();
-		System.out.println(n);
 		assertNotNull(n);
 	}
 	

@@ -2,7 +2,6 @@ package app.services;
 
 import java.util.List;
 
-import app.beans.DetalleSolicitud;
 import app.beans.Solicitud;
 import app.beans.Tecnico;
 import app.dao.DaoFactory;
@@ -21,13 +20,13 @@ public class ReparacionService {
 	public List<Tecnico> getTecnicos() {
 		return dao.getTecnicos();
 	}
-
-	public List<DetalleSolicitud> getDetalles(Long sol) {
-		return dao.getDetalles(sol);
-	}
 	
 	public List<Object> getEquiposPorDetalle(Long sol) {
 		return dao.getEquiposPorDetalles(sol);
+	}
+
+	public void guardarReparaciones(String jsonparam) {
+		dao.guardarReparaciones(jsonparam);
 	}
 
 }

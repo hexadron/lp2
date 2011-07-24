@@ -4,10 +4,9 @@ import java.util.*;
 
 import javax.servlet.Servlet;
 
-import com.google.gson.*;
-
 import app.beans.*;
 import app.services.ReparacionService;
+import static app.util.Utilities.*;
 
 public class ReparacionServlet extends ApplicationController implements Servlet {
 	private static final long serialVersionUID = 1L;
@@ -23,12 +22,12 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 		render();
 	}
 	
-	public void detallesolicitud() {
-		List<DetalleSolicitud> dets = 
-			service.getDetalles(Long.valueOf(param("solicitud")));
-		renderJSON(dets);
+	public void realizarAsignacion() {
+		String json = ToUTF(param("reparaciones"));
+		service.guardarReparaciones(json);
+		renderText("ok");
 	}
-	
+
 	public void equipospordetalle() {
 		renderJSON(service.getEquiposPorDetalle(Long.valueOf(param("solicitud"))));
 	}
