@@ -40,8 +40,8 @@ public class MySqlSolicitudDao implements SolicitudDao {
 	private ArrayList<DetalleSolicitud> parse(String jsonstring, Solicitud sol) {
 		String cad = jsonstring.substring(1, jsonstring.length() - 1);
 		ArrayList<String> partes = new ArrayList<String>();
-		int init=-1, end=-1;
-		for (int i=0; i<cad.length(); i++) {
+		int init = -1, end = -1;
+		for (int i = 0; i < cad.length(); i++) {
 			if (cad.charAt(i) == '{') {
 				init = i;
 			} else if (cad.charAt(i) == '}') {
