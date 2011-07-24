@@ -62,6 +62,13 @@ create table detalleSolicitud (
 	problema text not null
 ) DEFAULT CHARSET=utf8;
 
+create table reparacion (
+    solicitud_id int not null references solicitud,
+    equipo_id int not null references equipo,
+    tecnico_id int not null references tecnico,
+    unique(solicitud_id, equipo_id)
+) DEFAULT CHARSET=utf8;
+
 #dummy data
 #area
 insert into area (descripcion) values ('Mantenimiento');

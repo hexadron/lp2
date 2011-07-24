@@ -14,34 +14,35 @@ import app.interfaces.SolicitudDao;
 public class MySqlSolicitudDao implements SolicitudDao {
 
 	public Equipo buscarEquipo(long codigoPatrimonial) {
-		List<Equipo> e = Equipo.where(Equipo.class, 
-					"codigoPatrimonial = ? and dadodebaja = ?", 
-					codigoPatrimonial, "false");
-		return e.size() != 0 ? e.get(0) : null; 
+		List<Equipo> e = Equipo.where(Equipo.class,
+				"codigoPatrimonial = ? and dadodebaja = ?", codigoPatrimonial,
+				"false");
+		return e.size() != 0 ? e.get(0) : null;
 	}
 
 	@Override
 	public Solicitud guardar(String jsonparam, Usuario usuario) {
 		Solicitud sol = new Solicitud();
 		sol.setUsuario(usuario);
-		Timestamp tstamp = new Timestamp
-			(Calendar.getInstance().getTime().getTime());
+		Timestamp tstamp = new Timestamp(Calendar.getInstance().getTime()
+				.getTime());
 		sol.setFecha(tstamp);
 		sol.save();
 		for (DetalleSolicitud d : parse(jsonparam, sol)) {
-			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getCodigoPatrimonial());
+			Equipo e = Equipo.find(Equipo.class, d.getEquipo()
+					.getCodigoPatrimonial());
 			e.setEnproceso(true);
 			e.save();
 			d.save();
 		}
 		return sol;
 	}
-	
+
 	private ArrayList<DetalleSolicitud> parse(String jsonstring, Solicitud sol) {
 		String cad = jsonstring.substring(1, jsonstring.length() - 1);
 		ArrayList<String> partes = new ArrayList<String>();
-		int init=-1, end=-1;
-		for (int i=0; i<cad.length(); i++) {
+		int init = -1, end = -1;
+		for (int i = 0; i < cad.length(); i++) {
 			if (cad.charAt(i) == '{') {
 				init = i;
 			} else if (cad.charAt(i) == '}') {

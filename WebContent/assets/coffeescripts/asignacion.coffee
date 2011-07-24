@@ -8,7 +8,7 @@ evaluarConfirmaryQuitar = ->
 	isEmptyTable = (($ '#asignados tbody').html() is "")
 	isAsignSelected = (($ '#asignados tbody').find('.aselected').length == 0)
 	$('#confirmar').attr 'disabled', (isEmptyTable)
-	$('#quitar').attr 'disabled', (isEmptyTable or isAsignSelected) 
+	$('#quitar').attr 'disabled', (isEmptyTable or isAsignSelected)
 	
 	
 isInTable = (e) ->
@@ -20,16 +20,14 @@ $ ->
 		($ '.selected').removeClass 'selected'
 		$(@).parent().addClass 'selected'
 		sol = $(@).parent().find('.solid').text()
-		alert "antes"
 		$.post 'detallesolicitud',
 			solicitud: sol,
 			(r) ->
-				alert "llega"
 				det = JSON.parse r
-				($ '#equipos tbody').html ''		
+				($ '#equipos tbody').html ''
 				((d)->
-					if not isInTable(d.equipo.codigoPatrimonial) 
-						($ '#equipos tbody').append("<tr><td class='cp'>#{d.equipo.codigoPatrimonial}</td>" + 
+					if not isInTable(d.equipo.codigoPatrimonial)
+						($ '#equipos tbody').append("<tr><td class='cp'>#{d.equipo.codigoPatrimonial}</td>" +
 							"<td class='denom'>#{d.equipo.denominacion}</td><td class='fab'>#{d.equipo.fabricante}" +
 							"</td><td class='problema' style='display: none;'>#{d.problema}</td></tr>")
 							)(d) for d in det
@@ -43,7 +41,7 @@ $ ->
 		sol = ($ '.selected').find('.solid').text()
 		problema = "<h2>#{d} [#{cp}]</h2><h4>Solicitud ##{sol}</h4><p>#{p}</p>"
 		apprise problema,
-			verify: true 
+			verify: true
 			textYes: 'seleccionar'
 			textNo: 'cancelar',
 			(r) ->
@@ -63,8 +61,9 @@ $ ->
 		eq = ($ '.eqselected').find('.cp').text()
 		den = ($ '.eqselected').find('.denom').text()
 		tec = ($ '.tselected').find('.tnombre').text()
-		row = "<tr id='#{eq}'><td>#{sol}</td><td>#{eq}</td><td>#{den}</td><td>#{tec}</td></tr>"
-		($ '#asignados tbody').append row
+		tid = ($ '.tselected').find('.tid').text()
+		row = "<tr id='#{eq}'><td class='sol'>#{sol}</td><td class='eq'>#{eq}</td>" +
+			 "<td>#{den}</td><td class='tec'>#{tec}</td><td class='tid' style='display: none;'>#{tid}</tr>"($ '#asignados tbody').append row
 		($ '.eqselected').remove()
 		evaluarAsignar()
 		evaluarConfirmaryQuitar()
@@ -77,7 +76,19 @@ $ ->
 	($ '#quitar').click (e) ->
 		e.preventDefault()
 		($ '.aselected').remove()
-		
+	
 	($ '#confirmar').click (e) ->
 		e.preventDefault()
+		arreglo = []
+		for arow in ($ '#asignados tbody').children()
+			if $(arow).find('.sol').text() != ""
+				sol = $(arow).find('.sol').text()
+				eq = $(arow).find('.eq').text()
+				tec = $(arow).find('.tid').text()
+				o = { solicitud: sol, equipo: eq, tecnico: tec }
+				arreglo.push o
 		
+		$.post 'realizarAsignacion',
+			reparaciones: JSON.stringify arreglo,
+			(r) ->
+				alert "Yeah!"

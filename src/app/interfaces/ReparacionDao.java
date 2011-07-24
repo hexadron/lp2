@@ -7,7 +7,13 @@ import app.beans.Solicitud;
 import app.beans.Tecnico;
 
 public interface ReparacionDao {
+	
 	public List<Solicitud> getSolicitudesSinAsignar();
+	
 	public List<Tecnico> getTecnicos();
+	
 	public List<DetalleSolicitud> getDetalles(Long sol);
+
+	public void guardarReparaciones(String jsonparam);
+
 }

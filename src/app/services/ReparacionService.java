@@ -26,4 +26,8 @@ public class ReparacionService {
 		return dao.getDetalles(sol);
 	}
 
+	public void guardarReparaciones(String json) {
+		dao.guardarReparaciones(json);
+	}
+
 }
