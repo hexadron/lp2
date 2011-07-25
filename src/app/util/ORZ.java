@@ -1,11 +1,13 @@
 package app.util;
 
+import java.io.Serializable;
 import java.lang.reflect.*;
 import java.sql.*;
 import java.util.*;
 import static app.util.Utilities.*;
 
-public abstract class ORZ {
+public abstract class ORZ
+		implements Serializable {
     
 	public static <T> T find(Class<? extends ORZ> c, long id) {
         try {
