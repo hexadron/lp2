@@ -70,6 +70,8 @@ create table reparacion (
     detallesolicitud_id int not null references detalleSolicitud,
     equipo_id int not null references equipo,
     tecnico_id int not null references tecnico,
+    diagnostico text,
+    prioridad varchar(20)
     unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
@@ -126,6 +128,6 @@ insert into equipo (denominacion, fabricante, area_id) values ('Rayos X', 'Super
 insert into equipo (denominacion, fabricante, area_id) values ('Rayos Y', 'SuperFabricante', 3);
     
 #tecnicos
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Linus', 'Torvalds', now(), 'informática', 4);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Linus', 'Torvalds', now(), 'telecomunicaciones', 4);
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Alan', 'García Perez', now(), 'gasfitería', 5);
 insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Diego Armando', 'Maradona', now(), 'electricista', 6);

@@ -15,7 +15,8 @@ public class MySqlReparacionDao implements ReparacionDao {
 		for (Object s : Solicitud.all(Solicitud.class)) {
 			Solicitud x = (Solicitud) s;
 			List<DetalleSolicitud> detalles = 
-				DetalleSolicitud.where(DetalleSolicitud.class, "solicitud_id = ?", x.getId());
+				DetalleSolicitud.where(DetalleSolicitud.class,
+						"solicitud_id = ? and diagnostico = null", x.getId());
 			int asignados = 0;
 			for (DetalleSolicitud d : detalles)
 				if (d.getEquipo().getAsignado() == true)
@@ -100,6 +101,16 @@ public class MySqlReparacionDao implements ReparacionDao {
 	@Override
 	public Reparacion getDatosReparacion(Long id) {
 		return Reparacion.find(Reparacion.class, id);
+	}
+
+	@Override
+	public void registrarDiagnostico(long reparacion, String diagnostico,
+			String prioridad) {
+		System.out.println(reparacion);
+		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
+		r.setDiagnostico(diagnostico);
+		r.setPrioridad(prioridad);
+		r.save();
 	}
 	
 }

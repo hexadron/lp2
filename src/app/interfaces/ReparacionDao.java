@@ -21,4 +21,6 @@ public interface ReparacionDao {
 
 	public Reparacion getDatosReparacion(Long id);
 
+	public void registrarDiagnostico(long reparacion, String diagnostico, String prioridad);
+
 }
