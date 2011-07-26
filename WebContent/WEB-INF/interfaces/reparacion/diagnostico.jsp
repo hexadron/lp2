@@ -7,6 +7,13 @@
     <title>Registrar Diagnóstico</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
     <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
+    <style>
+		#susterceros {
+			background-color: hsl(0, 0%, 97%);
+			width: 100%;
+			height: 5em;
+    		};
+	</style>
   </head>
   <body>
     <div id='menu'>
@@ -60,7 +67,7 @@
             </li>
             <li><h3>Diagnóstico</h3></li>
             <li>
-             <textarea></textarea>
+             <textarea id='diagnostico'></textarea>
             </li>
             <li><h3>Prioridad</h3></li>
             <li>
@@ -77,8 +84,11 @@
               </ul>
             </li>
             <li>
+            <div style='margin-top: 1em'>
+            	  <label for='terceros' style="width: 34em; text-align: right;">Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
+            </div>
             <div class='actions'>
-              <input class='default' type='submit' value='Guardar' />
+              <input class='default' type='submit' value='Guardar' id='guardar' disabled/>
               <input type='submit' value='Cancelar' />
             </div>
             </li>
@@ -97,9 +107,9 @@
     				// el id del equipo. Éstos se obtienen del atributo id del elemento
     				// seleccionado.
     				var problema = 
-    					"<h2>Ventilador [000233]</h2>" + 
+    					"<div class='contentapprise'><h2>Ventilador [000233]</h2>" + 
 					"<h4>Reparación #1111</h4>" +
-					
+					"<h3> Diagnóstico </h3>" +
 					"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit." + 
 					" Duis venenatis metus ut purus molestie facilisis. Morbi" + 
 					" fermentum tincidunt ipsum quis pretium. Ut in elit risus." + 
@@ -108,10 +118,32 @@
 					" mauris consectetur eu molestie ante lacinia. Aenean at diam" +
 					" ipsum, a vestibulum magna. Sed vel neque ligula, at viverra nunc." +
 					" Cum sociis natoque penatibus et magnis dis parturient montes," + 
-					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p> "
+					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p></div>"
     				apprise(problema, {verify: true, textYes: 'seleccionar', textNo: 'cancelar'});
-    			});	
+    			});
+    			
+    			var evaluarElementos = function() {
+    				var checked = $("#terceros").attr("checked");
+    				var b = checked ? true : false;
+    				$("input[type='text']").attr("disabled", b);
+    				$("input[type='radio']").attr("disabled", b);
+    				$("#diagnostico").attr("disabled", b);  				
+    			}
+    			
+    			$('#terceros').click(function(e) {
+    				if ($("#terceros").attr("checked") === "checked") {
+    					e.preventDefault();
+    					var elements =
+        					"<div class='contentapprise'><h3>Sustentación de Solicitar Terceros</h3>" +
+        					"<textarea id='susterceros'></textarea>"
+        					"</div>";
+        				apprise(elements, {verify: true, textYes: 'Aceptar', textNo: 'Cancelar' },
+        					function(b) { $("#terceros").attr("checked", b); }
+        				);    					
+    				};
+    				evaluarElementos();
+    			});
     		});
     </script>
-  </body>
+    </body>
 </html>

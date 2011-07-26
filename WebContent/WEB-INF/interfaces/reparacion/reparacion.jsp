@@ -7,6 +7,13 @@
     <title>Registrar Reparación</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
     <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
+    <style>
+    		#susterceros {
+    			background-color: hsl(0, 0%, 97%);
+    			width: 100%;
+    			height: 5em;
+    		};
+	</style>
   </head>
   <body>
     <div id='menu'>
@@ -60,11 +67,12 @@
             <li>
               <div class='actions'>
               	<input class='default' type='submit' value='Dar de Baja' />
+              	<label for='terceros' style="width: 8em; text-align: left;">Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
               </div>
             </li>
             <li><h3>Trabajo Realizado</h3></li>
             <li>
-             <textarea></textarea>
+             <textarea id='trabajo'></textarea>
             </li>
             <li>
               <ul>
@@ -80,7 +88,7 @@
             </li>
             <li><h3>Recomendaciones</h3></li>
             <li>
-             <textarea></textarea>
+             <textarea id='recomendaciones'></textarea>
             </li>
             <li>
             <div class='actions'>
@@ -116,7 +124,35 @@
 					" Cum sociis natoque penatibus et magnis dis parturient montes," + 
 					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p></div>"
     				apprise(problema, {verify: true, textYes: 'seleccionar', textNo: 'cancelar'});
-    			});	
+    			});
+    			
+    			var evaluarElementos = function() {
+    				var checked = $("#terceros").attr("checked");
+    				var b = checked ? true : false;
+    				$("input[type='text']").attr("disabled", b);
+    				$("#trabajo").attr("disabled", b);
+    				$("#recomendaciones").attr("disabled", b);  				
+    			}
+    			
+    			$('#terceros').click(function(e) {
+    				if ($("#terceros").attr("checked") === "checked") {
+    					e.preventDefault();
+    					var elements =
+        					"<div class='contentapprise'><h3>Sustentación de Solicitar Terceros</h3>" +
+        					"<textarea id='susterceros'></textarea>"
+        					"</div>";
+        				apprise(elements, {verify: true, textYes: 'Aceptar', textNo: 'Cancelar' },
+        					function(b) {
+        						if (b) {
+        							$("#terceros").attr("checked", true);
+        						} else {
+        							$("#terceros").attr("checked", false);
+        							$()
+        						}
+        				});    					
+    				};
+    				evaluarElementos();
+    			});
     		});
     </script>
   </body>
