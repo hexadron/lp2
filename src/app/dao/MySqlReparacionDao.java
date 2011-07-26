@@ -1,6 +1,5 @@
 package app.dao;
 
-import java.sql.Timestamp;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -16,8 +15,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 		for (Object s : Solicitud.all(Solicitud.class)) {
 			Solicitud x = (Solicitud) s;
 			List<DetalleSolicitud> detalles = 
-				DetalleSolicitud.where(DetalleSolicitud.class,
-						"solicitud_id = ? and diagnostico = null", x.getId());
+				DetalleSolicitud.where(DetalleSolicitud.class, "solicitud_id = ?", x.getId());
 			int asignados = 0;
 			for (DetalleSolicitud d : detalles)
 				if (d.getEquipo().getAsignado() == true)
@@ -102,30 +100,6 @@ public class MySqlReparacionDao implements ReparacionDao {
 	@Override
 	public Reparacion getDatosReparacion(Long id) {
 		return Reparacion.find(Reparacion.class, id);
-	}
-
-	@Override
-	public void registrarDiagnostico(long reparacion, String diagnostico,
-			String prioridad) {
-		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
-		r.setDiagnostico(diagnostico);
-		r.setPrioridad(prioridad);
-		r.save();
-	}
-
-	@Override
-	public void registrarTerceros(long reparacion, String diagnostico,
-			String prioridad, String sustentacion) {
-		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
-		r.setDiagnostico(diagnostico);
-		r.setPrioridad(prioridad);
-		r.save();
-		SolicitudTerceros s = new SolicitudTerceros();
-		s.setFecha(new Timestamp(Calendar.getInstance().getTimeInMillis()));
-		s.setReparacion(r);
-		s.setSustentacion(sustentacion);
-		s.setEnatencion(true);
-		s.save();
 	}
 	
 }

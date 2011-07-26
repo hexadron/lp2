@@ -13,11 +13,6 @@
 			width: 100%;
 			height: 5em;
     	};
-    	.message {
-    			font-size: 1em;
-    			color: hsl(0, 60%, 40%); }
-   		.selected, .eqselected, .tselected, .aselected { 
-   			background-color: #FF8; }
 	</style>
   </head>
   <body>
@@ -60,7 +55,7 @@
               <c:forEach var='r' items="${ asignadas }">
 				<tr>
 					<td class='solid'>${ r.detalleSolicitud.solicitud.fecha }</td>
-					<td class='id repid'>${ r.id }</td>
+					<td class='id'>${ r.id }</td>
 					<td>${ r.equipo.denominacion }</td>
 				</tr>
 			  </c:forEach>

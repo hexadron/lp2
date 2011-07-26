@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import app.beans.Area;
 import app.beans.DetalleSolicitud;
 import app.beans.Equipo;
 import app.beans.Modulo;
@@ -137,13 +136,6 @@ public class SomeTests extends TestCase {
 		t.setApellidos("otro normal");
 		t.setFechaIngreso(new Date());
 		t.setEspecialidad("y otro");
-		Usuario u = new Usuario();
-		u.setArea((Area) Area.find(Area.class, 1));
-		u.setPassword("seguro");
-		u.setPerfil((Perfil) Perfil.find(Perfil.class, 1));
-		u.setUsuario("noexisto");
-		u.save();
-		t.setUsuario(u);
 		t.save();
 		assertNotNull(t);
 	}
@@ -171,13 +163,6 @@ public class SomeTests extends TestCase {
 		t.setApellidos("otro normal");
 		t.setFechaIngreso(new Date());
 		t.setEspecialidad("y otro");
-		Usuario u = new Usuario();
-		u.setArea((Area) Area.find(Area.class, 1));
-		u.setPassword("seguro");
-		u.setPerfil((Perfil) Perfil.find(Perfil.class, 1));
-		u.setUsuario("noexisto");
-		u.save();
-		t.setUsuario(u);
 		t.save();
 	}
 	

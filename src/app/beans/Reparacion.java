@@ -8,8 +8,6 @@ public class Reparacion extends ORZ {
 	private DetalleSolicitud detallesolicitud;
 	private Equipo equipo;
 	private Tecnico tecnico;
-	private String diagnostico;
-	private String prioridad;
 	
 	public long getId() {
 		return id;
@@ -41,22 +39,6 @@ public class Reparacion extends ORZ {
 
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
-	}
-
-	public void setDiagnostico(String diagnostico) {
-		this.diagnostico = diagnostico;
-	}
-
-	public String getDiagnostico() {
-		return diagnostico;
-	}
-
-	public void setPrioridad(String prioridad) {
-		this.prioridad = prioridad;
-	}
-
-	public String getPrioridad() {
-		return prioridad;
 	}
 
 }

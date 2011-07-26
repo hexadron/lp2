@@ -46,22 +46,8 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void getDatosReparacion() {
+		System.out.println(service.getDatosReparacion(Long.valueOf(param("reparacion"))));
 		renderJSON(service.getDatosReparacion(Long.valueOf(param("reparacion"))));
-	}
-	
-	public void registrarDiagnostico() {
-		long reparacion = Long.valueOf(param("reparacion"));
-		String diagnostico = (String) param("diagnostico");
-		String prioridad = (String) param("prioridad");
-		service.registrarDiagnostico(reparacion, diagnostico, prioridad);
-	}
-	
-	public void registrarTerceros() {
-		long reparacion = Long.valueOf(param("reparacion"));
-		String diagnostico = (String) param("diagnostico");
-		String prioridad = (String) param("prioridad");
-		String sustentacion = (String) param("sustentacion");
-		service.registrarTerceros(reparacion, diagnostico, prioridad, sustentacion);
 	}
 
 }
