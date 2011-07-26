@@ -102,4 +102,12 @@ public class MySqlReparacionDao implements ReparacionDao {
 		return Reparacion.find(Reparacion.class, id);
 	}
 	
+	public void registrarDiagnostico(long reparacion, String diagnostico,
+            String prioridad) {
+        Reparacion r = Reparacion.find(Reparacion.class, reparacion);
+        r.setDiagnostico(diagnostico);
+        r.setPrioridad(prioridad);
+        r.save();
+    }
+	
 }
