@@ -19,7 +19,7 @@
     <div id='menu'>
       <ul class='menu_items'>
        <li><a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
-      		<li>${sessionScope.user.perfil.descripcion}</li>
+      		<li>${sessionScope.user.usuario}</li>
 			<c:forEach var='m' items="${ modulos }">
 				<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
 			</c:forEach>

@@ -12,7 +12,7 @@
 			background-color: hsl(0, 0%, 97%);
 			width: 100%;
 			height: 5em;
-    		};
+    	};
 	</style>
   </head>
   <body>
@@ -20,7 +20,7 @@
       <ul class='menu_items'>
         <li>
         <a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
-      		<li>${sessionScope.user.perfil.descripcion}</li>
+      		<li>${sessionScope.user.usuario}</li>
 			<c:forEach var='m' items="${ modulos }">
 				<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
 			</c:forEach>
@@ -39,7 +39,7 @@
             <h2>Trabajos Asignados</h2>
             </li>
             <li>
-              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione un trabajo para ver el problema</span>
+              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione un trabajo para ver problema</span>
             </li>
             <li>
            	<table id="reparaciones">
@@ -52,16 +52,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>12/07/2011</td>
-                  <td>0000322</td>
-                  <td>Refrigeradora</td>
-                </tr>
-                <tr>
-                  <td>13/07/2011</td>
-                  <td>0000323</td>
-                  <td>Cocina</td>
-                </tr>
+              <c:forEach var='r' items="${ asignadas }">
+				<tr>
+					<td class='solid'>${ r.detalleSolicitud.solicitud.fecha }</td>
+					<td class='id'>${ r.id }</td>
+					<td>${ r.equipo.denominacion }</td>
+				</tr>
+			  </c:forEach>
               </tbody>
             </table>
             </li>
@@ -73,19 +70,19 @@
             <li>
               <ul>
                 <li>
-                  <label style="width: 7em; text-align: left;">Programable</label>
+                  <label>Programable</label>
                   <input type="radio" name="prioridad" value="Programable" /></li>
                 <li>
-                  <label style="width: 7em; text-align: left;">Urgente</label>
+                  <label>Urgente</label>
                   <input type="radio" name="prioridad" value="Urgente" /></li>
                 <li>
-                  <label style="width: 7em; text-align: left;">Muy Urgente</label>
+                  <label>Muy Urgente</label>
                   <input type="radio" name="prioridad" value="Muy Urgente" /></li>
               </ul>
             </li>
             <li>
-            <div style='margin-top: 1em'>
-            	  <label for='terceros' style="width: 34em; text-align: right;">Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
+            <div>
+            	  <label for='terceros'>Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
             </div>
             <div class='actions'>
               <input class='default' type='submit' value='Guardar' id='guardar' disabled/>
@@ -98,52 +95,7 @@
       </ul>
     </div>
     <jsp:include page="../../templates/scripts.jsp">
-    	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
+    	<jsp:param value="defaults, diagnostico" name="scripts"/>
     </jsp:include>
-    <script type="text/javascript">
-    		$(function() {
-    			$("#reparaciones td").click(function() {
-    				// este problema se carga usando ajax enviando el id de la solicitud y
-    				// el id del equipo. Éstos se obtienen del atributo id del elemento
-    				// seleccionado.
-    				var problema = 
-    					"<div class='contentapprise'><h2>Ventilador [000233]</h2>" + 
-					"<h4>Reparación #1111</h4>" +
-					"<h3> Diagnóstico </h3>" +
-					"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit." + 
-					" Duis venenatis metus ut purus molestie facilisis. Morbi" + 
-					" fermentum tincidunt ipsum quis pretium. Ut in elit risus." + 
-					" Nulla pellentesque odio et augue varius sed pellentesque augue" +
-					" accumsan. Vivamus at quam diam. Quisque sollicitudin nisi ut" + 
-					" mauris consectetur eu molestie ante lacinia. Aenean at diam" +
-					" ipsum, a vestibulum magna. Sed vel neque ligula, at viverra nunc." +
-					" Cum sociis natoque penatibus et magnis dis parturient montes," + 
-					" nascetur ridiculus mus. Nunc consequat interdum auctor.</p></div>"
-    				apprise(problema, {verify: true, textYes: 'seleccionar', textNo: 'cancelar'});
-    			});
-    			
-    			var evaluarElementos = function() {
-    				var checked = $("#terceros").attr("checked");
-    				var b = checked ? true : false;
-    				$("input[type='text']").attr("disabled", b);
-    				$("input[type='radio']").attr("disabled", b);
-    				$("#diagnostico").attr("disabled", b);  				
-    			}
-    			
-    			$('#terceros').click(function(e) {
-    				if ($("#terceros").attr("checked") === "checked") {
-    					e.preventDefault();
-    					var elements =
-        					"<div class='contentapprise'><h3>Sustentación de Solicitar Terceros</h3>" +
-        					"<textarea id='susterceros'></textarea>"
-        					"</div>";
-        				apprise(elements, {verify: true, textYes: 'Aceptar', textNo: 'Cancelar' },
-        					function(b) { $("#terceros").attr("checked", b); }
-        				);    					
-    				};
-    				evaluarElementos();
-    			});
-    		});
-    </script>
     </body>
 </html>

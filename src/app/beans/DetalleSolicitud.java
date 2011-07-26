@@ -4,6 +4,7 @@ import app.util.ORZ;
 
 public class DetalleSolicitud extends ORZ {
 	
+	private long id;
 	private Solicitud solicitud;
 	private Equipo equipo;
 	private String problema;
@@ -30,6 +31,14 @@ public class DetalleSolicitud extends ORZ {
 
 	public void setProblema(String problema) {
 		this.problema = problema;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 }

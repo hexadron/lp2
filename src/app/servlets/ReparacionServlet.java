@@ -2,6 +2,7 @@ package app.servlets;
 
 import javax.servlet.Servlet;
 
+import app.beans.*;
 import app.services.ReparacionService;
 import static app.util.Utilities.*;
 
@@ -34,11 +35,19 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void reparacion() {
-		
+	
 	}
 	
 	public void diagnostico() {
-		
+		Usuario u = (Usuario) fromSession("user");
+		Tecnico t = (Tecnico) Tecnico.where(Tecnico.class, "usuario_id = ?", u.getId()).get(0);
+		add("asignadas", service.getReparacionesAsignadas(t.getId()));
+		render();
+	}
+	
+	public void getDatosReparacion() {
+		System.out.println(service.getDatosReparacion(Long.valueOf(param("reparacion"))));
+		renderJSON(service.getDatosReparacion(Long.valueOf(param("reparacion"))));
 	}
 
 }

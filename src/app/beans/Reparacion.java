@@ -4,16 +4,25 @@ import app.util.*;
 
 public class Reparacion extends ORZ {
 
-	private Solicitud solicitud;
+	private long id;
+	private DetalleSolicitud detallesolicitud;
 	private Equipo equipo;
 	private Tecnico tecnico;
-
-	public Solicitud getSolicitud() {
-		return solicitud;
+	
+	public long getId() {
+		return id;
 	}
 
-	public void setSolicitud(Solicitud solicitud) {
-		this.solicitud = solicitud;
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	public DetalleSolicitud getDetalleSolicitud() {
+		return detallesolicitud;
+	}
+	
+	public void setDetalleSolicitud(DetalleSolicitud detallesolicitud) {
+		this.detallesolicitud = detallesolicitud;
 	}
 
 	public Equipo getEquipo() {

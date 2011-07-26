@@ -186,8 +186,11 @@ public abstract class ORZ
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             
-            if (rs.next())
-                getSetter(getColumnaBase()).invoke(this, rs.getLong(1));
+            if (rs.next()) {
+                Method m = getSetter(getColumnaBase());
+                if (m != null)
+                	m.invoke(this, rs.getLong(1));
+            }
             return (T) this;
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,8 +229,8 @@ public abstract class ORZ
                 		f.getType().getSuperclass().equals(this.getClass().getSuperclass())) {
                 		Method idGetter = null;
                 		Object obj = getGetter(f.getName()).invoke(this);
-                		if (obj.getClass().getMethod("getId") != null)
-                			idGetter = obj.getClass().getMethod("getId");
+                		if (obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase())) != null)
+                			idGetter = obj.getClass().getMethod("get" + Capitalize(((ORZ) obj).getColumnaBase()));
                 		ps.setObject(i, idGetter.invoke(obj));
         			} else
         				ps.setObject(i, getGetter(f.getName()).invoke(this));
@@ -338,7 +341,7 @@ public abstract class ORZ
     }
     
     protected String getColumnaBase() {
-    		return "id";
+		return "id";
     }
 
 }

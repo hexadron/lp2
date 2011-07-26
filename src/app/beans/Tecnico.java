@@ -10,6 +10,7 @@ public class Tecnico extends ORZ {
 	private String apellidos;
 	private Date fechaIngreso;
 	private String especialidad;
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -49,6 +50,14 @@ public class Tecnico extends ORZ {
 
 	public String getEspecialidad() {
 		return especialidad;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 }

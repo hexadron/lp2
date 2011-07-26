@@ -42,7 +42,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 	public void guardarReparaciones(String jsonString) {
 		List<Reparacion> reps = parse(jsonString);
 		for (Reparacion r : reps) {
-			Solicitud sol = Solicitud.find(Solicitud.class, r.getSolicitud().getId());
+			Solicitud sol = Solicitud.find(Solicitud.class, r.getDetalleSolicitud().getSolicitud().getId());
 			sol.setEnatencion(true);
 			sol.save();
 			Equipo e = r.getEquipo();
@@ -68,7 +68,6 @@ public class MySqlReparacionDao implements ReparacionDao {
 				fin = -1;
 			}
 		}
-		Gson g = new Gson();
 		List<Reparacion> reps = new ArrayList<Reparacion>();
 		for (String j : minijsons) {
 			List<Integer> ids = new ArrayList<Integer>();
@@ -78,12 +77,29 @@ public class MySqlReparacionDao implements ReparacionDao {
 				ids.add(entry.getValue().getAsInt());
 			}
 			Reparacion r = new Reparacion();
-			r.setSolicitud((Solicitud) Solicitud.find(Solicitud.class, ids.get(0)));
+			r.setDetalleSolicitud(
+					(DetalleSolicitud) DetalleSolicitud.where(DetalleSolicitud.class,
+							"solicitud_id = ? and equipo_id = ?", ids.get(0), ids.get(1)).get(0));
 			r.setEquipo((Equipo) Equipo.find(Equipo.class, ids.get(1)));
 			r.setTecnico((Tecnico) Tecnico.find(Tecnico.class, ids.get(2)));
 			reps.add(r);
 		}
 		return reps;
+	}
+
+	@Override
+	public List<Reparacion> getReparacionesAsignadas(long id) {
+		List<Reparacion> reparaciones = 
+			Reparacion.where(Reparacion.class, "tecnico_id = ?", id);
+		for (Reparacion r : reparaciones)
+			if (r.getEquipo().getAsignado() == false)
+				reparaciones.remove(r);
+		return reparaciones;
+	}
+
+	@Override
+	public Reparacion getDatosReparacion(Long id) {
+		return Reparacion.find(Reparacion.class, id);
 	}
 	
 }

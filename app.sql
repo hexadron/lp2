@@ -47,7 +47,8 @@ create table tecnico (
     nombres varchar(50) not null,
     apellidos varchar(50) not null,
     fechaIngreso date not null,
-    especialidad varchar(50) not null
+    especialidad varchar(50) not null,
+    usuario_id int not null references usuario
 ) DEFAULT CHARSET=utf8;
 
 create table solicitud (
@@ -58,16 +59,18 @@ create table solicitud (
 ) DEFAULT CHARSET=utf8;
 
 create table detalleSolicitud (
+	id int not null auto_increment primary key,
     solicitud_id int not null references solicitud,
     equipo_id int not null references equipo,
     problema text not null
 ) DEFAULT CHARSET=utf8;
 
 create table reparacion (
-    solicitud_id int not null references solicitud,
+	id int not null auto_increment primary key,
+    detallesolicitud_id int not null references detalleSolicitud,
     equipo_id int not null references equipo,
     tecnico_id int not null references tecnico,
-    unique(solicitud_id, equipo_id)
+    unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
 #dummy data
@@ -110,8 +113,10 @@ insert into moduloPorPerfil values (3, 2);
 #usuario
 insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -- administrador
 insert into usuario (usuario, password, perfil_id, area_id) values ('jefe', 'boss', 2, 1); -- jefe
-insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
 insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'tiger', 4, 3); -- usuario
+insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
+insert into usuario (usuario, password, perfil_id, area_id) values ('bob2', 'sudo', 3, 2); -- técnico interno
+insert into usuario (usuario, password, perfil_id, area_id) values ('bob3', 'sudo', 3, 3); -- técnico interno
 
 #equipos
 insert into equipo (denominacion, fabricante, area_id) values ('Ventilador', 'General Electrics', 3);
@@ -121,6 +126,6 @@ insert into equipo (denominacion, fabricante, area_id) values ('Rayos X', 'Super
 insert into equipo (denominacion, fabricante, area_id) values ('Rayos Y', 'SuperFabricante', 3);
     
 #tecnicos
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Linus', 'Torvalds', now(), 'informática');
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Alan', 'García Perez', now(), 'gasfitería');
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad) values ('Diego Armando', 'Maradona', now(), 'electricista');
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Linus', 'Torvalds', now(), 'informática', 4);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Alan', 'García Perez', now(), 'gasfitería', 5);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Diego Armando', 'Maradona', now(), 'electricista', 6);
