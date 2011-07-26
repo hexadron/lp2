@@ -17,7 +17,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 			Solicitud x = (Solicitud) s;
 			List<DetalleSolicitud> detalles = 
 				DetalleSolicitud.where(DetalleSolicitud.class,
-						"solicitud_id = ?", x.getId());
+						"solicitud_id = ? and diagnostico = null", x.getId());
 			int asignados = 0;
 			for (DetalleSolicitud d : detalles)
 				if (d.getEquipo().getAsignado() == true)

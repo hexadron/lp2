@@ -26,21 +26,16 @@ eraseAll = ->
 	($ '#problemadescrito').val ''
 	
 evaluarAgregar = ->
-	bool = $.trim($('#problema').val()) is "" or equipoSel == undefined
-	($ '#agregar').attr("disabled", bool)
+	($ '#agregar').attr("disabled", ($.trim($('#problema').val()) is "" or equipoSel == undefined))
 	
 evaluarEnviar = ->
-	bool = $.trim($('#solicitudes tbody').html()) is ""
-	($ '#enviar').attr("disabled", bool)
+	($ '#enviar').attr("disabled", ($.trim($('#solicitudes tbody').html()) is ""))
 	
 isInTable = (e) ->
 	($ '#solicitudes tbody').find("##{e}").attr('id') != undefined
 	
 detalle = (rowid) ->
-	e = {}
-	e.equipo = rowid 
-	e.problema = $("##{rowid}").find('.hiddenproblem').text()
-	e
+	{equipo: rowid, problema: $("##{rowid}").find('.hiddenproblem').text()}
 
 $ ->
 	($ '#buscar').click (e) ->
@@ -54,6 +49,7 @@ $ ->
 			$.post 'solicitud/buscarequipo',
 				equipo: equipo,
 				(r) ->
+					console.log r
 					if ($.trim r) is 'notfound'
 						errorEnDetalle 'Equipo no encontrado'
 					else
@@ -78,6 +74,7 @@ $ ->
 		evaluarEnviar()
 	
 	($ '#solicitudes td').live 'click', ->
+		$(@).parent().removeClass 'unselected'
 		$('.selected').removeClass 'selected'
 		$(@).parent().addClass 'selected'
 		($ '#problemadescrito').val $(@).parent().find('.hiddenproblem').text()
@@ -96,9 +93,6 @@ $ ->
 		t = $ '#solicitudes tbody'
 		sol = []
 		sol.push(detalle(row.id)) for row in t.children()
-		# for (row in t.children()) {
-		#    sol.push(detalle(row.id)); [{ equipo: 1, problema: "balbala" }, {..}, {..}]
-		# }
 		$.post 'solicitud/guardar',
 			solicitud: JSON.stringify(sol),
 			(r) ->

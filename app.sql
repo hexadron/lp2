@@ -71,7 +71,7 @@ create table reparacion (
     equipo_id int not null references equipo,
     tecnico_id int not null references tecnico,
     diagnostico text,
-    prioridad varchar(20),
+    prioridad varchar(20)
     unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 

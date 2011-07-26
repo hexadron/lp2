@@ -55,7 +55,7 @@
             </li>
             <li>
             <div class='actions'>
-              <input class='default ' id='agregar' type='submit' value='Agregar a solicitud' />
+              <input class='default ' id='agregar' type='submit' value='Agregar a solicitud' disabled />
             </div>
             <li><h2>Solicitud</h2></li>
             <li>
