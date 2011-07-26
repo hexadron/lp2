@@ -75,6 +75,16 @@ create table reparacion (
     unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
+
+create table solicitudterceros (
+    id int not null auto_increment primary key,
+    fecha timestamp,
+    sustentacion text,
+    reparacion_id int not null references reparacion,
+    enatencion boolean not null default false
+) DEFAULT CHARSET=utf8;
+
+
 #dummy data
 #area
 insert into area (descripcion) values ('Mantenimiento');

@@ -49,18 +49,31 @@ $ ->
 	
 	($ ':radio').change -> evaluarGuardar()
 
-	($ '#guardar').click (e) ->
+	($ '#guardar').live 'click', (e) ->
 		e.preventDefault();
 		reparacion = ($ '.repid').text()
 		diagnostico = ($ '#diagnostico').val()
 		prioridad = ($ ':radio:checked').val()
-		$.post 'registrarDiagnostico',
-			reparacion: reparacion
-			diagnostico: diagnostico
-			prioridad: prioridad,
-			(r) ->
-				apprise 'Diagn&oacute;stico guardado',
-					textOk: 'Aceptar',
-					(b) ->
-						window.location = ''
-	
+		console.log $('#susterceros').val()
+		if ($ "#terceros").attr("checked") is 'checked'
+			$.post 'registrarTerceros',
+				reparacion: reparacion
+				diagnostico: diagnostico
+				prioridad: prioridad,
+				sustentacion: $('#susterceros').val()
+				(r) ->
+					apprise 'Orden de Solicitud a Terceros generada',
+						textOk: 'Aceptar',
+						(b) ->
+							window.location = ''
+		else
+			$.post 'registrarDiagnostico',
+				reparacion: reparacion
+				diagnostico: diagnostico
+				prioridad: prioridad,
+				(r) ->
+					apprise 'Diagn&oacute;stico guardado',
+						textOk: 'Aceptar',
+						(b) ->
+							window.location = ''
+		

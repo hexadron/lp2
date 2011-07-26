@@ -23,4 +23,7 @@ public interface ReparacionDao {
 
 	public void registrarDiagnostico(long reparacion, String diagnostico, String prioridad);
 
+	public void registrarTerceros(long reparacion, String diagnostico,
+			String prioridad,String sustentacion);
+
 }

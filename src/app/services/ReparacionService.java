@@ -41,4 +41,9 @@ public class ReparacionService {
 		dao.registrarDiagnostico(reparacion, diagnostico, prioridad);
 	}
 
+	public void registrarTerceros(long reparacion, String diagnostico,
+			String prioridad, String sustentacion) {
+		dao.registrarTerceros(reparacion, diagnostico, prioridad, sustentacion);		
+	}
+
 }

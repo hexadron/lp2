@@ -1,5 +1,6 @@
 package app.dao;
 
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -106,11 +107,25 @@ public class MySqlReparacionDao implements ReparacionDao {
 	@Override
 	public void registrarDiagnostico(long reparacion, String diagnostico,
 			String prioridad) {
-		System.out.println(reparacion);
 		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
 		r.setDiagnostico(diagnostico);
 		r.setPrioridad(prioridad);
 		r.save();
+	}
+
+	@Override
+	public void registrarTerceros(long reparacion, String diagnostico,
+			String prioridad, String sustentacion) {
+		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
+		r.setDiagnostico(diagnostico);
+		r.setPrioridad(prioridad);
+		r.save();
+		SolicitudTerceros s = new SolicitudTerceros();
+		s.setFecha(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+		s.setReparacion(r);
+		s.setSustentacion(sustentacion);
+		s.setEnatencion(true);
+		s.save();
 	}
 	
 }
