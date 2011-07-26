@@ -38,7 +38,8 @@ create table equipo (
     fabricante text not null,
     area_id int not null references area,
     enproceso boolean not null default false,
-    dadodebaja boolean not null default false
+    dadodebaja boolean not null default false,
+    asignado boolean not null default false
 ) DEFAULT CHARSET=utf8;
 
 create table tecnico (

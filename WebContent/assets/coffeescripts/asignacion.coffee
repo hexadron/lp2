@@ -63,7 +63,8 @@ $ ->
 		tec = ($ '.tselected').find('.tnombre').text()
 		tid = ($ '.tselected').find('.tid').text()
 		row = "<tr id='#{eq}'><td class='sol'>#{sol}</td><td class='eq'>#{eq}</td>" +
-			 "<td>#{den}</td><td class='tec'>#{tec}</td><td class='tid' style='display: none;'>#{tid}</tr>"($ '#asignados tbody').append row
+			 "<td>#{den}</td><td class='tec'>#{tec}</td><td class='tid' style='display: none;'>#{tid}</tr>"
+		($ '#asignados tbody').append row
 		($ '.eqselected').remove()
 		evaluarAsignar()
 		evaluarConfirmaryQuitar()
@@ -91,4 +92,5 @@ $ ->
 		$.post 'realizarAsignacion',
 			reparaciones: JSON.stringify arreglo,
 			(r) ->
+				($ '#asignados tbody').html ''
 				alert "Yeah!"

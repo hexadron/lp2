@@ -9,6 +9,7 @@ public class Equipo extends ORZ {
 	private Area area;
 	private boolean enproceso;
 	private boolean dadodebaja;
+	private boolean asignado;
 
 	public String getDenominacion() {
 		return denominacion;
@@ -57,7 +58,15 @@ public class Equipo extends ORZ {
 	public boolean getEnproceso() {
 		return enproceso;
 	}
-	
+
+	public void setAsignado(boolean asignado) {
+		this.asignado = asignado;
+	}
+
+	public boolean getAsignado() {
+		return asignado;
+	}
+
 	protected String getColumnaBase() {
 		return "codigoPatrimonial";
 	}

@@ -22,7 +22,7 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	public void realizarAsignacion() {
 		String json = ToUTF(param("reparaciones"));
 		service.guardarReparaciones(json);
-		renderText("ok");
+		skipRender();
 	}
 	
 	public void detallesolicitud() {
