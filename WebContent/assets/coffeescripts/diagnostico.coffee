@@ -54,7 +54,6 @@ $ ->
 		reparacion = ($ '.repid').text()
 		diagnostico = ($ '#diagnostico').val()
 		prioridad = ($ ':radio:checked').val()
-		console.log $('#susterceros').val()
 		if ($ "#terceros").attr("checked") is 'checked'
 			$.post 'registrarTerceros',
 				reparacion: reparacion

@@ -24,13 +24,11 @@ public class MySqlSolicitudDao implements SolicitudDao {
 	public Solicitud guardar(String jsonparam, Usuario usuario) {
 		Solicitud sol = new Solicitud();
 		sol.setUsuario(usuario);
-		Timestamp tstamp = new Timestamp(Calendar.getInstance().getTime()
-				.getTime());
+		Timestamp tstamp = new Timestamp(Calendar.getInstance().getTimeInMillis());
 		sol.setFecha(tstamp);
 		sol.save();
 		for (DetalleSolicitud d : parse(jsonparam, sol)) {
-			Equipo e = Equipo.find(Equipo.class, d.getEquipo()
-					.getCodigoPatrimonial());
+			Equipo e = Equipo.find(Equipo.class, d.getEquipo().getCodigoPatrimonial());
 			e.setEnproceso(true);
 			e.save();
 			d.save();
