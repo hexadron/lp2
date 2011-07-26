@@ -4,14 +4,14 @@ errorEnDetalle = (msg) ->
 	equipoSel = undefined
 	($ '.desc').html msg
 
-showEquipo = (e) -> 
+showEquipo = (e) ->
 	equipoSel = e
 	($ '.desc').html ''
 	($ '.desc').append "<li><span class='desc_left'>C&oacute;digo Patrimonial</span>" +
-        "<span class='desc_right'>#{e.codigoPatrimonial}</span></li><li><span class='desc_left'>" + 
+        "<span class='desc_right'>#{e.codigoPatrimonial}</span></li><li><span class='desc_left'>" +
 	"Denominaci&oacute;n</span><span class='desc_right'>#{e.denominacion}" +
-	"</span></li><li><span class='desc_left'>Fabricante</span>" + 
-	"<span class='desc_right'>#{e.fabricante}</span></li><li>" + 
+	"</span></li><li><span class='desc_left'>Fabricante</span>" +
+	"<span class='desc_right'>#{e.fabricante}</span></li><li>" +
 	"<span class='desc_left'>&Aacute;rea a la que pertenece" +
 	"</span><span class='desc_right'>#{e.area.descripcion}</span></li>"
 	
@@ -66,7 +66,7 @@ $ ->
 		e.preventDefault()
 		row = "<tr id='#{equipoSel.codigoPatrimonial}'><td id='#{equipoSel.codigoPatrimonial}'>#{equipoSel.codigoPatrimonial}</td>" +
 				"<td>#{equipoSel.denominacion}</td>" +
-				"<td>#{equipoSel.fabricante}</td>" + 
+				"<td>#{equipoSel.fabricante}</td>" +
 				"<td class='hiddenproblem' style='display: none;'>#{$.trim ($ '#problema').val()}</td></tr>"
 		($ '#solicitudes tbody').append row
 		eraseFields()
@@ -79,7 +79,7 @@ $ ->
 		$(@).parent().addClass 'selected'
 		($ '#problemadescrito').val $(@).parent().find('.hiddenproblem').text()
 		
-	($ '#problemadescrito').keyup -> 
+	($ '#problemadescrito').keyup ->
 		$('.selected').find('.hiddenproblem').text $(@).val()
 		
 	($ '#quitar').click (e) ->

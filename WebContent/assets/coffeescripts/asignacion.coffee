@@ -93,4 +93,4 @@ $ ->
 			reparaciones: JSON.stringify arreglo,
 			(r) ->
 				($ '#asignados tbody').html ''
-				alert "Yeah!"
+				alert "Asignado"

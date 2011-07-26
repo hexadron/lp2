@@ -38,7 +38,7 @@ public class ReparacionService {
 
 	public void registrarDiagnostico(long reparacion, String diagnostico,
 			String prioridad) {
-		dao.registrarTerceros(reparacion, diagnostico, prioridad);
+		dao.registrarDiagnostico(reparacion, diagnostico, prioridad);
 	}
 
 }
