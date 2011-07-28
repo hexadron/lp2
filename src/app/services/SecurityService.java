@@ -23,4 +23,9 @@ public class SecurityService {
 		return dao.getModules(p);
 	}
 
+	public List<Perfil> allPerfiles() {
+		SecurityDao dao = factory.getSecurityDao();
+		return dao.allPerfiles();
+	}
+
 }

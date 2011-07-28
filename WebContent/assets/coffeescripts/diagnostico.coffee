@@ -51,9 +51,10 @@ $ ->
 
 	($ '#guardar').click (e) ->
 		e.preventDefault();
-		reparacion = ($ '.repid').text()
+		reparacion = ($ '.eqselected .repid').text()
 		diagnostico = ($ '#diagnostico').val()
 		prioridad = ($ ':radio:checked').val()
+		console.log reparacion
 		$.post 'registrarDiagnostico',
 			reparacion: reparacion
 			diagnostico: diagnostico
@@ -62,5 +63,5 @@ $ ->
 				apprise 'Diagn&oacute;stico guardado',
 					textOk: 'Aceptar',
 					(b) ->
-						window.location = ''
-	
+						if b
+							alert "hola"

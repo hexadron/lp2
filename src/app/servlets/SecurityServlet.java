@@ -19,6 +19,30 @@ public class SecurityServlet extends ApplicationController {
 	}
 	
 	public void perfiles() {
+		add("perfiles", service.allPerfiles());
+	}
+	
+	public void agregarperfiles() {
+		
+	}
+	
+	public void editarperfiles() {
+		
+	}
+	
+	public void eliminarperfiles() {
+		
+	}
+	
+	public void agregarusuarios() {
+		
+	}
+	
+	public void editarusuarios() {
+		
+	}
+	
+	public void eliminarusuarios() {
 		
 	}
 	

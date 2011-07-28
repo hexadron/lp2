@@ -71,7 +71,7 @@ create table reparacion (
     equipo_id int not null references equipo,
     tecnico_id int not null references tecnico,
     diagnostico text,
-    prioridad varchar(20)
+    prioridad varchar(20),
     unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
@@ -81,11 +81,15 @@ insert into area (descripcion) values ('Mantenimiento');
 insert into area (descripcion) values ('Recursos Humanos');
 insert into area (descripcion) values ('Emergencias');
 insert into area (descripcion) values ('Clinica');
+insert into area (descripcion) values ('Logistica');
 #perfil
 insert into perfil (descripcion) values ('administrador');
 insert into perfil (descripcion) values ('jefe del area');
 insert into perfil (descripcion) values ('tecnico interno');
 insert into perfil (descripcion) values ('usuario');
+insert into perfil (descripcion) values ('administrativo');
+insert into perfil (descripcion) values ('logistica');
+insert into perfil (descripcion) values ('tecnico externo');
 #modulo
 insert into modulo (descripcion, uri, shorthand) values ('Diagnóstico de Equipos', 'reparacion/diagnostico', 'Diagnóstico'); 
 insert into modulo (descripcion, uri, shorthand) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
@@ -96,7 +100,9 @@ insert into modulo (descripcion, uri, shorthand) values ('Asignar Técnicos a So
 insert into modulo (descripcion, uri, shorthand) values ('Consultar Historial de Desempeño', 'reparacion/historial', 'Historial');
 insert into modulo (descripcion, uri, shorthand) values ('Mantener Equipos', 'equipos', 'Equipos');
 insert into modulo (descripcion, uri, shorthand) values ('Reparación externa', 'reparacionexterna', 'Externa');
-insert into modulo (descripcion, uri, shorthand) values ('Terceros', 'terceros', 'Terceros');
+insert into modulo (descripcion, uri, shorthand) values ('Registrar Solicitud de Terceros', 'terceros/solicitud', 'Solicitar');
+insert into modulo (descripcion, uri, shorthand) values ('Asignar Técnico Externo de Reparación', 'terceros/asignarexterno', 'Asignar Técnico Externo');
+insert into modulo (descripcion, uri, shorthand) values ('Registrar Reparación por Técnico Externo', 'reparacion/reparacionexterna', 'Reparación Externa');
 
 #moduloporperfil
 #administrador del sistema
@@ -111,6 +117,12 @@ insert into moduloPorPerfil values (2, 8);
 #perfil de técnico interno
 insert into moduloPorPerfil values (3, 1);
 insert into moduloPorPerfil values (3, 2);
+#administrativo
+insert into moduloPorPerfil values (5, 10); 
+#logistica
+insert into moduloPorPerfil values (6, 11);
+#tecnico externo
+insert into moduloPorPerfil values (7, 12);
 
 #usuario
 insert into usuario (usuario, password, perfil_id) values ('root', 'sudo', 1); -- administrador
@@ -119,6 +131,9 @@ insert into usuario (usuario, password, perfil_id, area_id) values ('scott', 'ti
 insert into usuario (usuario, password, perfil_id, area_id) values ('bob', 'sudo', 3, 1); -- técnico interno
 insert into usuario (usuario, password, perfil_id, area_id) values ('bob2', 'sudo', 3, 2); -- técnico interno
 insert into usuario (usuario, password, perfil_id, area_id) values ('bob3', 'sudo', 3, 3); -- técnico interno
+insert into usuario (usuario, password, perfil_id, area_id) values ('fred', 'dog', 5, 3); -- administrativo
+insert into usuario (usuario, password, perfil_id, area_id) values ('nullpointer', 'exception', 6, 5); -- logistica
+insert into usuario (usuario, password, perfil_id) values ('pero', 'pero', 7); -- tecnico externo
 
 #equipos
 insert into equipo (denominacion, fabricante, area_id) values ('Ventilador', 'General Electrics', 3);

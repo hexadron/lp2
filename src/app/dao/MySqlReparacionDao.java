@@ -16,7 +16,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 			Solicitud x = (Solicitud) s;
 			List<DetalleSolicitud> detalles = 
 				DetalleSolicitud.where(DetalleSolicitud.class,
-						"solicitud_id = ? and diagnostico = null", x.getId());
+						"solicitud_id = ?", x.getId());
 			int asignados = 0;
 			for (DetalleSolicitud d : detalles)
 				if (d.getEquipo().getAsignado() == true)
@@ -106,8 +106,8 @@ public class MySqlReparacionDao implements ReparacionDao {
 	@Override
 	public void registrarDiagnostico(long reparacion, String diagnostico,
 			String prioridad) {
-		System.out.println(reparacion);
 		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
+		System.out.println(reparacion);
 		r.setDiagnostico(diagnostico);
 		r.setPrioridad(prioridad);
 		r.save();

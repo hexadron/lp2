@@ -9,7 +9,6 @@ public abstract class Utilities {
 		try {
 			return new String(val.getBytes("iso-8859-1"), "utf-8");
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -18,7 +17,6 @@ public abstract class Utilities {
 		try {
 			return new String(val.getBytes("utf-8"), "iso-8859-1");
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -50,7 +48,7 @@ public abstract class Utilities {
 					Method getter = c.getMethod("get" + name);
 					m.invoke(object, ToUTF((String) getter.invoke(object)));
 				} catch (Exception e) {
-					e.printStackTrace();
+					// aqui iba un mensaje de error
 				}
 			}
 		}

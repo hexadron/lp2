@@ -11,4 +11,6 @@ public interface SecurityDao {
 	public Usuario validate(String username, String password);
 
 	public List<Modulo> getModules(Perfil p);
+
+	public List<Perfil> allPerfiles();
 }

@@ -54,6 +54,16 @@
     <servlet-name>ReparacionServlet</servlet-name>
     <url-pattern>/reparacion/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TercerosServlet</display-name>
+    <servlet-name>TercerosServlet</servlet-name>
+    <servlet-class>app.servlets.TercerosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TercerosServlet</servlet-name>
+    <url-pattern>/terceros/*</url-pattern>
+  </servlet-mapping>
   <session-config>
     <session-timeout>45</session-timeout>
   </session-config>

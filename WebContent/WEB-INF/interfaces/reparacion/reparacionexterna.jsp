@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html lang='es'>
   <head>
-    <title>Registrar Reparación</title>
+    <title>Reparación Externa</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
     <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
     <style>
-    		#susterceros {
+    		#susbaja {
     			background-color: hsl(0, 0%, 97%);
     			width: 100%;
     			height: 5em;
@@ -28,7 +28,7 @@
     </div>
     <div class='container'>
       <div id='header'>
-        <h1>Registrar Reparación de Equipo</h1>
+        <h1>Registrar Reparación<br/> por Técnico Externo</h1>
       </div>
       <ul class='content'>
         <li>
@@ -66,8 +66,7 @@
             </li>
             <li>
               <div class='actions'>
-              	<input class='default' type='submit' value='Dar de Baja' />
-              	<label for='terceros' style="width: 8em; text-align: left;">Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
+              	<input class='default' id="baja" type='submit' value='Dar de Baja' />
               </div>
             </li>
             <li><h3>Trabajo Realizado</h3></li>
@@ -92,7 +91,7 @@
             </li>
             <li>
             <div class='actions'>
-              <input class='default' type='submit' value='Guardar' />
+              <input class='default' type='submit' value='Guardar' disabled/>
               <input type='submit' value='Limpiar' />
             </div>
             </li>
@@ -134,24 +133,14 @@
     				$("#recomendaciones").attr("disabled", b);  				
     			}
     			
-    			$('#terceros').click(function(e) {
-    				if ($("#terceros").attr("checked") === "checked") {
-    					e.preventDefault();
-    					var elements =
-        					"<div class='contentapprise'><h3>Sustentación de Solicitar Terceros</h3>" +
-        					"<textarea id='susterceros'></textarea>"
-        					"</div>";
-        				apprise(elements, {verify: true, textYes: 'Aceptar', textNo: 'Cancelar' },
-        					function(b) {
-        						if (b) {
-        							$("#terceros").attr("checked", true);
-        						} else {
-        							$("#terceros").attr("checked", false);
-        							$()
-        						}
-        				});    					
-    				};
-    				evaluarElementos();
+    			$('#baja').click(function(e) {
+				e.preventDefault();
+				var elements =
+	  					"<div class='contentapprise'><h3>Sustentación de Baja</h3>" +
+	  					"<textarea id='susbaja'></textarea>"
+	  					"</div>";
+				apprise(elements, {verify: true, textYes: 'Aceptar', textNo: 'Cancelar' });    					
+				evaluarElementos();
     			});
     		});
     </script>

@@ -28,4 +28,9 @@ public class MySqlSecurityDao implements SecurityDao {
 		return mods;
 	}
 
+	@Override
+	public List<Perfil> allPerfiles() {
+		return Perfil.all(Perfil.class);
+	}
+
 }
