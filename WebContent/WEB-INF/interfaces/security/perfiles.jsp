@@ -118,6 +118,14 @@
             	</ul>
             </li>
             
+            <li class="Eliminar escondidos">
+            	<p>¿Est&aacute; seguro que desea eliminar el perfil seleccionado?</p>
+            	<div class='actions'>
+					<input class='default' type='submit' value='S&iacute;' />
+					<input type='submit' value='No' />
+				</div>
+            </li>
+            
           </ul>
         </form>
         </li>
