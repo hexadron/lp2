@@ -43,11 +43,15 @@
         <h1>Mantener Usuarios</h1>
       </div>
       <ul class='content'>
-      	<li><h2>Usuarios</h2></li>
         <li>
         <form>
           <ul>
             <li>
+            <li><h3>Buscar usuarios</h3></li>
+            	<li><label>Nombre</label><input type="text"/></li>
+            	<div class='actions'>
+            		<input class='default' type='submit' value='Buscar' />
+            	</div>
            	<table id="reparaciones">
               <thead>
                 <tr>
@@ -57,6 +61,7 @@
                   <th title="${ tooltip }">&Aacute;rea</th>
                 </tr>
               </thead>
+              
               <tbody>
 				<tr>
 					<td>jorgemedina</td>
@@ -78,7 +83,6 @@
             </li>
             <li>
 			<div class='actions'>
-				<input class='default' type='submit' value='Buscar' />
 				<input class='default' type='submit' value='Nuevo' />
 				<input class='default' type='submit' value='Editar' />
 				<input class='default' type='submit' value='Eliminar' />
@@ -86,16 +90,6 @@
             </li>
             <li class="Buscar escondidos">
             	<ul>
-            	<li><h3>Buscar usuarios</h3></li>
-            	<li><label>Nombre</label><input type="text"/></li>
-            	<li><label>Perfil</label>
-            		<select>
-            			<option>Seleccione perfil</option>
-            		</select></li>
-            	<li><label>Area</label>
-            		<select>
-            			<option>Seleccione area</option>
-            		</select></li>
             	<li>
             	<div class='actions'>
 					<input class='default' type='submit' value='Buscar' />
@@ -107,7 +101,7 @@
             <li class="Nuevo escondidos">
             	<ul>
             	<li><h3>Nuevo usuario</h3></li>
-            	<li><label>Nombre</label><input type="text"/></li>
+            	<li><label>Usuario</label><input type="text"/></li>
             	<li><label>Contraseña</label><input type="text"/></li>
             	<li><label>Perfil</label>
             		<select>

@@ -24,6 +24,15 @@
    		.escondidos {
    			display: none;
    		}
+   		#perfiles {
+   			width: 40%;
+   			margin: auto;
+   			height: 60%;
+   			overflow: auto;
+   		}
+   		#perfiles td {
+   			text-align: center;
+   		}
 	</style>
   </head>
   <body>
@@ -48,11 +57,10 @@
         <form>
           <ul>
             <li>
-           	<table id="reparaciones">
+           	<table id="perfiles">
               <thead>
                 <tr>
-                  <fmt:message key='table.tooltip' var="tooltip" />
-                  <th title="${ tooltip }">Denominacion</th>
+                  
                 </tr>
               </thead>
               <tbody>

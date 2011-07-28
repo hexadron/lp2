@@ -72,7 +72,14 @@ create table reparacion (
     tecnico_id int not null references tecnico,
     diagnostico text,
     prioridad varchar(20),
+		fechainicio date,
     unique(detallesolicitud_id, equipo_id)
+) DEFAULT CHARSET=utf8;
+
+create table ordensolicitudterceros (
+	id int not null auto_increment primary key,
+	reparacion_id int not null references reparacion,
+	sustentacion text
 ) DEFAULT CHARSET=utf8;
 
 #dummy data
