@@ -48,7 +48,8 @@ create table tecnico (
     apellidos varchar(50) not null,
     fechaIngreso date not null,
     especialidad varchar(50) not null,
-    usuario_id int not null references usuario
+    usuario_id int not null ref˙erences usuario,
+		unique(usuario_id)
 ) DEFAULT CHARSET=utf8;
 
 create table solicitud (
@@ -71,8 +72,12 @@ create table reparacion (
     equipo_id int not null references equipo,
     tecnico_id int not null references tecnico,
     diagnostico text,
+		reparacion text,
+		reparacionexterna text,
+		recomendaciones text,
     prioridad varchar(20),
 		fechainicio date,
+		estado varchar(36),
     unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
