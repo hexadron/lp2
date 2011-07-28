@@ -29,16 +29,16 @@
     </div>
     <div class='container'>
       <div id='header'>
-        <h1>Asignar T&eacute;cnicos a Solicitud</h1>
+        <h1>Asignar Técnico Externo de Reparación</h1>
       </div>
       <ul class='content'>
         <li>
         <form>
           <ul>
             <li>
-            <h2>Trabajos sin Reparación</h2>
+            <h2>Trabajos Sin Reparación</h2>
             </li>
-            <li><span class="message">Seleccione un Trabajo sin Reparación</span></li>
+            <li><span class="message">Seleccione un trabajo sin reparación</span></li>
             <li>
            	<table id="solicitudes">
               <thead>
