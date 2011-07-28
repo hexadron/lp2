@@ -4,94 +4,173 @@
 <!DOCTYPE html>
 <html lang='es'>
   <head>
-    <title>Registrar Reparación</title>
+    <title>Mantener Usuarios</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
     <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
     <style>
-    		
+		#susterceros {
+			background-color: hsl(0, 0%, 97%);
+			width: 100%;
+			height: 5em;
+    	};
+    	.message {
+    			font-size: 1em;
+    			color: hsl(0, 60%, 40%); }
+   		.selected, .eqselected, .tselected, .aselected { 
+   			background-color: #FF8; }
+   		.waitwhat {
+   			margin-left: 14em;
+   		}
+   		.escondidos {
+   			display: none;
+   		}
 	</style>
   </head>
   <body>
     <div id='menu'>
       <ul class='menu_items'>
-       <li><a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
+        <li>
+        <a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
       		<li>${sessionScope.user.usuario}</li>
 			<c:forEach var='m' items="${ modulos }">
 				<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
 			</c:forEach>
 			<li><a href="${pageContext.request.contextPath}">Men&uacute; Principal</a></li>
-	  </ul>
+      </ul>
     </div>
     <div class='container'>
       <div id='header'>
-        <h1>Mantener Perfiles</h1>
+        <h1>Mantener Usuarios</h1>
       </div>
       <ul class='content'>
+      	<li><h2>Usuarios</h2></li>
         <li>
         <form>
           <ul>
             <li>
-            <h2>Perfiles</h2>
-            </li>
-            <li>
-              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione una reparación para ver el diagnóstico</span>
-            </li>
-            <li>
-           	<table id="perfiles">
+           	<table id="reparaciones">
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
-                  <th title="${ tooltip }">Descripción</th>
+                  <th title="${ tooltip }">Nombre de usuario</th>
+                  <th title="${ tooltip }">Perfil</th>
+                  <th title="${ tooltip }">&Aacute;rea</th>
                 </tr>
               </thead>
               <tbody>
-              <c:forEach var="p" items="${ perfiles }">
-                <tr>
-                  <td>${ p.descripcion }</td>
-                </tr>
-              </c:forEach>
+				<tr>
+					<td>jorgemedina</td>
+					<td>Jefe</td>
+					<td>Recursos Humanos</td>
+				</tr>
+				<tr>
+					<td>vanhohenheim</td>
+					<td>T&eacute;cnico Interno</td>
+					<td>Log&iacute;stica</td>
+				</tr>
+				<tr>
+					<td>ceciliaperez</td>
+					<td>Usuario</td>
+					<td>Emergencias</td>
+				</tr>
               </tbody>
             </table>
             </li>
             <li>
-              <div class='actions'>
-              	<input class='default' type='submit' value='Dar de Baja' />
-              	<label for='terceros' style="width: 8em; text-align: left;">Solicitar Terceros</label><input id='terceros' name='terceros' type='checkbox' />
-              </div>
+			<div class='actions'>
+				<input class='default' type='submit' value='Buscar' />
+				<input class='default' type='submit' value='Nuevo' />
+				<input class='default' type='submit' value='Editar' />
+				<input class='default' type='submit' value='Eliminar' />
+			</div>
             </li>
-            <li><h3>Trabajo Realizado</h3></li>
-            <li>
-             <textarea id='trabajo'></textarea>
+            <li class="Buscar escondidos">
+            	<ul>
+            	<li><h3>Buscar usuarios</h3></li>
+            	<li><label>Nombre</label><input type="text"/></li>
+            	<li><label>Perfil</label>
+            		<select>
+            			<option>Seleccione perfil</option>
+            		</select></li>
+            	<li><label>Area</label>
+            		<select>
+            			<option>Seleccione area</option>
+            		</select></li>
+            	<li>
+            	<div class='actions'>
+					<input class='default' type='submit' value='Buscar' />
+					<input type='submit' value='Cancelar' />
+				</div>
+            	</li>
+            	</ul>
             </li>
-            <li>
-              <ul>
-                <li>
-                  <label style="width: 5em; text-align: left;">costo</label>
-                  <input type="text" style="width: 5em;" name="costo" />
-                </li>
-                <li>
-                  <label style="width: 5em; text-align: left;">garantía</label>
-                  <input type="text" style="width: 5em;" name="garantia" />
-                </li>
-              </ul>
+            <li class="Nuevo escondidos">
+            	<ul>
+            	<li><h3>Nuevo usuario</h3></li>
+            	<li><label>Nombre</label><input type="text"/></li>
+            	<li><label>Contraseña</label><input type="text"/></li>
+            	<li><label>Perfil</label>
+            		<select>
+            			<option>Seleccione perfil</option>
+            		</select></li>
+            	<li><label>Area</label>
+            		<select>
+            			<option>Seleccione area</option>
+            		</select></li>
+            	<li>
+            		<li><label>Interno</label><input type="checkbox"/></li>
+            	</li>
+            	<li>
+            	<div class='actions'>
+					<input class='default' type='submit' value='Guardar' />
+					<input type='submit' value='Cancelar' />
+				</div>
+            	</li>
+            	</ul>
             </li>
-            <li><h3>Recomendaciones</h3></li>
-            <li>
-             <textarea id='recomendaciones'></textarea>
+            <li class="Editar escondidos">
+            	<ul>
+            	<li><h3>Editar usuario</h3></li>
+            	<li><label>Nombre</label><input type="text"/></li>
+            	<li><label>Contraseña</label><input type="text"/></li>
+            	<li><label>Perfil</label>
+            		<select>
+            			<option>Seleccione perfil</option>
+            		</select></li>
+            	<li><label>Area</label>
+            		<select>
+            			<option>Seleccione area</option>
+            		</select></li>
+            	<li>
+            		<li><label>Interno</label><input type="checkbox"/></li>
+            	</li>
+            	<li>
+            	<div class='actions'>
+					<input class='default' type='submit' value='Guardar' />
+					<input type='submit' value='Cancelar' />
+				</div>
+            	</li>
+            	</ul>
             </li>
-            <li>
-            <div class='actions'>
-              <input class='default' type='submit' value='Guardar' />
-              <input type='submit' value='Limpiar' />
-            </div>
-            </li>
+            
+            
           </ul>
         </form>
         </li>
       </ul>
     </div>
+    <script type="text/coffeescript">
+		$ ->
+			($ 'input[type=submit]').click (e) ->
+				e.preventDefault()
+				nombre = e.target.value
+				el = ($ '.' + nombre)
+				status = el.css 'display'
+				el.css 'display', if status is 'block' then 'none' else 'block'
+    </script>
     <jsp:include page="../../templates/scripts.jsp">
-    	<jsp:param value="defaults, ix.switch, ix.initialize" name="scripts"/>
+    	<jsp:param value="defaults, diagnostico" name="scripts"/>
     </jsp:include>
-  </body>
+    </body>
 </html>
+
