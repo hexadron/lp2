@@ -83,6 +83,7 @@ create table reparacion (
 	estado varchar(36),
 	garantia double,
 	costo double,
+        dadodebaja boolean,
 	unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8; #ok
 
