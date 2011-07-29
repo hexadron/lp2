@@ -91,7 +91,7 @@
             </div>
             <div class='actions'>
               <input class='default' type='submit' value='Guardar' id='guardar' disabled/>
-              <input type='submit' value='Cancelar' />
+              <input type='submit' value='Limpiar' />
             </div>
             </li>
           </ul>

@@ -84,7 +84,8 @@ create table reparacion (
 create table ordensolicitudterceros (
 	id int not null auto_increment primary key,
 	reparacion_id int not null references reparacion,
-	sustentacion text
+	sustentacion text,
+	fechaorden date
 ) DEFAULT CHARSET=utf8;
 
 #dummy data
