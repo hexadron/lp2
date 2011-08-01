@@ -1,4 +1,4 @@
-drop database if exists app;
+  drop database if exists app;
 create database app;
 use app;
 
@@ -33,46 +33,46 @@ create table usuario (
 ) DEFAULT CHARSET=utf8;
 
 create table equipo (
-    codigoPatrimonial int not null auto_increment primary key,
-    denominacion text not null,
-    fabricante text not null,
-    area_id int not null references area,
-    enproceso boolean not null default false,
-    dadodebaja boolean not null default false,
-    asignado boolean not null default false
+  codigoPatrimonial int not null auto_increment primary key,
+  denominacion text not null,
+  fabricante text not null,
+  area_id int not null references area,
+  enproceso boolean not null default false,
+  dadodebaja boolean not null default false,
+  asignado boolean not null default false
 ) DEFAULT CHARSET=utf8;
 
 create table tecnico (
-    id int not null auto_increment primary key,
-    nombres varchar(50) not null,
-    apellidos varchar(50) not null,
-    fechaIngreso date not null,
-    especialidad varchar(50) not null,
-    usuario_id int not null references usuario
+  id int not null auto_increment primary key,
+  nombres varchar(50) not null,
+  apellidos varchar(50) not null,
+  fechaIngreso date not null,
+  especialidad varchar(50) not null,
+  usuario_id int not null references usuario
 ) DEFAULT CHARSET=utf8;
 
 create table solicitud (
-    id int not null auto_increment primary key,
-    fecha timestamp,
-    usuario_id int not null references usuario,
-    enatencion boolean not null default false
+  id int not null auto_increment primary key,
+  fecha timestamp,
+  usuario_id int not null references usuario,
+  enatencion boolean not null default false
 ) DEFAULT CHARSET=utf8;
 
 create table detalleSolicitud (
 	id int not null auto_increment primary key,
-    solicitud_id int not null references solicitud,
-    equipo_id int not null references equipo,
-    problema text not null
+  solicitud_id int not null references solicitud,
+  equipo_id int not null references equipo,
+  problema text not null
 ) DEFAULT CHARSET=utf8;
 
 create table reparacion (
 	id int not null auto_increment primary key,
-    detallesolicitud_id int not null references detalleSolicitud,
-    equipo_id int not null references equipo,
-    tecnico_id int not null references tecnico,
-    diagnostico text,
-    prioridad varchar(20),
-    unique(detallesolicitud_id, equipo_id)
+  detallesolicitud_id int not null references detalleSolicitud,
+  equipo_id int not null references equipo,
+  tecnico_id int not null references tecnico,
+  diagnostico text,
+  prioridad varchar(20),
+  unique(detallesolicitud_id, equipo_id)
 ) DEFAULT CHARSET=utf8;
 
 #dummy data
@@ -80,16 +80,16 @@ create table reparacion (
 insert into area (descripcion) values ('Mantenimiento');
 insert into area (descripcion) values ('Recursos Humanos');
 insert into area (descripcion) values ('Emergencias');
-insert into area (descripcion) values ('Clinica');
-insert into area (descripcion) values ('Logistica');
+insert into area (descripcion) values ('Cl&iacute;nica');
+insert into area (descripcion) values ('Log&iacute;stica');
 #perfil
-insert into perfil (descripcion) values ('administrador');
-insert into perfil (descripcion) values ('jefe del area');
-insert into perfil (descripcion) values ('tecnico interno');
-insert into perfil (descripcion) values ('usuario');
-insert into perfil (descripcion) values ('administrativo');
-insert into perfil (descripcion) values ('logistica');
-insert into perfil (descripcion) values ('tecnico externo');
+insert into perfil (descripcion) values ('Administrador');
+insert into perfil (descripcion) values ('Jefe del &aacute;rea');
+insert into perfil (descripcion) values ('T&eacute;cnico interno');
+insert into perfil (descripcion) values ('Usuario');
+insert into perfil (descripcion) values ('Administrativo');
+insert into perfil (descripcion) values ('Log&iacute;stica');
+insert into perfil (descripcion) values ('T&eacute;cnico externo');
 #modulo
 insert into modulo (descripcion, uri, shorthand) values ('Diagnóstico de Equipos', 'reparacion/diagnostico', 'Diagnóstico'); 
 insert into modulo (descripcion, uri, shorthand) values ('Reparación de Equipos', 'reparacion/reparacion', 'Reparación');
@@ -143,6 +143,6 @@ insert into equipo (denominacion, fabricante, area_id) values ('Rayos X', 'Super
 insert into equipo (denominacion, fabricante, area_id) values ('Rayos Y', 'SuperFabricante', 3);
     
 #tecnicos
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Linus', 'Torvalds', now(), 'telecomunicaciones', 4);
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Alan', 'García Perez', now(), 'gasfitería', 5);
-insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Diego Armando', 'Maradona', now(), 'electricista', 6);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Linus', 'Torvalds', now(), 'Telecomunicaciones', 4);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Alan', 'Garc&iacute;a P&eacute;rez', now(), 'Gasfiter&iacute;a', 5);
+insert into tecnico (nombres, apellidos, fechaIngreso, especialidad, usuario_id) values ('Diego Armando', 'Maradona', now(), 'Electricista', 6);

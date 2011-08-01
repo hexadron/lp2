@@ -8,6 +8,8 @@ import com.google.gson.*;
 import app.beans.*;
 import app.interfaces.ReparacionDao;
 
+import static app.util.Utilities.*;
+
 public class MySqlReparacionDao implements ReparacionDao {
 
 	public List<Solicitud> getSolicitudesSinAsignar() {
@@ -18,9 +20,10 @@ public class MySqlReparacionDao implements ReparacionDao {
 				DetalleSolicitud.where(DetalleSolicitud.class,
 						"solicitud_id = ?", x.getId());
 			int asignados = 0;
-			for (DetalleSolicitud d : detalles)
+			for (DetalleSolicitud d : detalles) {
 				if (d.getEquipo().getAsignado() == true)
 					asignados++;
+			}
 			if (asignados < detalles.size())
 				solicitudes.add(x);
 		}
@@ -28,7 +31,13 @@ public class MySqlReparacionDao implements ReparacionDao {
 	}
 
 	public List<Tecnico> getTecnicos() {
-		return Tecnico.all(Tecnico.class);
+		List<Tecnico> tecnicos = Tecnico.all(Tecnico.class);
+		for (Tecnico t : tecnicos ) {
+			t.setNombres(decode(t.getNombres()));
+			t.setApellidos(decode(t.getApellidos()));
+			t.setEspecialidad(decode(t.getEspecialidad()));
+		}
+		return tecnicos;
 	}
 
 	public List<DetalleSolicitud> getDetalles(Long sol) {
@@ -36,6 +45,8 @@ public class MySqlReparacionDao implements ReparacionDao {
 		for (DetalleSolicitud dt : d)
 			if (dt.getEquipo().getAsignado() == true)
 				d.remove(dt);
+			else
+				dt.setProblema(decode(dt.getProblema()));
 		return d;
 	}
 	

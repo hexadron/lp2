@@ -1,5 +1,7 @@
 package app.dao;
 
+import static app.util.Utilities.encode;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,7 +63,7 @@ public class MySqlSolicitudDao implements SolicitudDao {
 			Equipo e = new Equipo();
 			e.setCodigoPatrimonial(Long.valueOf(equipo));
 			det.setEquipo(e);
-			det.setProblema(problema);
+			det.setProblema(encode(problema));
 			det.setSolicitud(sol);
 			dets.add(det);
 		}

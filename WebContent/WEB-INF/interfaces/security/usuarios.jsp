@@ -45,7 +45,7 @@
       <ul class='content'>
       	<li><h2>Usuarios</h2></li>
         <li>
-        <form>
+        <form method="post">
           <ul>
             <li>
            	<table id="reparaciones">
@@ -118,7 +118,7 @@
             			<option>Seleccione area</option>
             		</select></li>
             	<li>
-            		<li><label>Interno</label><input type="checkbox"/></li>
+            		<label>Interno</label><input type="checkbox"/>
             	</li>
             	<li>
             	<div class='actions'>
@@ -142,7 +142,7 @@
             			<option>Seleccione area</option>
             		</select></li>
             	<li>
-            		<li><label>Interno</label><input type="checkbox"/></li>
+            		<label>Interno</label><input type="checkbox"/>
             	</li>
             	<li>
             	<div class='actions'>

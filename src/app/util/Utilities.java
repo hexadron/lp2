@@ -3,6 +3,8 @@ package app.util;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 public abstract class Utilities {
 	
 	public static String ToUTF(String val) {
@@ -62,4 +64,12 @@ public abstract class Utilities {
 		return builder.toString();
 	}
 	
+    public static String encode(String value) {
+    	return StringEscapeUtils.escapeHtml(value);
+    }
+    
+    public static String decode(String value) {
+    	return StringEscapeUtils.unescapeHtml(value);
+    }
+    
 }
