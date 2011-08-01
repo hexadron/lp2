@@ -44,7 +44,7 @@
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
                   <th title="${ tooltip }">Orden Nro.</th>
-                  <th title="${ tooltip }">Fecha de Solicitud</th>
+                  <th title="${ tooltip }">Fecha de Orden</th>
                   <th title="${ tooltip }">Cod. Patrimonial</th>
                   <th title="${ tooltip }">Denominación del Equipo</th>
                   <th title="${ tooltip }">Técnico</th>
@@ -68,12 +68,6 @@
               </tbody>
             </table>
             </li>
-            <li><h3>Equipo</h3></li>
-            <li><textarea disabled>
-Código Patrimonial: 000001
-Denominación: Licuadora
-Fabricante: General Electrics
-            </textarea></li>
             <li><h3>Diagnóstico</h3></li>
             <li><textarea disabled>Éste es un diagnóstico</textarea></li>
             <li><h3>Sustentación</h3></li>

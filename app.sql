@@ -1,36 +1,37 @@
-  drop database if exists app;
+drop database if exists app;
 create database app;
 use app;
 
 create table perfil (
   id int not null auto_increment primary key,
   descripcion varchar(100) not null
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table modulo (
   id int not null auto_increment primary key,
   descripcion varchar(100) not null,
   uri varchar(120) not null,
   shorthand varchar(50) not null
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table moduloPorPerfil (
   perfil_id int not null references perfil,
   modulo_id int not null references modulo
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table area (
   id int not null auto_increment primary key,
   descripcion varchar(30) not null
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table usuario (
   id int not null auto_increment primary key,
   usuario varchar(32) not null,
   password varchar(64) not null,
+  desactivado boolean not null default false,
   perfil_id int not null references perfil,
   area_id int null references area
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table equipo (
   codigoPatrimonial int not null auto_increment primary key,
@@ -40,7 +41,7 @@ create table equipo (
   enproceso boolean not null default false,
   dadodebaja boolean not null default false,
   asignado boolean not null default false
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table tecnico (
   id int not null auto_increment primary key,
@@ -48,32 +49,66 @@ create table tecnico (
   apellidos varchar(50) not null,
   fechaIngreso date not null,
   especialidad varchar(50) not null,
-  usuario_id int not null references usuario
-) DEFAULT CHARSET=utf8;
+  usuario_id int not null references usuario,
+  unique(usuario_id)
+) DEFAULT CHARSET=utf8; #ok
 
 create table solicitud (
   id int not null auto_increment primary key,
   fecha timestamp,
   usuario_id int not null references usuario,
   enatencion boolean not null default false
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table detalleSolicitud (
-	id int not null auto_increment primary key,
+  id int not null auto_increment primary key,
   solicitud_id int not null references solicitud,
   equipo_id int not null references equipo,
   problema text not null
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
 
 create table reparacion (
-	id int not null auto_increment primary key,
+  id int not null auto_increment primary key,
   detallesolicitud_id int not null references detalleSolicitud,
   equipo_id int not null references equipo,
   tecnico_id int not null references tecnico,
+  tecnicoexterno_id int not null references tecnicoexterno,
   diagnostico text,
+  reparacion text,
+  reparacionexterna text,
+  recomendaciones text,
   prioridad varchar(20),
+  fechainicio date,
+  fechafin date,
+  estado varchar(36),
+  garantia double,
+  costo double,
+  dadodebaja boolean,
   unique(detallesolicitud_id, equipo_id)
-) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8; #ok
+
+create table ordensolicitudterceros (
+  id int not null auto_increment primary key,
+  reparacion_id int not null references reparacion,
+  sustentacion text,
+  fechaorden date,
+  solterceros_id int null references solicitudterceros
+) DEFAULT CHARSET=utf8; #ok
+
+create table solicitudterceros (
+  id int not null auto_increment primary key,
+  ordensolicitudterceros_id int not null references ordensolicitudterceros,
+  fechasolicitud date,
+  reparacion_id int not null references reparacion,
+  asignada boolean not null default false
+);
+
+create table tecnicoexterno (
+  id int not null auto_increment primary key,
+  nombre varchar(20) not null,
+  especialidad varchar(40) not null,
+  costopromedio double 
+);
 
 #dummy data
 #area

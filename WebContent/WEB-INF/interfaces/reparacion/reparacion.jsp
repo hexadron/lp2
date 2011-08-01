@@ -35,10 +35,10 @@
         <form>
           <ul>
             <li>
-            <h2>Trabajos</h2>
+            <h2>Trabajos Diagnósticados</h2>
             </li>
             <li>
-              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione una reparación para ver el diagnóstico</span>
+              <span style="font-size: 1em;color: hsl(0, 60%, 40%);">Seleccione un trabajo para ver el diagnóstico</span>
             </li>
             <li>
            	<table id="reparaciones">
