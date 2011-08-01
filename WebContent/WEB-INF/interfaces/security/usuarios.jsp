@@ -46,13 +46,13 @@
         <li>
         <form method="post">
           <ul>
-            <li>
             <li><h3>Buscar usuarios</h3></li>
-            	<li><label>Nombre</label><input type="text"/></li>
-            	<div class='actions'>
+            <li><label>Nombre</label><input type="text"/></li>
+            <li><div class='actions'>
             		<input class='default' type='submit' value='Buscar' />
-            	</div>
-           	<table id="reparaciones">
+            </div>
+            </li>
+           	<li><table id="reparaciones">
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
