@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 
 public class I18NServlet extends ApplicationController implements Servlet {
@@ -15,14 +14,9 @@ public class I18NServlet extends ApplicationController implements Servlet {
 		String idioma = param("idioma");
 		String pais = param("pais");
 
-		Locale locale = null;
-		if (pais != null)
-			locale = new Locale(idioma, pais);
-		else
-			locale = new Locale(idioma);
+		Locale locale = pais != null ? new Locale(idioma, pais) : new Locale(idioma);
 		
-		HttpSession session = req.getSession(false);
-		Config.set(session, Config.FMT_LOCALE, locale);
+		Config.set(req.getSession(false), Config.FMT_LOCALE, locale);
 		renderJSP("ejemplo");
 	}
 
