@@ -156,5 +156,13 @@ public class MySqlReparacionDao implements ReparacionDao {
 		r.setAtendida(true);
 		r.save();
 	}
+
+	@Override
+	public void registrarOrdenTerceros(OrdenTerceros o) {
+		o.save();
+		Reparacion r = o.getReparacion();
+		r.setAtendida(true);
+		r.save();
+	}
 	
 }

@@ -78,12 +78,18 @@ create table reparacion (
 
 create table detalleReparacion (
     id int not null auto_increment primary key,
-    reparacion_id int not null references detalleSolicitud,
+    reparacion_id int not null references reparacion,
     trabajo text,
     costo double,
     garantia double,
     recomendaciones text,
     unique(reparacion_id)
+) DEFAULT CHARSET=utf8;
+
+create table ordenTerceros (
+    id int not null auto_increment primary key,
+    reparacion_id int not null references reparacion,
+    sustentacion text
 ) DEFAULT CHARSET=utf8;
 
 #dummy data

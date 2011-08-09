@@ -1,3 +1,5 @@
+terceros = undefined
+
 $ ->
 	$("#reparaciones td").click ->
 		row = $(@).parent()
@@ -31,14 +33,15 @@ $ ->
 		if ($ "#terceros").attr("checked") is "checked"
 			e.preventDefault()
 			elements =
-				"<div class='contentapprise'><h3>Sustentaci&oacute;n de Solicitar Terceros</h3>" +
-				"<textarea id='susterceros'></textarea></div>"
+				"<div class='contentapprise'><h3>Sustentaci&oacute;n de Solicitar Terceros</h3>"
 			apprise elements,
 				verify: true
+				input: true
 				textYes: 'Aceptar'
 				textNo: 'Cancelar',
 				(b) ->
-					($ "#terceros").attr "checked", b
+					terceros = b
+					($ "#terceros").attr "checked", b?
 		evaluarElementos()
 		
 	evaluarGuardar = ->
@@ -52,17 +55,28 @@ $ ->
 	($ '#guardar').click (e) ->
 		e.preventDefault();
 		reparacion = ($ '.eqselected .repid').text()
-		diagnostico = ($ '#diagnostico').val()
-		prioridad = ($ ':radio:checked').val()
-		console.log reparacion
-		$.post 'registrarDiagnostico',
-			reparacion: reparacion
-			diagnostico: diagnostico
-			prioridad: prioridad,
-			(r) ->
-				apprise 'Diagn&oacute;stico guardado',
-					confirm: true
-					textOk: 'Aceptar'
-					textCancel: 'Aceptar',
-					(b) ->
-						window.location = ''
+		if terceros
+			$.post 'registrarOrdenTerceros',
+				reparacion: reparacion
+				terceros: terceros,
+				(rep) ->
+					apprise 'Orden de terceros guardada',
+						confirm: true
+						textOk: 'Aceptar'
+						textCancel: 'Aceptar',
+						(b) ->
+							window.location = ''
+		else
+			diagnostico = ($ '#diagnostico').val()
+			prioridad = ($ ':radio:checked').val()
+			$.post 'registrarDiagnostico',
+				reparacion: reparacion
+				diagnostico: diagnostico
+				prioridad: prioridad,
+				(r) ->
+					apprise 'Diagn&oacute;stico guardado',
+						confirm: true
+						textOk: 'Aceptar'
+						textCancel: 'Aceptar',
+						(b) ->
+							window.location = ''

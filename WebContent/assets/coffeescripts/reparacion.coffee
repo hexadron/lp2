@@ -1,3 +1,5 @@
+terceros = undefined
+
 $ ->
     $("#reparaciones td").click ->
         row = $(@).parent()
@@ -48,33 +50,48 @@ $ ->
         if $("#terceros").attr("checked") is "checked"
             e.preventDefault()
             elements =
-                "<div class='contentapprise'><h3>Sustentaci&oacute;n de Solicitar Terceros</h3>" +
-                "<textarea id='susterceros'></textarea></div>"
+                "<div class='contentapprise'><h3>Sustentaci&oacute;n de Solicitar Terceros</h3>"
             apprise elements,
                 verify: true
+                input: true
                 textYes: 'Aceptar'
                 textNo: 'Cancelar',
                 (b) ->
+                    terceros = b
                     $("#terceros").attr "checked", b?
-                    evaluarElementos()
+        evaluarElementos()
 
     $('#guardar').click (e) ->
         e.preventDefault()
         reparacion = ($ '.eqselected .repid').text()
-        trabajo = $('#trabajo').val()
-        costo = $('#costo').val()
-        garantia = $('#garantia').val()
-        recomendaciones = $('#recomendaciones').val()
-        $.post 'registrarReparacion',
-            reparacion: reparacion
-            trabajo: trabajo
-            costo: costo
-            garantia: garantia
-            recomendaciones: recomendaciones,
-            (rep) ->
-                apprise 'Reparaci&oacute;n guardada',
-                    confirm: true
-                    textOk: 'Aceptar'
-                    textCancel: 'Aceptar',
-                    (b) ->
-                        window.location = ''
+        if terceros
+            alert terceros
+            alert reparacion
+            $.post 'registrarOrdenTerceros',
+                reparacion: reparacion
+                terceros: terceros,
+                (rep) ->
+                    apprise 'Orden de terceros guardada',
+                        confirm: true
+                        textOk: 'Aceptar'
+                        textCancel: 'Aceptar',
+                        (b) ->
+                            window.location = ''
+        else
+            trabajo = $('#trabajo').val()
+            costo = $('#costo').val()
+            garantia = $('#garantia').val()
+            recomendaciones = $('#recomendaciones').val()
+            $.post 'registrarReparacion',
+                reparacion: reparacion
+                trabajo: trabajo
+                costo: costo
+                garantia: garantia
+                recomendaciones: recomendaciones,
+                (rep) ->
+                    apprise 'Reparaci&oacute;n guardada',
+                        confirm: true
+                        textOk: 'Aceptar'
+                        textCancel: 'Aceptar',
+                        (b) ->
+                            window.location = ''

@@ -4,6 +4,7 @@ import java.util.List;
 
 import app.beans.DetalleReparacion;
 import app.beans.DetalleSolicitud;
+import app.beans.OrdenTerceros;
 import app.beans.Reparacion;
 import app.beans.Solicitud;
 import app.beans.Tecnico;
@@ -29,5 +30,7 @@ public interface ReparacionDao {
 	public List<Reparacion> getReparacionesDiagnosticadas(long id);
 
 	public void registrarReparacion(DetalleReparacion d);
+
+	public void registrarOrdenTerceros(OrdenTerceros o);
 
 }

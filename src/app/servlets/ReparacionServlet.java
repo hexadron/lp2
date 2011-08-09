@@ -56,6 +56,15 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 		service.registrarReparacion(d);
 	}
 	
+	public void registrarOrdenTerceros() {
+		long reparacion = Long.valueOf(param("reparacion"));
+		String sustentacion = param("terceros");
+		OrdenTerceros o = new OrdenTerceros();
+		o.setReparacion((Reparacion) Reparacion.find(Reparacion.class, reparacion));
+		o.setSustentacion(sustentacion);
+		service.registrarOrdenTerceros(o);
+	}
+	
 	public void registrarBaja() {
 		long id = Long.valueOf(param("reparacion"));
 		service.registrarBaja(id);

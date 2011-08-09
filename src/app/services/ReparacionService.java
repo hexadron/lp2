@@ -53,4 +53,8 @@ public class ReparacionService {
 		dao.registrarReparacion(d);
 	}
 
+	public void registrarOrdenTerceros(OrdenTerceros o) {
+		dao.registrarOrdenTerceros(o);
+	}
+
 }
