@@ -27,7 +27,7 @@ $ ->
 	evaluarElementos = ->
 		checked = $("#terceros").attr "checked"
 		b = if checked then true else false
-		$("input[type='text'], input[type='radio'], #diagnostico").attr "disabled", b
+		$("input[type='text']:not(.aTextbox), input[type='radio'], #diagnostico").attr "disabled", b
 	
 	($ '#terceros').click (e) ->
 		if ($ "#terceros").attr("checked") is "checked"
@@ -41,6 +41,7 @@ $ ->
 				textNo: 'Cancelar',
 				(b) ->
 					terceros = b
+					($ '#guardar').attr 'disabled', false
 					($ "#terceros").attr "checked", b?
 		evaluarElementos()
 		

@@ -26,7 +26,7 @@ $ ->
     			
     evaluarElementos = ->
         checked = $("#terceros").attr("checked")
-        elem = "input[type='text'], #trabajo, #recomendaciones"
+        elem = "input[type='text']:not(.aTextbox), #trabajo, #recomendaciones"
         $(elem).attr "disabled", checked?
 
     evaluarBaja = ->
@@ -65,8 +65,6 @@ $ ->
         e.preventDefault()
         reparacion = ($ '.eqselected .repid').text()
         if terceros
-            alert terceros
-            alert reparacion
             $.post 'registrarOrdenTerceros',
                 reparacion: reparacion
                 terceros: terceros,
