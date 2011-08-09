@@ -93,4 +93,5 @@ $ ->
 			reparaciones: JSON.stringify arreglo,
 			(r) ->
 				($ '#asignados tbody').html ''
-				apprise "Equipos asignados"
+				apprise "Equipos asignados", {}, ->
+					window.location = ''

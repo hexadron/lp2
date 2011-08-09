@@ -80,12 +80,12 @@
             <li>
               <ul>
                 <li>
-                  <label style="width: 5em; text-align: left;">Costo</label>
+                  <label style="width: 5em; text-align: left;">Costo: S/.</label>
                   <input type="text" id="costo" style="width: 10em;" name="costo" />
                 </li>
                 <li>
                   <label style="width: 5em; text-align: left;">Garant&iacute;a</label>
-                  <input type="text" id="garantia" style="width: 10em;" name="garantia" />
+                  <input type="text" id="garantia" style="width: 6em;" name="garantia" />&nbsp;&nbsp; meses
                 </li>
               </ul>
             </li>

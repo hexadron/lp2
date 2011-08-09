@@ -72,7 +72,7 @@ $ ->
             costo = $('#costo').val()
             garantia = $('#garantia').val()
             recomendaciones = $('#recomendaciones').val()
-            unless isNaN(costo) or isNaN(garantia)
+            if isNaN costo or isNaN garantia
                 $.post 'registrarReparacion',
                     reparacion: reparacion
                     trabajo: trabajo
@@ -80,7 +80,11 @@ $ ->
                     garantia: garantia
                     recomendaciones: recomendaciones,
                     (rep) ->
-                        apprise 'Reparaci&oacute;n guardada', {}, (b) ->
-                            window.location = ''
+                        apprise 'Reparaci&oacute;n guardada',
+                            confirm: true
+                            textOk: 'Aceptar'
+                            textCancel: 'Aceptar',
+                            (b) ->
+                                window.location = ''
             else
                 apprise 'Valores incorrectos'

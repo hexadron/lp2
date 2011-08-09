@@ -75,9 +75,5 @@ $ ->
 				diagnostico: diagnostico
 				prioridad: prioridad,
 				(r) ->
-					apprise 'Diagn&oacute;stico guardado',
-						confirm: true
-						textOk: 'Aceptar'
-						textCancel: 'Aceptar',
-						(b) ->
-							window.location = ''
+					apprise 'Diagn&oacute;stico guardado', {}, (b) ->
+						window.location = ''
