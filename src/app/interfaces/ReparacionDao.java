@@ -2,6 +2,7 @@ package app.interfaces;
 
 import java.util.List;
 
+import app.beans.DetalleReparacion;
 import app.beans.DetalleSolicitud;
 import app.beans.Reparacion;
 import app.beans.Solicitud;
@@ -26,5 +27,7 @@ public interface ReparacionDao {
 	public void registrarBaja(long id);
 
 	public List<Reparacion> getReparacionesDiagnosticadas(long id);
+
+	public void registrarReparacion(DetalleReparacion d);
 
 }

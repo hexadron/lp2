@@ -80,11 +80,11 @@
               <ul>
                 <li>
                   <label style="width: 5em; text-align: left;">Costo</label>
-                  <input type="text" style="width: 10em;" name="costo" />
+                  <input type="text" id="costo" style="width: 10em;" name="costo" />
                 </li>
                 <li>
                   <label style="width: 5em; text-align: left;">Garant&iacute;a</label>
-                  <input type="text" style="width: 10em;" name="garantia" />
+                  <input type="text" id="garantia" style="width: 10em;" name="garantia" />
                 </li>
               </ul>
             </li>
@@ -94,7 +94,7 @@
             </li>
             <li>
             <div class='actions'>
-              <input class='default' type='submit' value='Guardar' />
+              <input id="guardar" class='default' type='submit' value='Guardar' />
               <input type='submit' value='Limpiar' />
             </div>
             </li>

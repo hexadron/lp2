@@ -120,6 +120,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 		r.getEquipo().setDenominacion(decode(den));
 		String fab = r.getEquipo().getFabricante();
 		r.getEquipo().setFabricante(decode(fab));
+		r.setDiagnostico(decode(r.getDiagnostico()));
 		return r;
 	}
 
@@ -134,15 +135,26 @@ public class MySqlReparacionDao implements ReparacionDao {
 
 	@Override
 	public void registrarBaja(long id) {
-		Equipo e = Equipo.find(Equipo.class, id);
+		Reparacion r = Reparacion.find(Reparacion.class, id);
+		Equipo e = r.getEquipo();
 		e.setDadodebaja(true);
 		e.save();
+		r.setAtendida(true);
+		r.save();
 	}
 
 	@Override
 	public List<Reparacion> getReparacionesDiagnosticadas(long id) {
 		return Reparacion.where(Reparacion.class, "tecnico_id = ? " +
 				"and diagnostico is not null and atendida is false", id);
+	}
+
+	@Override
+	public void registrarReparacion(DetalleReparacion d) {
+		d.save();
+		Reparacion r = d.getReparacion();
+		r.setAtendida(true);
+		r.save();
 	}
 	
 }

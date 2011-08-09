@@ -61,4 +61,8 @@ $ ->
 			prioridad: prioridad,
 			(r) ->
 				apprise 'Diagn&oacute;stico guardado',
-					textOk: 'Aceptar',
+					confirm: true
+					textOk: 'Aceptar'
+					textCancel: 'Aceptar',
+					(b) ->
+						window.location = ''

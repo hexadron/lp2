@@ -1,6 +1,5 @@
 $ ->
     $("#reparaciones td").click ->
-        # este problema se carga usando ajax enviando el id de la solicitud y el id del equipo. Éstos se obtienen del atributo id del elemento seleccionado.
         row = $(@).parent()
         reparacion = row.children('.id').text()
         $.post 'getDatosReparacion',
@@ -39,7 +38,11 @@ $ ->
             reparacion: reparacion,
             (rep) ->
                 apprise 'Equipo dado de baja',
+                    confirm: true
                     textOk: 'Aceptar'
+                    textCancel: 'Aceptar',
+                    (b) ->
+                        window.location = ''
 
     $('#terceros').click (e) ->
         if $("#terceros").attr("checked") is "checked"
@@ -54,3 +57,24 @@ $ ->
                 (b) ->
                     $("#terceros").attr "checked", b?
                     evaluarElementos()
+
+    $('#guardar').click (e) ->
+        e.preventDefault()
+        reparacion = ($ '.eqselected .repid').text()
+        trabajo = $('#trabajo').val()
+        costo = $('#costo').val()
+        garantia = $('#garantia').val()
+        recomendaciones = $('#recomendaciones').val()
+        $.post 'registrarReparacion',
+            reparacion: reparacion
+            trabajo: trabajo
+            costo: costo
+            garantia: garantia
+            recomendaciones: recomendaciones,
+            (rep) ->
+                apprise 'Reparaci&oacute;n guardada',
+                    confirm: true
+                    textOk: 'Aceptar'
+                    textCancel: 'Aceptar',
+                    (b) ->
+                        window.location = ''

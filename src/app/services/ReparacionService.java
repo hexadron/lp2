@@ -49,4 +49,8 @@ public class ReparacionService {
 		return dao.getReparacionesDiagnosticadas(id);
 	}
 
+	public void registrarReparacion(DetalleReparacion d) {
+		dao.registrarReparacion(d);
+	}
+
 }
