@@ -104,7 +104,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 	public List<Reparacion> getReparacionesAsignadas(long id) {
 		List<Reparacion> reparaciones = 
 			Reparacion.where(Reparacion.class, "tecnico_id = ?" +
-					" and diagnostico is null", id);
+					" and diagnostico is null and atendida = 0", id);
 		for (Reparacion r : reparaciones)
 			if (r.getEquipo().getAsignado() == false)
 				reparaciones.remove(r);
