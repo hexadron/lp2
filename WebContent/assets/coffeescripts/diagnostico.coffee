@@ -31,7 +31,7 @@ $ ->
 		if ($ "#terceros").attr("checked") is "checked"
 			e.preventDefault()
 			elements =
-				"<div class='contentapprise'><h3>Sustentación de Solicitar Terceros</h3>" +
+				"<div class='contentapprise'><h3>Sustentaci&oacute;n de Solicitar Terceros</h3>" +
 				"<textarea id='susterceros'></textarea></div>"
 			apprise elements,
 				verify: true
@@ -62,6 +62,3 @@ $ ->
 			(r) ->
 				apprise 'Diagn&oacute;stico guardado',
 					textOk: 'Aceptar',
-					(b) ->
-						if b
-							alert "hola"

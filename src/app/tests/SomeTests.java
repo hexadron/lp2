@@ -128,66 +128,7 @@ public class SomeTests extends TestCase {
 			}
 		assertTrue(tecs.size() > 0);
 	}
-	
-	@Test
-	public void testSave() {
-		Tecnico t = new Tecnico();
-		String v = "áéíóúñ";
-		t.setNombres(ToISO(v));
-		t.setApellidos("otro normal");
-		t.setFechaIngreso(new Date());
-		t.setEspecialidad("y otro");
-		Usuario u = new Usuario();
-		u.setArea((Area) Area.find(Area.class, 1));
-		u.setPassword("seguro");
-		u.setPerfil((Perfil) Perfil.find(Perfil.class, 1));
-		u.setUsuario("noexisto");
-		u.save();
-		t.setUsuario(u);
-		t.save();
-		assertNotNull(t);
-	}
-	
-	@Test
-	public void testUtf8() {
-		Usuario u = Usuario.find(Usuario.class, 2);
-		Perfil p = u.getPerfil();
-		p.setDescripcion(ToUTF(p.getDescripcion()));
-		List<Modulo> mods = new SecurityService().getModules(u.getPerfil());
-		for (Modulo m : mods) {
-			m.setDescripcion(ToUTF(m.getDescripcion()));
-		}
-		for (Modulo m : mods) {
-			System.out.println(m.getDescripcion());
-		}
-		
-	}
-	
-	@Test
-	public void testOrzUtfSave() {
-		Tecnico t = new Tecnico();
-		String v = "áéíóúñ";
-		t.setNombres(v);
-		t.setApellidos("otro normal");
-		t.setFechaIngreso(new Date());
-		t.setEspecialidad("y otro");
-		Usuario u = new Usuario();
-		u.setArea((Area) Area.find(Area.class, 1));
-		u.setPassword("seguro");
-		u.setPerfil((Perfil) Perfil.find(Perfil.class, 1));
-		u.setUsuario("noexisto");
-		u.save();
-		t.setUsuario(u);
-		t.save();
-	}
-	
-	@Test
-	public void testOrzUtfGet() {
-		List<Tecnico> tecs = Tecnico.where(Tecnico.class, "nombres = ?", "alan");
-		for (Tecnico t : tecs)
-			System.out.println(t.getNombres() + " " + t.getApellidos());
-	}
-	
+
 	public static void main(String[] args) {
 		TestRunner.run(SomeTests.class);
 	}

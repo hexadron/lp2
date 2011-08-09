@@ -41,4 +41,12 @@ public class ReparacionService {
 		dao.registrarDiagnostico(reparacion, diagnostico, prioridad);
 	}
 
+	public void registrarBaja(long id) {
+		dao.registrarBaja(id);
+	}
+
+	public List<Reparacion> getReparacionesDiagnosticadas(long id) {
+		return dao.getReparacionesDiagnosticadas(id);
+	}
+
 }

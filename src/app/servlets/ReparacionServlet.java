@@ -21,7 +21,7 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void realizarAsignacion() {
-		String json = ToUTF(param("reparaciones"));
+		String json = param("reparaciones");
 		service.guardarReparaciones(json);
 		skipRender();
 	}
@@ -35,7 +35,19 @@ public class ReparacionServlet extends ApplicationController implements Servlet 
 	}
 	
 	public void reparacion() {
+		Usuario u = (Usuario) fromSession("user");
+		Tecnico t = (Tecnico) Tecnico.where(Tecnico.class, "usuario_id = ?", u.getId()).get(0);
+		add("reparaciones", service.getReparacionesDiagnosticadas(t.getId()));
+		render();
+	}
 	
+	public void registrarReparacion() {
+		
+	}
+	
+	public void registrarBaja() {
+		long id = Long.valueOf(param("reparacion"));
+		service.registrarBaja(id);
 	}
 	
 	public void diagnostico() {

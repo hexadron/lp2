@@ -10,6 +10,7 @@ public class Reparacion extends ORZ {
 	private Tecnico tecnico;
 	private String diagnostico;
 	private String prioridad;
+	private boolean atendida;
 	
 	public long getId() {
 		return id;
@@ -57,6 +58,14 @@ public class Reparacion extends ORZ {
 
 	public String getPrioridad() {
 		return prioridad;
+	}
+
+	public void setAtendida(boolean atendida) {
+		this.atendida = atendida;
+	}
+
+	public boolean getAtendida() {
+		return atendida;
 	}
 
 }

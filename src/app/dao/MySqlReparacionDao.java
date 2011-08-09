@@ -94,6 +94,7 @@ public class MySqlReparacionDao implements ReparacionDao {
 							"solicitud_id = ? and equipo_id = ?", ids.get(0), ids.get(1)).get(0));
 			r.setEquipo((Equipo) Equipo.find(Equipo.class, ids.get(1)));
 			r.setTecnico((Tecnico) Tecnico.find(Tecnico.class, ids.get(2)));
+			r.setAtendida(false);
 			reps.add(r);
 		}
 		return reps;
@@ -102,7 +103,8 @@ public class MySqlReparacionDao implements ReparacionDao {
 	@Override
 	public List<Reparacion> getReparacionesAsignadas(long id) {
 		List<Reparacion> reparaciones = 
-			Reparacion.where(Reparacion.class, "tecnico_id = ?", id);
+			Reparacion.where(Reparacion.class, "tecnico_id = ?" +
+					" and diagnostico is null", id);
 		for (Reparacion r : reparaciones)
 			if (r.getEquipo().getAsignado() == false)
 				reparaciones.remove(r);
@@ -111,17 +113,36 @@ public class MySqlReparacionDao implements ReparacionDao {
 
 	@Override
 	public Reparacion getDatosReparacion(Long id) {
-		return Reparacion.find(Reparacion.class, id);
+		Reparacion r = Reparacion.find(Reparacion.class, id);
+		String problema = r.getDetalleSolicitud().getProblema();
+		r.getDetalleSolicitud().setProblema(decode(problema));
+		String den = r.getEquipo().getDenominacion();
+		r.getEquipo().setDenominacion(decode(den));
+		String fab = r.getEquipo().getFabricante();
+		r.getEquipo().setFabricante(decode(fab));
+		return r;
 	}
 
 	@Override
 	public void registrarDiagnostico(long reparacion, String diagnostico,
 			String prioridad) {
 		Reparacion r = Reparacion.find(Reparacion.class, reparacion);
-		System.out.println(reparacion);
-		r.setDiagnostico(diagnostico);
+		r.setDiagnostico(encode(diagnostico));
 		r.setPrioridad(prioridad);
 		r.save();
+	}
+
+	@Override
+	public void registrarBaja(long id) {
+		Equipo e = Equipo.find(Equipo.class, id);
+		e.setDadodebaja(true);
+		e.save();
+	}
+
+	@Override
+	public List<Reparacion> getReparacionesDiagnosticadas(long id) {
+		return Reparacion.where(Reparacion.class, "tecnico_id = ? " +
+				"and diagnostico is not null and atendida is false", id);
 	}
 	
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang='es'>
   <head>
-    <title>Registrar Diagnóstico</title>
+    <title>Registrar Diagn&oacute;stico</title>
     <link href='${pageContext.request.contextPath}/assets/stylesheets/screen.css' rel='stylesheet' type='text/css' />
     <link href='${pageContext.request.contextPath}/assets/stylesheets/apprise.css' rel='stylesheet' type='text/css' />
     <style>
@@ -34,7 +34,7 @@
     </div>
     <div class='container'>
       <div id='header'>
-        <h1>Registrar Diagnóstico de Equipo</h1>
+        <h1>Registrar Diagn&oacute;stico de Equipo</h1>
       </div>
       <ul class='content'>
         <li>
@@ -51,23 +51,23 @@
               <thead>
                 <tr>
                   <fmt:message key='table.tooltip' var="tooltip" />
+                  <th title="${ tooltip }">C&oacute;digo de Reparación</th>
                   <th title="${ tooltip }">Fecha de Inicio</th>
-                  <th title="${ tooltip }">Código de Reparación</th>
                   <th title="${ tooltip }">Equipo</th>
                 </tr>
               </thead>
               <tbody>
               <c:forEach var='r' items="${ asignadas }">
 				<tr>
-					<td class='solid'>${ r.detalleSolicitud.solicitud.fecha }</td>
 					<td class='id repid'>${ r.id }</td>
+					<td class='solid'>${ r.detalleSolicitud.solicitud.fecha }</td>
 					<td>${ r.equipo.denominacion }</td>
 				</tr>
 			  </c:forEach>
               </tbody>
             </table>
             </li>
-            <li><h3>Diagnóstico</h3></li>
+            <li><h3>Diagn&oacute;stico</h3></li>
             <li>
              <textarea id='diagnostico'></textarea>
             </li>

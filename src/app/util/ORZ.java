@@ -49,7 +49,7 @@ public abstract class ORZ
                     			m.invoke(o, val);
                     }
                 }
-                return ObjectToUTF(o);
+                return o;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,7 +115,7 @@ public abstract class ORZ
                         		m.invoke(o, val);
                     }
                 }
-                all.add(ObjectToUTF(o));
+                all.add(o);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +127,6 @@ public abstract class ORZ
     
     @SuppressWarnings("unchecked")
     public <T> T save() {
-    	ObjectToISO(this);
         if (getGetter(getColumnaBase()) != null) {
             try {
                 Object id = getGetter(getColumnaBase()).invoke(this);
