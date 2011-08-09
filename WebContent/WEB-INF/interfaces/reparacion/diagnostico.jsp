@@ -1,6 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="gg" uri="apptags" %>
 <!DOCTYPE html>
 <html lang='es'>
   <head>
@@ -23,13 +24,12 @@
   <body>
     <div id='menu'>
       <ul class='menu_items'>
-        <li>
-        <a href="${pageContext.request.contextPath}/security/logout">salir</a></li>
-      		<li>${sessionScope.user.usuario}</li>
-			<c:forEach var='m' items="${ modulos }">
-				<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
-			</c:forEach>
-			<li><a href="${pageContext.request.contextPath}">Men&uacute; Principal</a></li>
+      	<li><gg:salir/></li>
+		<li>${sessionScope.user.usuario}</li>
+		<c:forEach var='m' items="${ modulos }">
+			<li><a href="${pageContext.request.contextPath}/${ m.uri }">${ m.shorthand }</a></li>
+		</c:forEach>
+		<li><gg:menu/></li>
       </ul>
     </div>
     <div class='container'>
